@@ -1,9 +1,9 @@
 /*
- * This file is part of SpoutAPI (http://www.spout.org/).
+ * This file is part of SpoutNBT (http://www.spout.org/).
  *
- * SpoutAPI is licensed under the SpoutDev License Version 1.
+ * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
- * SpoutAPI is free software: you can redistribute it and/or modify
+ * SpoutNBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -12,7 +12,7 @@
  * software, incorporating those changes, under the terms of the MIT license,
  * as described in the SpoutDev License Version 1.
  *
- * SpoutAPI is distributed in the hope that it will be useful,
+ * SpoutNBT is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,27 +26,27 @@
 package org.spout.nbt;
 
 /**
- * The {@code TAG_Float} tag.
+ * The {@code TAG_String} tag.
  * @author Graham Edgecombe
  */
-public final class FloatTag extends Tag {
+public final class StringTag extends Tag {
 	/**
 	 * The value.
 	 */
-	private final float value;
+	private final String value;
 
 	/**
 	 * Creates the tag.
 	 * @param name The name.
 	 * @param value The value.
 	 */
-	public FloatTag(String name, float value) {
+	public StringTag(String name, String value) {
 		super(name);
 		this.value = value;
 	}
 
 	@Override
-	public Float getValue() {
+	public String getValue() {
 		return value;
 	}
 
@@ -57,10 +57,10 @@ public final class FloatTag extends Tag {
 		if (name != null && !name.equals("")) {
 			append = "(\"" + this.getName() + "\")";
 		}
-		return "TAG_Float" + append + ": " + value;
+		return "TAG_String" + append + ": " + value;
 	}
 
-	public FloatTag clone() {
-		return new FloatTag(getName(), value);
+	public StringTag clone() {
+		return new StringTag(getName(), value);
 	}
 }

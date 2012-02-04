@@ -1,9 +1,9 @@
 /*
- * This file is part of SpoutAPI (http://www.spout.org/).
+ * This file is part of SpoutNBT (http://www.spout.org/).
  *
- * SpoutAPI is licensed under the SpoutDev License Version 1.
+ * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
- * SpoutAPI is free software: you can redistribute it and/or modify
+ * SpoutNBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -12,7 +12,7 @@
  * software, incorporating those changes, under the terms of the MIT license,
  * as described in the SpoutDev License Version 1.
  *
- * SpoutAPI is distributed in the hope that it will be useful,
+ * SpoutNBT is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,28 +25,31 @@
  */
 package org.spout.nbt;
 
+import java.util.Collections;
+import java.util.Map;
+
 /**
- * The {@code TAG_Byte} tag.
+ * The {@code TAG_Compound} tag.
  * @author Graham Edgecombe
  */
-public final class ByteTag extends Tag {
+public final class CompoundTag extends Tag {
 	/**
 	 * The value.
 	 */
-	private final byte value;
+	private final Map<String, Tag> value;
 
 	/**
 	 * Creates the tag.
 	 * @param name The name.
 	 * @param value The value.
 	 */
-	public ByteTag(String name, byte value) {
+	public CompoundTag(String name, Map<String, Tag> value) {
 		super(name);
-		this.value = value;
+		this.value = Collections.unmodifiableMap(value);
 	}
 
 	@Override
-	public Byte getValue() {
+	public Map<String, Tag> getValue() {
 		return value;
 	}
 
@@ -57,10 +60,18 @@ public final class ByteTag extends Tag {
 		if (name != null && !name.equals("")) {
 			append = "(\"" + this.getName() + "\")";
 		}
-		return "TAG_Byte" + append + ": " + value;
+
+		StringBuilder bldr = new StringBuilder();
+		bldr.append("TAG_Compound").append(append).append(": ").append(value.size()).append(" entries\r\n{\r\n");
+		for (Map.Entry<String, Tag> entry : value.entrySet()) {
+			bldr.append("   ").append(entry.getValue().toString().replaceAll("\r\n", "\r\n   ")).append("\r\n");
+		}
+		bldr.append("}");
+		return bldr.toString();
 	}
 
-	public ByteTag clone() {
-		return new ByteTag(getName(), value);
+	public CompoundTag clone() {
+		Map<String, Tag> newMap = Tag.cloneMap(value);
+		return new CompoundTag(getName(), newMap);
 	}
 }

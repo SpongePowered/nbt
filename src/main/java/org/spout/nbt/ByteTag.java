@@ -1,9 +1,9 @@
 /*
- * This file is part of SpoutAPI (http://www.spout.org/).
+ * This file is part of SpoutNBT (http://www.spout.org/).
  *
- * SpoutAPI is licensed under the SpoutDev License Version 1.
+ * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
- * SpoutAPI is free software: you can redistribute it and/or modify
+ * SpoutNBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -12,7 +12,7 @@
  * software, incorporating those changes, under the terms of the MIT license,
  * as described in the SpoutDev License Version 1.
  *
- * SpoutAPI is distributed in the hope that it will be useful,
+ * SpoutNBT is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,63 +26,41 @@
 package org.spout.nbt;
 
 /**
- * The {@code TAG_Byte_Array} tag.
+ * The {@code TAG_Byte} tag.
  * @author Graham Edgecombe
  */
-public final class ByteArrayTag extends Tag {
+public final class ByteTag extends Tag {
 	/**
 	 * The value.
 	 */
-	private final byte[] value;
+	private final byte value;
 
 	/**
 	 * Creates the tag.
 	 * @param name The name.
 	 * @param value The value.
 	 */
-	public ByteArrayTag(String name, byte[] value) {
+	public ByteTag(String name, byte value) {
 		super(name);
 		this.value = value;
 	}
 
 	@Override
-	public byte[] getValue() {
+	public Byte getValue() {
 		return value;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder hex = new StringBuilder();
-		for (byte b : value) {
-			String hexDigits = Integer.toHexString(b).toUpperCase();
-			if (hexDigits.length() == 1) {
-				hex.append("0");
-			}
-			hex.append(hexDigits).append(" ");
-		}
-
 		String name = getName();
 		String append = "";
 		if (name != null && !name.equals("")) {
 			append = "(\"" + this.getName() + "\")";
 		}
-		return "TAG_Byte_Array" + append + ": " + hex.toString();
+		return "TAG_Byte" + append + ": " + value;
 	}
 
-	public ByteArrayTag clone() {
-		byte[] clonedArray = cloneArray(value);
-
-		return new ByteArrayTag(getName(), clonedArray);
-	}
-
-	private byte[] cloneArray(byte[] byteArray) {
-		if (byteArray == null) {
-			return null;
-		} else {
-			int length = byteArray.length;
-			byte[] newArray = new byte[length];
-            System.arraycopy(byteArray, 0, newArray, 0, length);
-			return newArray;
-		}
+	public ByteTag clone() {
+		return new ByteTag(getName(), value);
 	}
 }

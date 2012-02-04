@@ -1,9 +1,9 @@
 /*
- * This file is part of SpoutAPI (http://www.spout.org/).
+ * This file is part of SpoutNBT (http://www.spout.org/).
  *
- * SpoutAPI is licensed under the SpoutDev License Version 1.
+ * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
- * SpoutAPI is free software: you can redistribute it and/or modify
+ * SpoutNBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -12,7 +12,7 @@
  * software, incorporating those changes, under the terms of the MIT license,
  * as described in the SpoutDev License Version 1.
  *
- * SpoutAPI is distributed in the hope that it will be useful,
+ * SpoutNBT is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -26,27 +26,27 @@
 package org.spout.nbt;
 
 /**
- * The {@code TAG_Int} tag.
+ * The {@code TAG_Short} tag.
  * @author Graham Edgecombe
  */
-public final class IntTag extends Tag {
+public final class ShortTag extends Tag {
 	/**
 	 * The value.
 	 */
-	private final int value;
+	private final short value;
 
 	/**
 	 * Creates the tag.
 	 * @param name The name.
 	 * @param value The value.
 	 */
-	public IntTag(String name, int value) {
+	public ShortTag(String name, short value) {
 		super(name);
 		this.value = value;
 	}
 
 	@Override
-	public Integer getValue() {
+	public Short getValue() {
 		return value;
 	}
 
@@ -57,10 +57,10 @@ public final class IntTag extends Tag {
 		if (name != null && !name.equals("")) {
 			append = "(\"" + this.getName() + "\")";
 		}
-		return "TAG_Int" + append + ": " + value;
+		return "TAG_Short" + append + ": " + value;
 	}
 
-	public IntTag clone() {
-		return new IntTag(getName(), value);
+	public ShortTag clone() {
+		return new ShortTag(getName(), value);
 	}
 }

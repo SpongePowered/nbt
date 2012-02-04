@@ -1,9 +1,9 @@
 /*
- * This file is part of SpoutAPI (http://www.spout.org/).
+ * This file is part of SpoutNBT (http://www.spout.org/).
  *
- * SpoutAPI is licensed under the SpoutDev License Version 1.
+ * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
- * SpoutAPI is free software: you can redistribute it and/or modify
+ * SpoutNBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -12,7 +12,7 @@
  * software, incorporating those changes, under the terms of the MIT license,
  * as described in the SpoutDev License Version 1.
  *
- * SpoutAPI is distributed in the hope that it will be useful,
+ * SpoutNBT is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -25,42 +25,37 @@
  */
 package org.spout.nbt;
 
+import java.nio.charset.Charset;
+
 /**
- * The {@code TAG_Long} tag.
+ * A class which holds constant values.
  * @author Graham Edgecombe
  */
-public final class LongTag extends Tag {
+public final class NBTConstants {
 	/**
-	 * The value.
+	 * The character set used by NBT (UTF-8).
 	 */
-	private final long value;
+	public static final Charset CHARSET = Charset.forName("UTF-8");
 
 	/**
-	 * Creates the tag.
-	 * @param name The name.
-	 * @param value The value.
+	 * Tag type constants.
 	 */
-	public LongTag(String name, long value) {
-		super(name);
-		this.value = value;
-	}
+	public static final int TYPE_END = 0,
+		TYPE_BYTE = 1,
+		TYPE_SHORT = 2,
+		TYPE_INT = 3,
+		TYPE_LONG = 4,
+		TYPE_FLOAT = 5,
+		TYPE_DOUBLE = 6,
+		TYPE_BYTE_ARRAY = 7,
+		TYPE_STRING = 8,
+		TYPE_LIST = 9,
+		TYPE_COMPOUND = 10;
 
-	@Override
-	public Long getValue() {
-		return value;
-	}
+	/**
+	 * Default private constructor.
+	 */
+	private NBTConstants() {
 
-	@Override
-	public String toString() {
-		String name = getName();
-		String append = "";
-		if (name != null && !name.equals("")) {
-			append = "(\"" + this.getName() + "\")";
-		}
-		return "TAG_Long" + append + ": " + value;
-	}
-
-	public LongTag clone() {
-		return new LongTag(getName(), value);
 	}
 }
