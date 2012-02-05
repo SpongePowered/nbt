@@ -82,6 +82,17 @@ public abstract class Tag {
 		return newMap;
 	}
 
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof Tag)) {
+			return false;
+		}
+		Tag tag = (Tag) other;
+		return getValue().equals(tag.getValue()) &&
+				getName().equals(tag.getName());
+
+	}
+
 	/**
 	 * Clones the Tag
 	 *
