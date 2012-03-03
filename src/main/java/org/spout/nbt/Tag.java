@@ -75,6 +75,10 @@ public abstract class Tag {
 	 * @return a clone of the map
 	 */
 	public static Map<String, Tag> cloneMap(Map<String, Tag> map) {
+		if (map == null) {
+			return null;
+		}
+
 		Map<String, Tag> newMap = new HashMap<String, Tag>();
 		for (Entry<String, Tag> entry : map.entrySet()) {
 			newMap.put(entry.getKey(), entry.getValue().clone());
