@@ -11,7 +11,7 @@
 	<!-- Project information -->
 	<groupId>org.spout</groupId>
 	<artifactId>spoutnbt</artifactId>
-	<version>dev-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>SpoutNBT</name>
 	<url>http://www.spout.org</url>
 	<description>Modified NBT for the Spout project. Based on Graham Edgecombe's JNBT library. NBT (Named Binary Tag) is a tag based binary format designed to carry large amounts of binary data with smaller amounts of additional data.</description>
@@ -61,7 +61,7 @@
 	</dependencies>
 
 	<build>
-		<defaultGoal>clean</defaultGoal>
+		<defaultGoal>clean package install</defaultGoal>
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 		<!-- Resources -->
 		<resources>
@@ -85,12 +85,6 @@
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
-			</plugin>
-			<!-- JAR creation plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.2</version>
 			</plugin>
 		</plugins>
 	</build>

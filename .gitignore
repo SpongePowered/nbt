@@ -58,3 +58,5 @@ build.xml
 #######################
 .idea
 *.iml
+*.ipr
+*.iws
