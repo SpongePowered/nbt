@@ -25,7 +25,9 @@
  */
 package org.spout.nbt;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,20 +38,20 @@ public final class CompoundTag extends Tag {
 	/**
 	 * The value.
 	 */
-	private final Map<String, Tag> value;
+	private final List<Tag> value;
 
 	/**
 	 * Creates the tag.
 	 * @param name The name.
 	 * @param value The value.
 	 */
-	public CompoundTag(String name, Map<String, Tag> value) {
+	public CompoundTag(String name, List<Tag> value) {
 		super(name);
-		this.value = Collections.unmodifiableMap(value);
+		this.value = Collections.unmodifiableList(value);
 	}
 
 	@Override
-	public Map<String, Tag> getValue() {
+	public List<Tag> getValue() {
 		return value;
 	}
 
@@ -63,7 +65,7 @@ public final class CompoundTag extends Tag {
 
 		StringBuilder bldr = new StringBuilder();
 		bldr.append("TAG_Compound").append(append).append(": ").append(value.size()).append(" entries\r\n{\r\n");
-		for (Map.Entry<String, Tag> entry : value.entrySet()) {
+		for (Tag entry : value) {
 			bldr.append("   ").append(entry.getValue().toString().replaceAll("\r\n", "\r\n   ")).append("\r\n");
 		}
 		bldr.append("}");
@@ -71,7 +73,7 @@ public final class CompoundTag extends Tag {
 	}
 
 	public CompoundTag clone() {
-		Map<String, Tag> newMap = Tag.cloneMap(value);
-		return new CompoundTag(getName(), newMap);
+		List<Tag> list = new ArrayList<Tag>(value);
+		return new CompoundTag(getName(), list);
 	}
 }

@@ -189,7 +189,7 @@ public final class NBTOutputStream implements Closeable {
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
 	private void writeCompoundTagPayload(CompoundTag tag) throws IOException {
-		for (Tag childTag : tag.getValue().values()) {
+		for (Tag childTag : tag.getValue()) {
 			writeTag(childTag);
 		}
 		os.writeByte((byte) 0); // end tag - better way?

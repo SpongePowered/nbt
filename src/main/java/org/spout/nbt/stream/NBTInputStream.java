@@ -185,17 +185,17 @@ public final class NBTInputStream implements Closeable {
 			return new ListTag(name, clazz, tagList);
 
 		case NBTConstants.TYPE_COMPOUND:
-			Map<String, Tag> tagMap = new HashMap<String, Tag>();
+			List<Tag> compoundTagList = new ArrayList<Tag>();
 			while (true) {
 				Tag tag = readTag(depth + 1);
 				if(tag instanceof EndTag) {
 					break;
 				} else {
-					tagMap.put(tag.getName(), tag);
+					compoundTagList.add(tag);
 				}
 			}
 
-			return new CompoundTag(name, tagMap);
+			return new CompoundTag(name, compoundTagList);
 
 		default:
 			throw new IOException("Invalid tag type: " + type + ".");
