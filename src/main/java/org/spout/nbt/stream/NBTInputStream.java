@@ -41,11 +41,13 @@ import org.spout.nbt.CompoundTag;
 import org.spout.nbt.DoubleTag;
 import org.spout.nbt.EndTag;
 import org.spout.nbt.FloatTag;
+import org.spout.nbt.IntArrayTag;
 import org.spout.nbt.IntTag;
 import org.spout.nbt.ListTag;
 import org.spout.nbt.LongTag;
 import org.spout.nbt.NBTConstants;
 import org.spout.nbt.NBTUtils;
+import org.spout.nbt.ShortArrayTag;
 import org.spout.nbt.ShortTag;
 import org.spout.nbt.StringTag;
 import org.spout.nbt.Tag;
@@ -196,6 +198,22 @@ public final class NBTInputStream implements Closeable {
 			}
 
 			return new CompoundTag(name, compoundTagList);
+			
+		case NBTConstants.TYPE_INT_ARRAY:
+			length = is.readInt();
+			int[] ints = new int[length];
+			for(int i = 0; i < length; i++) {
+				ints[i] = is.readInt();
+			}
+			return new IntArrayTag(name, ints);
+			
+		case NBTConstants.TYPE_SHORT_ARRAY:
+			length = is.readInt();
+			short[] shorts = new short[length];
+			for(int i = 0; i < length; i++) {
+				shorts[i] = is.readShort();
+			}
+			return new ShortArrayTag(name, shorts);
 
 		default:
 			throw new IOException("Invalid tag type: " + type + ".");

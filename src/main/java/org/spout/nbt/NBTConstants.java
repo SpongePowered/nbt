@@ -51,7 +51,8 @@ public final class NBTConstants {
 		TYPE_STRING = 8,
 		TYPE_LIST = 9,
 		TYPE_COMPOUND = 10,
-		TYPE_SHORT_ARRAY = 11;
+		TYPE_INT_ARRAY = 11,
+		TYPE_SHORT_ARRAY = 100;
 
 	/**
 	 * Default private constructor.
