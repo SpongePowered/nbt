@@ -43,7 +43,7 @@ public final class ByteTag extends Tag {
 	 */
 	public ByteTag(String name, boolean value) {
 		super(name);
-		this.value = value ? 1 : 0;
+		this.value = (byte)(value ? 1 : 0);
 	}
 
 	/**
