@@ -34,6 +34,17 @@ public final class ByteTag extends Tag {
 	 * The value.
 	 */
 	private final byte value;
+	
+	/**
+	 * Creates the tag.<br>
+	 * Boolean true is stored as 1 and boolean false is stored as 0.
+	 * @param name The name.
+	 * @param value The value.
+	 */
+	public ByteTag(String name, boolean value) {
+		super(name);
+		this.value = value ? 1 : 0;
+	}
 
 	/**
 	 * Creates the tag.
@@ -48,6 +59,10 @@ public final class ByteTag extends Tag {
 	@Override
 	public Byte getValue() {
 		return value;
+	}
+	
+	public boolean getBooleanValue() {
+		return value != 0;
 	}
 
 	@Override
