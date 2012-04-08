@@ -68,13 +68,31 @@ public final class NBTInputStream implements Closeable {
 	private final DataInputStream is;
 
 	/**
+	 * Controls whether this NBTInputStream reads numbers in little-endian format.
+	 */
+	private final boolean littleEndian;
+
+	/**
 	 * Creates a new {@link NBTInputStream}, which will source its data
 	 * from the specified input stream. This assumes the stream is compressed.
 	 * @param is The input stream.
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
 	public NBTInputStream(InputStream is) throws IOException {
-		this(is, true);
+		this(is, true, false);
+	}
+
+	/**
+	 * Creates a new {@link NBTInputStream}, which sources its data from the
+	 * specified input stream. A flag must be passed which indicates if the
+	 * stream is compressed with GZIP or not. This assumes the stream
+	 * uses big endian encoding.
+	 * @param is The input stream.
+	 * @param compressed A flag indicating if the stream is compressed.
+	 * @throws java.io.IOException if an I/O error occurs.
+	 */
+	public NBTInputStream(InputStream is, boolean compressed) throws IOException {
+		this(is, compressed, false);
 	}
 
 	/**
@@ -83,9 +101,11 @@ public final class NBTInputStream implements Closeable {
 	 * stream is compressed with GZIP or not.
 	 * @param is The input stream.
 	 * @param compressed A flag indicating if the stream is compressed.
+	 * @param littleEndian Whether to read numbers from the InputStream with little endian encoding.
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
-	public NBTInputStream(InputStream is, boolean compressed) throws IOException {
+	public NBTInputStream(InputStream is, boolean compressed, boolean littleEndian) throws IOException {
+		this.littleEndian = littleEndian;
 		this.is = new DataInputStream(compressed ? new GZIPInputStream(is) : is);
 	}
 
@@ -110,6 +130,7 @@ public final class NBTInputStream implements Closeable {
 		String name;
 		if (type != NBTConstants.TYPE_END) {
 			int nameLength = is.readShort() & 0xFFFF;
+			if (littleEndian) nameLength = Short.reverseBytes((short) nameLength);
 			byte[] nameBytes = new byte[nameLength];
 			is.readFully(nameBytes);
 			name = new String(nameBytes, NBTConstants.CHARSET.name());
@@ -142,35 +163,37 @@ public final class NBTInputStream implements Closeable {
 			return new ByteTag(name, is.readByte());
 
 		case NBTConstants.TYPE_SHORT:
-			return new ShortTag(name, is.readShort());
+			return new ShortTag(name, (littleEndian? Short.reverseBytes(is.readShort()) : is.readShort()));
 
 		case NBTConstants.TYPE_INT:
-			return new IntTag(name, is.readInt());
+			return new IntTag(name, (littleEndian? Integer.reverseBytes(is.readInt()) : is.readInt()));
 
 		case NBTConstants.TYPE_LONG:
-			return new LongTag(name, is.readLong());
+			return new LongTag(name, (littleEndian? Long.reverseBytes(is.readLong()) : is.readLong()));
 
 		case NBTConstants.TYPE_FLOAT:
-			return new FloatTag(name, is.readFloat());
+			return new FloatTag(name, (littleEndian? Float.intBitsToFloat(Integer.reverseBytes(is.readInt())) : 
+				is.readFloat()));
 
 		case NBTConstants.TYPE_DOUBLE:
-			return new DoubleTag(name, is.readDouble());
+			return new DoubleTag(name, (littleEndian? Double.longBitsToDouble(Long.reverseBytes(is.readLong())) :
+				is.readDouble()));
 
 		case NBTConstants.TYPE_BYTE_ARRAY:
-			int length = is.readInt();
+			int length = (littleEndian? Integer.reverseBytes(is.readInt()) : is.readInt());
 			byte[] bytes = new byte[length];
 			is.readFully(bytes);
 			return new ByteArrayTag(name, bytes);
 
 		case NBTConstants.TYPE_STRING:
-			length = is.readShort();
+			length = (littleEndian? Short.reverseBytes(is.readShort()) : is.readShort());
 			bytes = new byte[length];
 			is.readFully(bytes);
 			return new StringTag(name, new String(bytes, NBTConstants.CHARSET.name()));
 
 		case NBTConstants.TYPE_LIST:
 			int childType = is.readByte();
-			length = is.readInt();
+			length = (littleEndian? Integer.reverseBytes(is.readInt()) : is.readInt());
 
 			Class<? extends Tag> clazz = NBTUtils.getTypeClass(childType);
 			List<Tag> tagList = new ArrayList<Tag>();
@@ -200,18 +223,18 @@ public final class NBTInputStream implements Closeable {
 			return new CompoundTag(name, compoundTagList);
 			
 		case NBTConstants.TYPE_INT_ARRAY:
-			length = is.readInt();
+			length = (littleEndian? Integer.reverseBytes(is.readInt()) : is.readInt());
 			int[] ints = new int[length];
 			for(int i = 0; i < length; i++) {
-				ints[i] = is.readInt();
+				ints[i] = (littleEndian? Integer.reverseBytes(is.readInt()) : is.readInt());
 			}
 			return new IntArrayTag(name, ints);
 			
 		case NBTConstants.TYPE_SHORT_ARRAY:
-			length = is.readInt();
+			length = (littleEndian? Integer.reverseBytes(is.readInt()) : is.readInt());
 			short[] shorts = new short[length];
 			for(int i = 0; i < length; i++) {
-				shorts[i] = is.readShort();
+				shorts[i] = (littleEndian? Short.reverseBytes(is.readShort()) : is.readShort());
 			}
 			return new ShortArrayTag(name, shorts);
 
@@ -222,5 +245,12 @@ public final class NBTInputStream implements Closeable {
 
 	public void close() throws IOException {
 		is.close();
+	}
+
+	/**
+	 * @return whether this NBTInputStream reads numbers in little-endian format.
+	 */
+	public boolean isLittleEndian() {
+		return littleEndian;
 	}
 }
