@@ -11,7 +11,7 @@
 	<!-- Project information -->
 	<groupId>org.spout</groupId>
 	<artifactId>spoutnbt</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<name>SpoutNBT</name>
 	<url>http://www.spout.org</url>
 	<description>Modified NBT for the Spout project. Based on Graham Edgecombe's JNBT library. NBT (Named Binary Tag) is a tag based binary format designed to carry large amounts of binary data with smaller amounts of additional data.</description>
