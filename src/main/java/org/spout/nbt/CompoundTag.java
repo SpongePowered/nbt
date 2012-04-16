@@ -44,7 +44,8 @@ public final class CompoundTag extends Tag {
 	 */
 	public CompoundTag(String name, CompoundMap value) {
 		super(name);
-		this.value = (CompoundMap) Collections.unmodifiableMap(value);
+//		this.value = (CompoundMap) Collections.unmodifiableMap(value); This doesn't work anymore, needs a new solution
+		this.value = value;
 	}
 
 	@Override

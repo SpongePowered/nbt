@@ -7,6 +7,10 @@ public class CompoundMap extends HashMap<String, Tag> {
 	public CompoundMap(CompoundMap value) {
 		super(value);
 	}
+	
+	public CompoundMap(HashMap<String, Tag> value) {
+		super(value);
+	}
 
 	public CompoundMap() {
 		super();
