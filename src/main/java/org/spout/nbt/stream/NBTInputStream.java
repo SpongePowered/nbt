@@ -30,13 +30,12 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
 import org.spout.nbt.ByteArrayTag;
 import org.spout.nbt.ByteTag;
+import org.spout.nbt.CompoundMap;
 import org.spout.nbt.CompoundTag;
 import org.spout.nbt.DoubleTag;
 import org.spout.nbt.EndTag;
@@ -210,13 +209,13 @@ public final class NBTInputStream implements Closeable {
 			return new ListTag(name, clazz, tagList);
 
 		case NBTConstants.TYPE_COMPOUND:
-			List<Tag> compoundTagList = new ArrayList<Tag>();
+			CompoundMap compoundTagList = new CompoundMap();
 			while (true) {
 				Tag tag = readTag(depth + 1);
 				if(tag instanceof EndTag) {
 					break;
 				} else {
-					compoundTagList.add(tag);
+					compoundTagList.put(tag);
 				}
 			}
 

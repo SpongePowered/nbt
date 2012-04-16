@@ -42,8 +42,7 @@ public final class ByteTag extends Tag {
 	 * @param value The value.
 	 */
 	public ByteTag(String name, boolean value) {
-		super(name);
-		this.value = (byte)(value ? 1 : 0);
+		this(name, (byte)(value ? 1 : 0));
 	}
 
 	/**
