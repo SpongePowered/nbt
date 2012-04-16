@@ -25,8 +25,6 @@
  */
 package org.spout.nbt;
 
-import java.util.Collections;
-
 /**
  * The {@code TAG_Compound} tag.
  * @author Graham Edgecombe
