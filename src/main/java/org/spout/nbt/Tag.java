@@ -33,7 +33,7 @@ import java.util.Map.Entry;
  * Represents a single NBT tag.
  * @author Graham Edgecombe
  */
-public abstract class Tag {
+public abstract class Tag implements Comparable<Tag> {
 	/**
 	 * The name of this tag.
 	 */
@@ -96,7 +96,22 @@ public abstract class Tag {
 				getName().equals(tag.getName());
 
 	}
+	
+	@Override
+	public int compareTo(Tag o) {
+		if (equals(o)) {
+			return 0;
+		} else {
+			Tag other = (Tag)o;
+			if (other.getName().equals(getName())) {
+				throw new IllegalStateException("Cannot compare two Tags with the same name but different values for sorting");
+			} else {
+				return getName().compareTo(other.getName());
+			}
+		}
+	}
 
+	
 	/**
 	 * Clones the Tag
 	 *
