@@ -13,7 +13,6 @@ import java.util.TreeMap;
 public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	
 	private final Map<String, Tag> map;
-	private final boolean preserveOrder;
 	private final boolean sort;
 	private final boolean reverse;
 	
@@ -21,7 +20,7 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	 * Creates an empty CompoundMap backed by a HashMap.
 	 */
 	public CompoundMap() {
-		this(null, false, false, false);
+		this(null, false, false);
 	}
 	
 	/**
@@ -32,18 +31,18 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	 * @param initial the initial values for the CompoundMap 
 	 */
 	public CompoundMap(List<Tag> initial) {
-		this(initial, true, false, false);
+		this(initial, false, false);
 	}
 	
 	/**
-	 * Creates a CompoundMap back by a HashMap, so element ordering is not defined.<br>
+	 * Creates a CompoundMap back by a LinkedHashMap, so insertion order is preserved.<br>
 	 * <br>
-	 * The map is initialised using the values given in the HashMap.
+	 * The map is initialised using the values given in the Map.
 	 * 
 	 * @param initial the initial values for the CompoundMap 
 	 */
-	public CompoundMap(HashMap<String, Tag> initial) {
-		this(initial.values(), false, false, false);
+	public CompoundMap(Map<String, Tag> initial) {
+		this(initial.values(), false, false);
 	}
 
 	/**
@@ -54,19 +53,18 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	 * @param initial the initial values for the CompoundMap 
 	 */
 	public CompoundMap(CompoundMap initial) {
-		this(initial.values(), initial.preserveOrder, initial.sort, initial.reverse);
+		this(initial.values(), initial.sort, initial.reverse);
 	}
 	
 	/**
 	 * Creates an empty CompoundMap.<br>
 	 * <br>
 	 * 
-	 * @param perserveOrder elements are ordered in insertion order
 	 * @param sort elements are ordered in alphabetical ordering
 	 * @param reverse elements are ordered in reverse alphabetical ordering
 	 */
-	public CompoundMap(boolean preserveOrder, boolean sort, boolean reverse) {
-		this(null, preserveOrder, sort, reverse);
+	public CompoundMap(boolean sort, boolean reverse) {
+		this(null, sort, reverse);
 	}
 
 	/**
@@ -74,31 +72,24 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	 * <br>
 	 * 
 	 * @param initial the initial values
-	 * @param perserveOrder elements are ordered in insertion order
 	 * @param sort elements are ordered in alphabetical ordering
 	 * @param reverse elements are ordered in reverse alphabetical ordering
 	 */
-	public CompoundMap(Iterable<Tag> initial, boolean preserveOrder, boolean sort, boolean reverse) {
-		if (preserveOrder && sort) {
-			throw new IllegalArgumentException("A compound map cannot both preserve order and sort the keys");
-		}
+	public CompoundMap(Iterable<Tag> initial, boolean sort, boolean reverse) {
 		if (reverse) {
 			this.sort = true;
 		} else {
 			this.sort = sort;
 		}
-		this.preserveOrder = preserveOrder;
 		this.reverse = reverse;
-		if (preserveOrder) {
+		if (!sort) {
 			this.map = new LinkedHashMap<String, Tag>();
-		} else if (sort) {
+		} else {
 			if (reverse) {
 				this.map = new TreeMap<String, Tag>(Collections.reverseOrder());
 			} else {
 				this.map = new TreeMap<String, Tag>();
 			}
-		} else {
-			this.map = new HashMap<String, Tag>();
 		}
 		if (initial != null) {
 			for (Tag t : initial) {
@@ -183,11 +174,24 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
-		if(obj instanceof CompoundMap) {
-			CompoundMap objMap = (CompoundMap) obj;
-			return map.equals(objMap.map);
+	public boolean equals(Object o) {
+		if (o instanceof CompoundMap) {
+			CompoundMap other = (CompoundMap)o;
+			Iterator<Tag> iThis = iterator();
+			Iterator<Tag> iOther = other.iterator();
+			while (iThis.hasNext() && iOther.hasNext()) {
+				Tag tThis = iThis.next();
+				Tag tOther = iOther.next();
+				if (!tThis.equals(tOther)) {
+					return false;
+				}
+			}
+			if (iThis.hasNext() || iOther.hasNext()) {
+				return false;
+			}
+			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 }

@@ -79,11 +79,11 @@ public class CompountMapTest {
 	
 	@Test
 	public void preserveOrder() {
-		CompoundMap tag = new CompoundMap(random, true, false, false);
+		CompoundMap tag = new CompoundMap(random, false, false);
 		
 		assertEquals("Tag setup", tag, random);
 		
-		tag = new CompoundMap(true, false, false);
+		tag = new CompoundMap(false, false);
 		
 		for (Tag t : random) {
 			tag.put(t);
@@ -95,11 +95,11 @@ public class CompountMapTest {
 	
 	@Test
 	public void sorted() {
-		CompoundMap tag = new CompoundMap(random, false, true, false);
+		CompoundMap tag = new CompoundMap(random, true, false);
 		
 		assertEquals("Tag setup", tag, sorted);
 		
-		tag = new CompoundMap(false, true, false);
+		tag = new CompoundMap(true, false);
 		
 		for (Tag t : random) {
 			tag.put(t);
@@ -110,11 +110,11 @@ public class CompountMapTest {
 	
 	@Test
 	public void reverseSorted() {
-		CompoundMap tag = new CompoundMap(random, false, true, true);
+		CompoundMap tag = new CompoundMap(random, true, true);
 		
 		assertEquals("Tag setup", tag, reverse);
 		
-		tag = new CompoundMap(false, true, true);
+		tag = new CompoundMap(true, true);
 		
 		for (Tag t : random) {
 			tag.put(t);
