@@ -181,4 +181,13 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	public Iterator<Tag> iterator() {
 		return values().iterator();
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof CompoundMap) {
+			CompoundMap objMap = (CompoundMap) obj;
+			return map.equals(objMap.map);
+		}
+		return false;
+	}
 }
