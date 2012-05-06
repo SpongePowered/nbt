@@ -1,5 +1,5 @@
 /*
- * This file is part of SpoutNBT (http://www.spout.org/).
+ * This file is part of SpoutNBT <http://www.spout.org/>.
  *
  * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
@@ -92,11 +92,9 @@ public abstract class Tag implements Comparable<Tag> {
 			return false;
 		}
 		Tag tag = (Tag) other;
-		return getValue().equals(tag.getValue()) &&
-				getName().equals(tag.getName());
-
+		return getValue().equals(tag.getValue()) && getName().equals(tag.getName());
 	}
-	
+
 	@Override
 	public int compareTo(Tag o) {
 		if (equals(o)) {
@@ -111,7 +109,6 @@ public abstract class Tag implements Comparable<Tag> {
 		}
 	}
 
-	
 	/**
 	 * Clones the Tag
 	 *

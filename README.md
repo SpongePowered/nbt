@@ -9,7 +9,7 @@ SpoutNBT is licensed under [GNU LESSER GENERAL PUBLIC LICENSE Version 3][License
 
 Who is SpoutDev?
 ----------------
-SpoutDev is the team behind Spout, SpoutAPI, SpoutNBT, Spoutcraft, SpoutcraftAPI, Spoutcraft Launcher and LauncherAPI, SpoutPlugin, SpoutPluginAPI, Vanilla, and BukkitBridge.  
+SpoutDev is the team behind the Spout and Spoutcraft projects, Vanilla, BukkitBridge, I See You, and Pipe.  
 [![Afforess](https://secure.gravatar.com/avatar/ea0be49e1e4deac42ed9204ffd95b56c?d=mm&r=pg&s=48)](http://forums.spout.org/members/afforess.2/) 
 [![alta189](https://secure.gravatar.com/avatar/7a087430b2bf9456b8879c5469aadb95?d=mm&r=pg&s=48)](http://forums.spout.org/members/alta189.3/) 
 [![Wulfspider](https://secure.gravatar.com/avatar/6f2a0dcb60cd1ebee57875f9326bc98c?d=mm&r=pg&s=48)](http://forums.spout.org/members/wulfspider.1/) 
@@ -58,9 +58,9 @@ Coding and Pull Request Formatting
 [Website]: http://www.spout.org
 [Forums]: http://forums.spout.org
 [GitHub]: https://github.com/SpoutDev/SpoutNBT
-[Javadoc]: http://jd.spout.org/latest
-[Jenkins]: http://spout.in/ci
-[Issues]: http://spout.in/issues
+[Javadoc]: http://jd.spout.org/nbt/latest
+[Jenkins]: http://build.spout.org/job/SpoutNBT
+[Issues]: http://issues.spout.org
 [Twitter]: http://spout.in/twitter
 [Twitter Logo]: http://cdn.spout.org/img/button/twitter_follow_us.png
 [Facebook]: http://spout.in/facebook

@@ -1,5 +1,5 @@
 /*
- * This file is part of SpoutNBT (http://www.spout.org/).
+ * This file is part of SpoutNBT <http://www.spout.org/>.
  *
  * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
@@ -27,13 +27,13 @@ package org.spout.nbt;
 
 /**
  * A class which contains NBT-related utility methods.
- * 
+ *
  * @author Graham Edgecombe
  */
 public final class NBTUtils {
 	/**
 	 * Gets the type name of a tag.
-	 * 
+	 *
 	 * @param clazz The tag class.
 	 * @return The type name.
 	 */
@@ -71,7 +71,7 @@ public final class NBTUtils {
 
 	/**
 	 * Gets the type code of a tag class.
-	 * 
+	 *
 	 * @param clazz The tag class.
 	 * @return The type code.
 	 * @throws IllegalArgumentException if the tag class is invalid.
@@ -110,7 +110,7 @@ public final class NBTUtils {
 
 	/**
 	 * Gets the class of a type of tag.
-	 * 
+	 *
 	 * @param type The type.
 	 * @return The class.
 	 * @throws IllegalArgumentException if the tag type is invalid.

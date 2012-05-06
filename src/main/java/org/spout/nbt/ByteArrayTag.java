@@ -1,5 +1,5 @@
 /*
- * This file is part of SpoutNBT (http://www.spout.org/).
+ * This file is part of SpoutNBT <http://www.spout.org/>.
  *
  * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
@@ -81,13 +81,10 @@ public final class ByteArrayTag extends Tag {
 	public boolean equals(Object other) {
 		if (!(other instanceof ByteArrayTag)) {
 			return false;
-
 		}
 
 		ByteArrayTag tag = (ByteArrayTag) other;
-		return Arrays.equals(value, tag.value) &&
-				getName().equals(tag.getName());
-
+		return Arrays.equals(value, tag.value) && getName().equals(tag.getName());
 	}
 
 	private byte[] cloneArray(byte[] byteArray) {
@@ -96,7 +93,7 @@ public final class ByteArrayTag extends Tag {
 		} else {
 			int length = byteArray.length;
 			byte[] newArray = new byte[length];
-            System.arraycopy(byteArray, 0, newArray, 0, length);
+			System.arraycopy(byteArray, 0, newArray, 0, length);
 			return newArray;
 		}
 	}

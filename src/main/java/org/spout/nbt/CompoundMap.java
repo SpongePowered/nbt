@@ -1,3 +1,28 @@
+/*
+ * This file is part of SpoutNBT <http://www.spout.org/>.
+ *
+ * SpoutNBT is licensed under the SpoutDev License Version 1.
+ *
+ * SpoutNBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * In addition, 180 days after any changes are published, you can use the
+ * software, incorporating those changes, under the terms of the MIT license,
+ * as described in the SpoutDev License Version 1.
+ *
+ * SpoutNBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License,
+ * the MIT license and the SpoutDev License Version 1 along with this program.
+ * If not, see <http://www.gnu.org/licenses/> for the GNU Lesser General Public
+ * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
+ * including the MIT license.
+ */
 package org.spout.nbt;
 
 import java.util.Collection;
@@ -11,35 +36,34 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
-	
 	private final Map<String, Tag> map;
 	private final boolean sort;
 	private final boolean reverse;
-	
+
 	/**
 	 * Creates an empty CompoundMap backed by a HashMap.
 	 */
 	public CompoundMap() {
 		this(null, false, false);
 	}
-	
+
 	/**
 	 * Creates a CompoundMap back by a LinkedHashMap, so insertion order is preserved.<br>
 	 * <br>
 	 * The map is initialised using the values given in the List.
-	 * 
-	 * @param initial the initial values for the CompoundMap 
+	 *
+	 * @param initial the initial values for the CompoundMap
 	 */
 	public CompoundMap(List<Tag> initial) {
 		this(initial, false, false);
 	}
-	
+
 	/**
 	 * Creates a CompoundMap back by a LinkedHashMap, so insertion order is preserved.<br>
 	 * <br>
 	 * The map is initialised using the values given in the Map.
-	 * 
-	 * @param initial the initial values for the CompoundMap 
+	 *
+	 * @param initial the initial values for the CompoundMap
 	 */
 	public CompoundMap(Map<String, Tag> initial) {
 		this(initial.values(), false, false);
@@ -49,17 +73,17 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	 * Creates a CompoundMap using the same element ordering rules as in the given CompoundMap.<br>
 	 * <br>
 	 * The map is initialised using the values given in the CompoundMap.
-	 * 
-	 * @param initial the initial values for the CompoundMap 
+	 *
+	 * @param initial the initial values for the CompoundMap
 	 */
 	public CompoundMap(CompoundMap initial) {
 		this(initial.values(), initial.sort, initial.reverse);
 	}
-	
+
 	/**
 	 * Creates an empty CompoundMap.<br>
 	 * <br>
-	 * 
+	 *
 	 * @param sort elements are ordered in alphabetical ordering
 	 * @param reverse elements are ordered in reverse alphabetical ordering
 	 */
@@ -70,7 +94,7 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	/**
 	 * Creates an empty CompoundMap which is initialised using the given values<br>
 	 * <br>
-	 * 
+	 *
 	 * @param initial the initial values
 	 * @param sort elements are ordered in alphabetical ordering
 	 * @param reverse elements are ordered in reverse alphabetical ordering
@@ -97,10 +121,10 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 			}
 		}
 	}
-	
+
 	/**
 	 * Puts a tag in this map, getting the string from the tag
-	 * 
+	 *
 	 * @param tag to add
 	 * @return the previous value
 	 */
@@ -172,7 +196,7 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	public Iterator<Tag> iterator() {
 		return values().iterator();
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof CompoundMap) {

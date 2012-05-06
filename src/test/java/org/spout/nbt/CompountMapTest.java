@@ -1,9 +1,9 @@
 /*
- * This file is part of SpoutAPI (http://www.spout.org/).
+ * This file is part of SpoutNBT <http://www.spout.org/>.
  *
- * SpoutAPI is licensed under the SpoutDev License Version 1.
+ * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
- * SpoutAPI is free software: you can redistribute it and/or modify
+ * SpoutNBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -12,7 +12,7 @@
  * software, incorporating those changes, under the terms of the MIT license,
  * as described in the SpoutDev License Version 1.
  *
- * SpoutAPI is distributed in the hope that it will be useful,
+ * SpoutNBT is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -38,36 +38,34 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CompountMapTest {
-	
 	List<Tag> sorted;
 	List<Tag> random;
 	List<Tag> reverse;
-	
 
 	@Before
 	public void setupLists() {
 		random = new ArrayList<Tag>();
-		
+
 		Random r = new Random();
-		
+
 		for (int i = 0; i < 20; i++) {
 			random.add(new LongTag(Integer.toHexString(r.nextInt()), r.nextLong()));
 		}
-		
+
 		sorted = new ArrayList<Tag>(random);
 		Collections.sort(sorted);
-		
+
 		reverse = new ArrayList<Tag>(random);
 		Collections.sort(reverse, Collections.reverseOrder());
 	}
-	
+
 	@Test
 	public void printLists() {
 		printList("Random", random);
 		printList("Sorted", sorted);
 		printList("Reverse", reverse);
 	}
-	
+
 	private void printList(String type, List<Tag> list) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("List: " + type + "\n");
@@ -76,53 +74,52 @@ public class CompountMapTest {
 		}
 		System.out.println(sb.toString());
 	}
-	
+
 	@Test
 	public void preserveOrder() {
 		CompoundMap tag = new CompoundMap(random, false, false);
-		
+
 		assertEquals("Tag setup", tag, random);
-		
+
 		tag = new CompoundMap(false, false);
-		
+
 		for (Tag t : random) {
 			tag.put(t);
 		}
-		
-		assertEquals("Tag setup", tag, random);
 
+		assertEquals("Tag setup", tag, random);
 	}
-	
+
 	@Test
 	public void sorted() {
 		CompoundMap tag = new CompoundMap(random, true, false);
-		
+
 		assertEquals("Tag setup", tag, sorted);
-		
+
 		tag = new CompoundMap(true, false);
-		
+
 		for (Tag t : random) {
 			tag.put(t);
 		}
-		
+
 		assertEquals("Tag setup", tag, sorted);
 	}
-	
+
 	@Test
 	public void reverseSorted() {
 		CompoundMap tag = new CompoundMap(random, true, true);
-		
+
 		assertEquals("Tag setup", tag, reverse);
-		
+
 		tag = new CompoundMap(true, true);
-		
+
 		for (Tag t : random) {
 			tag.put(t);
 		}
-		
+
 		assertEquals("Tag setup", tag, reverse);
 	}
-	
+
 	private void assertEquals(String message, Iterable<Tag> a, Iterable<Tag> b) {
 		Iterator<Tag> iterA = a.iterator();
 		Iterator<Tag> iterB = b.iterator();

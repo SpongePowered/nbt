@@ -1,5 +1,5 @@
 /*
- * This file is part of SpoutNBT (http://www.spout.org/).
+ * This file is part of SpoutNBT <http://www.spout.org/>.
  *
  * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
@@ -34,7 +34,7 @@ public final class ByteTag extends Tag {
 	 * The value.
 	 */
 	private final byte value;
-	
+
 	/**
 	 * Creates the tag.<br>
 	 * Boolean true is stored as 1 and boolean false is stored as 0.
@@ -59,7 +59,7 @@ public final class ByteTag extends Tag {
 	public Byte getValue() {
 		return value;
 	}
-	
+
 	public boolean getBooleanValue() {
 		return value != 0;
 	}
