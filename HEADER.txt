@@ -1,5 +1,6 @@
-This file is part of ${name} <${url}/>.
+This file is part of ${name}.
 
+${copyright} <${url}/>
 ${name} is licensed under the SpoutDev License Version 1.
 
 ${name} is free software: you can redistribute it and/or modify

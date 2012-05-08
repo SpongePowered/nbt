@@ -1,6 +1,7 @@
 /*
- * This file is part of SpoutNBT <http://www.spout.org/>.
+ * This file is part of SpoutNBT.
  *
+ * Copyright (c) 2012, SpoutDev <http://www.spout.org/>
  * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
  * SpoutNBT is free software: you can redistribute it and/or modify

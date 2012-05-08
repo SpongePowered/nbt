@@ -18,7 +18,6 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.build.timestamp.format>yyyy-MM-dd hh:mm:ss aaa z</maven.build.timestamp.format>
 	</properties>
 
 	<!-- License -->
@@ -33,9 +32,9 @@
 
 	<!-- Source code -->
 	<scm>
-		<developerConnection>scm:git:git@github.com:SpoutDev/${project.name}.git</developerConnection>
-		<connection>scm:git:git://github.com/SpoutDev/${project.name}.git</connection>
-		<url>https://github.com/SpoutDev/${project.name}</url>
+		<developerConnection>scm:git:git@github.com:SpoutDev/SpoutNBT.git</developerConnection>
+		<connection>scm:git:git://github.com/SpoutDev/SpoutNBT.git</connection>
+		<url>https://github.com/SpoutDev/SpoutNBT</url>
 	</scm>
 
 	<!-- Continuous integration -->
@@ -64,7 +63,6 @@
 
 	<build>
 		<defaultGoal>clean verify package install</defaultGoal>
-		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 		<!-- Resources -->
 		<resources>
 			<resource>
@@ -108,6 +106,7 @@
 						<name>${project.name}</name>
 						<url>${project.url}</url>
 						<licenseUrl>http://www.spout.org/SpoutDevLicenseV1.txt</licenseUrl>
+						<copyright>Copyright (c) 2012, SpoutDev</copyright>
 					</properties>
 					<includes>
 						<include>src/main/java/**</include>
