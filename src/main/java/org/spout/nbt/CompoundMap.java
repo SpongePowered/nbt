@@ -47,7 +47,7 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	public CompoundMap() {
 		this(null, false, false);
 	}
-
+	
 	/**
 	 * Creates a CompoundMap back by a LinkedHashMap, so insertion order is preserved.<br>
 	 * <br>
@@ -69,7 +69,20 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	public CompoundMap(Map<String, Tag> initial) {
 		this(initial.values(), false, false);
 	}
-
+	
+	/**
+	 * Creates a CompoundMap back by a LinkedHashMap, so insertion order is preserved.<br>
+	 * <br>
+	 * The map is initialised using the values given in the HashMap.  The constructor is included for 
+	 * backward compatibility, it is recommended to use the one that takes Map<String, Tag> instead.
+	 *
+	 * @param initial the initial values for the CompoundMap
+	 */
+	@Deprecated 
+	public CompoundMap(HashMap<String, Tag> initial) {
+		this((Map<String, Tag>)initial);
+	}
+	
 	/**
 	 * Creates a CompoundMap using the same element ordering rules as in the given CompoundMap.<br>
 	 * <br>
@@ -86,7 +99,7 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	 * <br>
 	 *
 	 * @param sort elements are ordered in alphabetical ordering
-	 * @param reverse elements are ordered in reverse alphabetical ordering
+	 * @param reverse elements are ordered in reverse alphabetical ordering, when sort is true
 	 */
 	public CompoundMap(boolean sort, boolean reverse) {
 		this(null, sort, reverse);
@@ -98,7 +111,7 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	 *
 	 * @param initial the initial values
 	 * @param sort elements are ordered in alphabetical ordering
-	 * @param reverse elements are ordered in reverse alphabetical ordering
+	 * @param reverse elements are ordered in reverse alphabetical ordering, when sort is true
 	 */
 	public CompoundMap(Iterable<Tag> initial, boolean sort, boolean reverse) {
 		if (reverse) {
