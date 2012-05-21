@@ -1,7 +1,7 @@
 /*
  * This file is part of SpoutNBT.
  *
- * Copyright (c) 2012, SpoutDev <http://www.spout.org/>
+ * Copyright (c) 2011-2012, SpoutDev <http://www.spout.org/>
  * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
  * SpoutNBT is free software: you can redistribute it and/or modify
@@ -47,7 +47,7 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	public CompoundMap() {
 		this(null, false, false);
 	}
-	
+
 	/**
 	 * Creates a CompoundMap back by a LinkedHashMap, so insertion order is preserved.<br>
 	 * <br>
@@ -69,20 +69,20 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	public CompoundMap(Map<String, Tag> initial) {
 		this(initial.values(), false, false);
 	}
-	
+
 	/**
 	 * Creates a CompoundMap back by a LinkedHashMap, so insertion order is preserved.<br>
 	 * <br>
-	 * The map is initialised using the values given in the HashMap.  The constructor is included for 
+	 * The map is initialised using the values given in the HashMap.  The constructor is included for
 	 * backward compatibility, it is recommended to use the one that takes Map<String, Tag> instead.
 	 *
 	 * @param initial the initial values for the CompoundMap
 	 */
-	@Deprecated 
+	@Deprecated
 	public CompoundMap(HashMap<String, Tag> initial) {
 		this((Map<String, Tag>)initial);
 	}
-	
+
 	/**
 	 * Creates a CompoundMap using the same element ordering rules as in the given CompoundMap.<br>
 	 * <br>

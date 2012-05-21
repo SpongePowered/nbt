@@ -5,7 +5,7 @@ Modified NBT for the Spout project. Based on Graham Edgecombe's JNBT library. NB
 
 Copyright (c) 2011-2012, SpoutDev <http://www.spout.org>
 
-SpoutNBT is licensed under [GNU LESSER GENERAL PUBLIC LICENSE Version 3][License], but with a provision that files are released under the MIT license 180 days after they are published. Please see the `LICENSE.txt` file for details.
+SpoutNBT is licensed under [GNU Lesser General Public License Version 3][License], but with a provision that files are released under the MIT license 180 days after they are published. Please see the `LICENSE.txt` file for details.
 
 Who is SpoutDev?
 ----------------
@@ -48,8 +48,10 @@ Coding and Pull Request Formatting
 * No 80 column limit or midstatement newlines.
 * Pull requests must compile and work.
 * Pull requests must be formatted properly.
-* Number of commits in a pull request should be kept to a minimum.
+* Sign-off on your ALL commits - this indicates you agree to the terms of our license.
 * No merges should be included in pull requests unless the pull request's purpose is a merge.
+* Number of commits in a pull request should be kept to *one commit* and all additional commits must be *squashed*.
+* For clarification, see the full pull request guidelines [here](http://spout.in/prguide).
 
 **Please follow the above conventions if you want your pull request(s) accepted.**
 
@@ -58,7 +60,7 @@ Coding and Pull Request Formatting
 [Website]: http://www.spout.org
 [Forums]: http://forums.spout.org
 [GitHub]: https://github.com/SpoutDev/SpoutNBT
-[Javadoc]: http://jd.spout.org/nbt/latest
+[Javadoc]: http://jd.spout.org/nbt/
 [Jenkins]: http://build.spout.org/job/SpoutNBT
 [Issues]: http://issues.spout.org
 [Twitter]: http://spout.in/twitter

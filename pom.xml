@@ -1,19 +1,13 @@
-<!--
-	Maven build file for SpoutNBT
-
-	Copyright (c) 2011-2012 SpoutDev <http://www.spout.org>
-	SpoutNBT is licensed under GNU LESSER GENERAL PUBLIC LICENSE Version 3, but with a provision that files are released under the MIT license 180 days after they are published. Please see the `LICENSE.txt` file for details.
--->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- Project information -->
+	<name>SpoutNBT</name>
 	<groupId>org.spout</groupId>
 	<artifactId>spoutnbt</artifactId>
 	<version>1.0.3-SNAPSHOT</version>
-	<name>SpoutNBT</name>
 	<url>http://www.spout.org</url>
+	<inceptionYear>2011</inceptionYear>
 	<description>Modified NBT for the Spout project. Based on Graham Edgecombe's JNBT library. NBT (Named Binary Tag) is a tag based binary format designed to carry large amounts of binary data with smaller amounts of additional data.</description>
 
 	<properties>
@@ -26,7 +20,7 @@
 			<name>SpoutDev License Version 1</name>
 			<url>http://www.spout.org/SpoutDevLicenseV1.txt</url>
 			<distribution>repo</distribution>
-			<comments>GNU LESSER GENERAL PUBLIC LICENSE Version 3, but with a provision that files are released under the MIT license 180 days after they are published</comments>
+			<comments>GNU Lesser General Public License Version 3, but with a provision that files are released under the MIT license 180 days after they are published</comments>
 		</license>
 	</licenses>
 
@@ -43,6 +37,12 @@
 		<url>http://build.spout.org</url>
 	</ciManagement>
 
+	<!-- Issue management -->
+	<issueManagement>
+		<system>JIRA</system>
+		<url>http://issues.spout.org</url>
+	</issueManagement>
+
 	<!-- Repository locations -->
 	<repositories>
 		<repository>
@@ -50,6 +50,12 @@
 			<url>http://repo.spout.org</url>
 		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spout-plugins</id>
+			<url>http://repo.spout.org</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<!-- Dependencies -->
 	<dependencies>
@@ -61,8 +67,9 @@
 		</dependency>
 	</dependencies>
 
+	<!-- Build settings -->
 	<build>
-		<defaultGoal>clean verify package install</defaultGoal>
+		<defaultGoal>clean package install</defaultGoal>
 		<!-- Resources -->
 		<resources>
 			<resource>
@@ -76,15 +83,14 @@
 		</resources>
 		<!-- Plugins -->
 		<plugins>
-			<!-- License headers check plugin -->
+			<!-- License header formatting plugin -->
 			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
 				<version>1.10.b1</version>
 				<executions>
 					<execution>
-						<id>format-headers</id>
-						<phase>verify</phase>
+						<phase>clean</phase>
 						<goals>
 							<goal>format</goal>
 						</goals>
@@ -105,8 +111,9 @@
 					<properties>
 						<name>${project.name}</name>
 						<url>${project.url}</url>
+						<license>SpoutDev License Version 1</license>
 						<licenseUrl>http://www.spout.org/SpoutDevLicenseV1.txt</licenseUrl>
-						<copyright>Copyright (c) 2012, SpoutDev</copyright>
+						<copyright>Copyright (c) ${project.inceptionYear}-2012, SpoutDev</copyright>
 					</properties>
 					<includes>
 						<include>src/main/java/**</include>

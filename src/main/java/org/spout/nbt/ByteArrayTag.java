@@ -1,7 +1,7 @@
 /*
  * This file is part of SpoutNBT.
  *
- * Copyright (c) 2012, SpoutDev <http://www.spout.org/>
+ * Copyright (c) 2011-2012, SpoutDev <http://www.spout.org/>
  * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
  * SpoutNBT is free software: you can redistribute it and/or modify
@@ -30,7 +30,6 @@ import java.util.Arrays;
 
 /**
  * The {@code TAG_Byte_Array} tag.
- * @author Graham Edgecombe
  */
 public final class ByteArrayTag extends Tag {
 	/**
@@ -77,7 +76,7 @@ public final class ByteArrayTag extends Tag {
 
 		return new ByteArrayTag(getName(), clonedArray);
 	}
-	
+
 	@Override
 	public boolean equals(Object other) {
 		if (!(other instanceof ByteArrayTag)) {

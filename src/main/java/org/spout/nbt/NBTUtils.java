@@ -1,7 +1,7 @@
 /*
  * This file is part of SpoutNBT.
  *
- * Copyright (c) 2012, SpoutDev <http://www.spout.org/>
+ * Copyright (c) 2011-2012, SpoutDev <http://www.spout.org/>
  * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
  * SpoutNBT is free software: you can redistribute it and/or modify
@@ -28,8 +28,6 @@ package org.spout.nbt;
 
 /**
  * A class which contains NBT-related utility methods.
- *
- * @author Graham Edgecombe
  */
 public final class NBTUtils {
 	/**
@@ -153,6 +151,5 @@ public final class NBTUtils {
 	 * Default private constructor.
 	 */
 	private NBTUtils() {
-
 	}
 }

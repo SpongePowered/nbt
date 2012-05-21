@@ -1,7 +1,7 @@
 /*
  * This file is part of SpoutNBT.
  *
- * Copyright (c) 2012, SpoutDev <http://www.spout.org/>
+ * Copyright (c) 2011-2012, SpoutDev <http://www.spout.org/>
  * SpoutNBT is licensed under the SpoutDev License Version 1.
  *
  * SpoutNBT is free software: you can redistribute it and/or modify
@@ -59,7 +59,6 @@ import org.spout.nbt.Tag;
  * The NBT format was created by Markus Persson, and the specification may
  * be found at <a href="http://www.minecraft.net/docs/NBT.txt">
  * http://www.minecraft.net/docs/NBT.txt</a>.
- * @author Graham Edgecombe
  */
 public final class NBTInputStream implements Closeable {
 	/**
