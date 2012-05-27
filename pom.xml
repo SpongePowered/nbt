@@ -2,10 +2,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- Project information -->
-	<name>SpoutNBT</name>
+	<name>SimpleNBT</name>
 	<groupId>org.spout</groupId>
-	<artifactId>spoutnbt</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<artifactId>simplenbt</artifactId>
+	<version>1.0.4-SNAPSHOT</version>
 	<url>http://www.spout.org</url>
 	<inceptionYear>2011</inceptionYear>
 	<description>Modified NBT for the Spout project. Based on Graham Edgecombe's JNBT library. NBT (Named Binary Tag) is a tag based binary format designed to carry large amounts of binary data with smaller amounts of additional data.</description>
@@ -26,9 +26,9 @@
 
 	<!-- Source code -->
 	<scm>
-		<developerConnection>scm:git:git@github.com:SpoutDev/SpoutNBT.git</developerConnection>
-		<connection>scm:git:git://github.com/SpoutDev/SpoutNBT.git</connection>
-		<url>https://github.com/SpoutDev/SpoutNBT</url>
+		<developerConnection>scm:git:git@github.com:SpoutDev/SimpleNBT.git</developerConnection>
+		<connection>scm:git:git://github.com/SpoutDev/SimpleNBT.git</connection>
+		<url>https://github.com/SpoutDev/SimpleNBT</url>
 	</scm>
 
 	<!-- Continuous integration -->
