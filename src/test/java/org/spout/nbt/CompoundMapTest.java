@@ -38,7 +38,7 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CompountMapTest {
+public class CompoundMapTest {
 	List<Tag<?>> sorted;
 	List<Tag<?>> random;
 	List<Tag<?>> reverse;
