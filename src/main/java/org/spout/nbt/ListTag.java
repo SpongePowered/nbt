@@ -1,7 +1,7 @@
 /*
  * This file is part of SimpleNBT.
  *
- * Copyright (c) 2011-2012, SpoutDev <http://www.spout.org/>
+ * Copyright (c) 2011, SpoutDev <http://www.spout.org/>
  * SimpleNBT is licensed under the SpoutDev License Version 1.
  *
  * SimpleNBT is free software: you can redistribute it and/or modify
@@ -33,7 +33,7 @@ import java.util.List;
 /**
  * The {@code TAG_List} tag.
  */
-public final class ListTag<T extends Tag> extends Tag {
+public final class ListTag<T extends Tag<?>> extends Tag<List<T>> {
 	/**
 	 * The type of entries within this list.
 	 */

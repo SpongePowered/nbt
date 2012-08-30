@@ -1,7 +1,7 @@
 /*
  * This file is part of SimpleNBT.
  *
- * Copyright (c) 2011-2012, SpoutDev <http://www.spout.org/>
+ * Copyright (c) 2011, SpoutDev <http://www.spout.org/>
  * SimpleNBT is licensed under the SpoutDev License Version 1.
  *
  * SimpleNBT is free software: you can redistribute it and/or modify
@@ -162,37 +162,37 @@ public final class NBTInputStream implements Closeable {
 				return new ByteTag(name, is.readByte());
 
 			case NBTConstants.TYPE_SHORT:
-				return new ShortTag(name, (littleEndian? Short.reverseBytes(is.readShort()) : is.readShort()));
+				return new ShortTag(name, (littleEndian ? Short.reverseBytes(is.readShort()) : is.readShort()));
 
 			case NBTConstants.TYPE_INT:
-				return new IntTag(name, (littleEndian? Integer.reverseBytes(is.readInt()) : is.readInt()));
+				return new IntTag(name, (littleEndian ? Integer.reverseBytes(is.readInt()) : is.readInt()));
 
 			case NBTConstants.TYPE_LONG:
-				return new LongTag(name, (littleEndian? Long.reverseBytes(is.readLong()) : is.readLong()));
+				return new LongTag(name, (littleEndian ? Long.reverseBytes(is.readLong()) : is.readLong()));
 
 			case NBTConstants.TYPE_FLOAT:
-				return new FloatTag(name, (littleEndian? Float.intBitsToFloat(Integer.reverseBytes(is.readInt())) :
+				return new FloatTag(name, (littleEndian ? Float.intBitsToFloat(Integer.reverseBytes(is.readInt())) :
 					is.readFloat()));
 
 			case NBTConstants.TYPE_DOUBLE:
-				return new DoubleTag(name, (littleEndian? Double.longBitsToDouble(Long.reverseBytes(is.readLong())) :
+				return new DoubleTag(name, (littleEndian ? Double.longBitsToDouble(Long.reverseBytes(is.readLong())) :
 					is.readDouble()));
 
 			case NBTConstants.TYPE_BYTE_ARRAY:
-				int length = (littleEndian? Integer.reverseBytes(is.readInt()) : is.readInt());
+				int length = (littleEndian ? Integer.reverseBytes(is.readInt()) : is.readInt());
 				byte[] bytes = new byte[length];
 				is.readFully(bytes);
 				return new ByteArrayTag(name, bytes);
 
 			case NBTConstants.TYPE_STRING:
-				length = (littleEndian? Short.reverseBytes(is.readShort()) : is.readShort());
+				length = (littleEndian ? Short.reverseBytes(is.readShort()) : is.readShort());
 				bytes = new byte[length];
 				is.readFully(bytes);
 				return new StringTag(name, new String(bytes, NBTConstants.CHARSET.name()));
 
 			case NBTConstants.TYPE_LIST:
 				int childType = is.readByte();
-				length = (littleEndian? Integer.reverseBytes(is.readInt()) : is.readInt());
+				length = (littleEndian ? Integer.reverseBytes(is.readInt()) : is.readInt());
 
 				Class<? extends Tag> clazz = NBTUtils.getTypeClass(childType);
 				List<Tag> tagList = new ArrayList<Tag>();
@@ -225,15 +225,15 @@ public final class NBTInputStream implements Closeable {
 				length = (littleEndian? Integer.reverseBytes(is.readInt()) : is.readInt());
 				int[] ints = new int[length];
 				for (int i = 0; i < length; i++) {
-					ints[i] = (littleEndian? Integer.reverseBytes(is.readInt()) : is.readInt());
+					ints[i] = (littleEndian ? Integer.reverseBytes(is.readInt()) : is.readInt());
 				}
 				return new IntArrayTag(name, ints);
 
 			case NBTConstants.TYPE_SHORT_ARRAY:
-				length = (littleEndian? Integer.reverseBytes(is.readInt()) : is.readInt());
+				length = (littleEndian ? Integer.reverseBytes(is.readInt()) : is.readInt());
 				short[] shorts = new short[length];
 				for (int i = 0; i < length; i++) {
-					shorts[i] = (littleEndian? Short.reverseBytes(is.readShort()) : is.readShort());
+					shorts[i] = (littleEndian ? Short.reverseBytes(is.readShort()) : is.readShort());
 				}
 				return new ShortArrayTag(name, shorts);
 

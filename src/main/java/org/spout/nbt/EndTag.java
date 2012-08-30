@@ -1,7 +1,7 @@
 /*
  * This file is part of SimpleNBT.
  *
- * Copyright (c) 2011-2012, SpoutDev <http://www.spout.org/>
+ * Copyright (c) 2011, SpoutDev <http://www.spout.org/>
  * SimpleNBT is licensed under the SpoutDev License Version 1.
  *
  * SimpleNBT is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@ package org.spout.nbt;
 /**
  * The {@code TAG_End} tag.
  */
-public final class EndTag extends Tag {
+public final class EndTag extends Tag<Object> {
 	/**
 	 * Creates the tag.
 	 */

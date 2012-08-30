@@ -1,7 +1,7 @@
 /*
  * This file is part of SimpleNBT.
  *
- * Copyright (c) 2011-2012, SpoutDev <http://www.spout.org/>
+ * Copyright (c) 2011, SpoutDev <http://www.spout.org/>
  * SimpleNBT is licensed under the SpoutDev License Version 1.
  *
  * SimpleNBT is free software: you can redistribute it and/or modify
@@ -31,7 +31,7 @@ import java.util.Arrays;
 /**
  * The {@code TAG_Byte_Array} tag.
  */
-public final class ByteArrayTag extends Tag {
+public final class ByteArrayTag extends Tag<byte[]> {
 	/**
 	 * The value.
 	 */

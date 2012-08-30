@@ -1,7 +1,7 @@
 /*
  * This file is part of SimpleNBT.
  *
- * Copyright (c) 2011-2012, SpoutDev <http://www.spout.org/>
+ * Copyright (c) 2011, SpoutDev <http://www.spout.org/>
  * SimpleNBT is licensed under the SpoutDev License Version 1.
  *
  * SimpleNBT is free software: you can redistribute it and/or modify
@@ -39,13 +39,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CompountMapTest {
-	List<Tag> sorted;
-	List<Tag> random;
-	List<Tag> reverse;
+	List<Tag<?>> sorted;
+	List<Tag<?>> random;
+	List<Tag<?>> reverse;
 
 	@Before
 	public void setupLists() {
-		random = new ArrayList<Tag>();
+		random = new ArrayList<Tag<?>>();
 
 		Random r = new Random();
 
@@ -53,10 +53,10 @@ public class CompountMapTest {
 			random.add(new LongTag(Integer.toHexString(r.nextInt()), r.nextLong()));
 		}
 
-		sorted = new ArrayList<Tag>(random);
+		sorted = new ArrayList<Tag<?>>(random);
 		Collections.sort(sorted);
 
-		reverse = new ArrayList<Tag>(random);
+		reverse = new ArrayList<Tag<?>>(random);
 		Collections.sort(reverse, Collections.reverseOrder());
 	}
 
@@ -67,7 +67,7 @@ public class CompountMapTest {
 		printList("Reverse", reverse);
 	}
 
-	private void printList(String type, List<Tag> list) {
+	private void printList(String type, List<Tag<?>> list) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("List: " + type + "\n");
 		for (Tag t : list) {
@@ -121,9 +121,9 @@ public class CompountMapTest {
 		assertEquals("Tag setup", tag, reverse);
 	}
 
-	private void assertEquals(String message, Iterable<Tag> a, Iterable<Tag> b) {
-		Iterator<Tag> iterA = a.iterator();
-		Iterator<Tag> iterB = b.iterator();
+	private void assertEquals(String message, Iterable<Tag<?>> a, Iterable<Tag<?>> b) {
+		Iterator<Tag<?>> iterA = a.iterator();
+		Iterator<Tag<?>> iterB = b.iterator();
 		while (iterA.hasNext() && iterB.hasNext()) {
 			Tag currentA = iterA.next();
 			Tag currentB = iterB.next();

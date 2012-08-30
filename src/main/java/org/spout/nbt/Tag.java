@@ -1,7 +1,7 @@
 /*
  * This file is part of SimpleNBT.
  *
- * Copyright (c) 2011-2012, SpoutDev <http://www.spout.org/>
+ * Copyright (c) 2011, SpoutDev <http://www.spout.org/>
  * SimpleNBT is licensed under the SpoutDev License Version 1.
  *
  * SimpleNBT is free software: you can redistribute it and/or modify
@@ -33,7 +33,7 @@ import java.util.Map.Entry;
 /**
  * Represents a single NBT tag.
  */
-public abstract class Tag implements Comparable<Tag> {
+public abstract class Tag<T> implements Comparable<Tag> {
 	/**
 	 * The name of this tag.
 	 */
@@ -66,7 +66,7 @@ public abstract class Tag implements Comparable<Tag> {
 	 * Gets the value of this tag.
 	 * @return The value of this tag.
 	 */
-	public abstract Object getValue();
+	public abstract T getValue();
 
 	/**
 	 * Clones a Map<String, Tag>
@@ -74,13 +74,13 @@ public abstract class Tag implements Comparable<Tag> {
 	 * @param map the map
 	 * @return a clone of the map
 	 */
-	public static Map<String, Tag> cloneMap(Map<String, Tag> map) {
+	public static Map<String, Tag<?>> cloneMap(Map<String, Tag<?>> map) {
 		if (map == null) {
 			return null;
 		}
 
-		Map<String, Tag> newMap = new HashMap<String, Tag>();
-		for (Entry<String, Tag> entry : map.entrySet()) {
+		Map<String, Tag<?>> newMap = new HashMap<String, Tag<?>>();
+		for (Entry<String, Tag<?>> entry : map.entrySet()) {
 			newMap.put(entry.getKey(), entry.getValue().clone());
 		}
 		return newMap;
@@ -91,16 +91,15 @@ public abstract class Tag implements Comparable<Tag> {
 		if (!(other instanceof Tag)) {
 			return false;
 		}
-		Tag tag = (Tag) other;
+		Tag<?> tag = (Tag<?>) other;
 		return getValue().equals(tag.getValue()) && getName().equals(tag.getName());
 	}
 
 	@Override
-	public int compareTo(Tag o) {
-		if (equals(o)) {
+	public int compareTo(Tag other) {
+		if (equals(other)) {
 			return 0;
 		} else {
-			Tag other = (Tag)o;
 			if (other.getName().equals(getName())) {
 				throw new IllegalStateException("Cannot compare two Tags with the same name but different values for sorting");
 			} else {
@@ -114,5 +113,5 @@ public abstract class Tag implements Comparable<Tag> {
 	 *
 	 * @return the clone
 	 */
-	public abstract Tag clone();
+	public abstract Tag<T> clone();
 }

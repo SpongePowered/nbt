@@ -1,7 +1,7 @@
 /*
  * This file is part of SimpleNBT.
  *
- * Copyright (c) 2011-2012, SpoutDev <http://www.spout.org/>
+ * Copyright (c) 2011, SpoutDev <http://www.spout.org/>
  * SimpleNBT is licensed under the SpoutDev License Version 1.
  *
  * SimpleNBT is free software: you can redistribute it and/or modify
@@ -36,8 +36,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
-	private final Map<String, Tag> map;
+public class CompoundMap implements Map<String, Tag<?>>, Iterable<Tag<?>> {
+	private final Map<String, Tag<?>> map;
 	private final boolean sort;
 	private final boolean reverse;
 
@@ -55,7 +55,7 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	 *
 	 * @param initial the initial values for the CompoundMap
 	 */
-	public CompoundMap(List<Tag> initial) {
+	public CompoundMap(List<Tag<?>> initial) {
 		this(initial, false, false);
 	}
 
@@ -66,7 +66,7 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	 *
 	 * @param initial the initial values for the CompoundMap
 	 */
-	public CompoundMap(Map<String, Tag> initial) {
+	public CompoundMap(Map<String, Tag<?>> initial) {
 		this(initial.values(), false, false);
 	}
 
@@ -79,8 +79,8 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	 * @param initial the initial values for the CompoundMap
 	 */
 	@Deprecated
-	public CompoundMap(HashMap<String, Tag> initial) {
-		this((Map<String, Tag>)initial);
+	public CompoundMap(HashMap<String, Tag<?>> initial) {
+		this((Map<String, Tag<?>>)initial);
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	 * @param sort elements are ordered in alphabetical ordering
 	 * @param reverse elements are ordered in reverse alphabetical ordering, when sort is true
 	 */
-	public CompoundMap(Iterable<Tag> initial, boolean sort, boolean reverse) {
+	public CompoundMap(Iterable<Tag<?>> initial, boolean sort, boolean reverse) {
 		if (reverse) {
 			this.sort = true;
 		} else {
@@ -121,12 +121,12 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 		}
 		this.reverse = reverse;
 		if (!sort) {
-			this.map = new LinkedHashMap<String, Tag>();
+			this.map = new LinkedHashMap<String, Tag<?>>();
 		} else {
 			if (reverse) {
-				this.map = new TreeMap<String, Tag>(Collections.reverseOrder());
+				this.map = new TreeMap<String, Tag<?>>(Collections.reverseOrder());
 			} else {
-				this.map = new TreeMap<String, Tag>();
+				this.map = new TreeMap<String, Tag<?>>();
 			}
 		}
 		if (initial != null) {
@@ -142,7 +142,7 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	 * @param tag to add
 	 * @return the previous value
 	 */
-	public Tag put(Tag tag) {
+	public Tag<?> put(Tag<?> tag) {
 		return map.put(tag.getName(), tag);
 	}
 
@@ -162,12 +162,12 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	}
 
 	@Override
-	public Set<Map.Entry<String, Tag>> entrySet() {
+	public Set<Map.Entry<String, Tag<?>>> entrySet() {
 		return map.entrySet();
 	}
 
 	@Override
-	public Tag get(Object key) {
+	public Tag<?> get(Object key) {
 		return map.get(key);
 	}
 
@@ -182,12 +182,12 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	}
 
 	@Override
-	public Tag put(String key, Tag value) {
+	public Tag<?> put(String key, Tag<?> value) {
 		return map.put(key, value);
 	}
 
 	@Override
-	public void putAll(Map<? extends String, ? extends Tag> values) {
+	public void putAll(Map<? extends String, ? extends Tag<?>> values) {
 		map.putAll(values);
 	}
 
@@ -202,12 +202,12 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	}
 
 	@Override
-	public Collection<Tag> values() {
+	public Collection<Tag<?>> values() {
 		return map.values();
 	}
 
 	@Override
-	public Iterator<Tag> iterator() {
+	public Iterator<Tag<?>> iterator() {
 		return values().iterator();
 	}
 
@@ -215,8 +215,8 @@ public class CompoundMap implements Map<String, Tag>, Iterable<Tag> {
 	public boolean equals(Object o) {
 		if (o instanceof CompoundMap) {
 			CompoundMap other = (CompoundMap)o;
-			Iterator<Tag> iThis = iterator();
-			Iterator<Tag> iOther = other.iterator();
+			Iterator<Tag<?>> iThis = iterator();
+			Iterator<Tag<?>> iOther = other.iterator();
 			while (iThis.hasNext() && iOther.hasNext()) {
 				Tag tThis = iThis.next();
 				Tag tOther = iOther.next();
