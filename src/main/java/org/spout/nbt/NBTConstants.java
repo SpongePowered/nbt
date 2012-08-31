@@ -40,19 +40,20 @@ public final class NBTConstants {
 	/**
 	 * Tag type constants.
 	 */
-	public static final int TYPE_END = 0,
-		TYPE_BYTE = 1,
-		TYPE_SHORT = 2,
-		TYPE_INT = 3,
-		TYPE_LONG = 4,
-		TYPE_FLOAT = 5,
-		TYPE_DOUBLE = 6,
-		TYPE_BYTE_ARRAY = 7,
-		TYPE_STRING = 8,
-		TYPE_LIST = 9,
-		TYPE_COMPOUND = 10,
-		TYPE_INT_ARRAY = 11,
-		TYPE_SHORT_ARRAY = 100;
+	@Deprecated
+	public static final int TYPE_END = TagType.TAG_END.getId(),
+		TYPE_BYTE = TagType.TAG_BYTE.getId(),
+		TYPE_SHORT = TagType.TAG_SHORT.getId(),
+		TYPE_INT = TagType.TAG_INT.getId(),
+		TYPE_LONG = TagType.TAG_LONG.getId(),
+		TYPE_FLOAT = TagType.TAG_FLOAT.getId(),
+		TYPE_DOUBLE = TagType.TAG_DOUBLE.getId(),
+		TYPE_BYTE_ARRAY = TagType.TAG_BYTE_ARRAY.getId(),
+		TYPE_STRING = TagType.TAG_STRING.getId(),
+		TYPE_LIST = TagType.TAG_LIST.getId(),
+		TYPE_COMPOUND = TagType.TAG_COMPOUND.getId(),
+		TYPE_INT_ARRAY = TagType.TAG_INT_ARRAY.getId(),
+		TYPE_SHORT_ARRAY = TagType.TAG_SHORT_ARRAY.getId();
 
 	/**
 	 * Default private constructor.

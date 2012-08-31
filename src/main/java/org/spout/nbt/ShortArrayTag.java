@@ -40,7 +40,7 @@ public class ShortArrayTag extends Tag<short[]> {
 	 * @param value The value.
 	 */
 	public ShortArrayTag(String name, short[] value) {
-		super(name);
+		super(TagType.TAG_SHORT_ARRAY, name);
 		this.value = value;
 	}
 

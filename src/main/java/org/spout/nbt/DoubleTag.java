@@ -41,7 +41,7 @@ public final class DoubleTag extends Tag<Double> {
 	 * @param value The value.
 	 */
 	public DoubleTag(String name, double value) {
-		super(name);
+		super(TagType.TAG_DOUBLE, name);
 		this.value = value;
 	}
 

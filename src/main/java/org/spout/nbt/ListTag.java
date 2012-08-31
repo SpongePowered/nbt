@@ -51,7 +51,7 @@ public final class ListTag<T extends Tag<?>> extends Tag<List<T>> {
 	 * @param value The value.
 	 */
 	public ListTag(String name, Class<T> type, List<T> value) {
-		super(name);
+		super(TagType.TAG_LIST, name);
 		this.type = type;
 		this.value = Collections.unmodifiableList(value);
 	}
@@ -60,7 +60,7 @@ public final class ListTag<T extends Tag<?>> extends Tag<List<T>> {
 	 * Gets the type of item in this list.
 	 * @return The type of item in this list.
 	 */
-	public Class<T> getType() {
+	public Class<T> getElementType() {
 		return type;
 	}
 
@@ -78,7 +78,7 @@ public final class ListTag<T extends Tag<?>> extends Tag<List<T>> {
 		}
 
 		StringBuilder bldr = new StringBuilder();
-		bldr.append("TAG_List").append(append).append(": ").append(value.size()).append(" entries of type ").append(NBTUtils.getTypeName(type)).append("\r\n{\r\n");
+		bldr.append("TAG_List").append(append).append(": ").append(value.size()).append(" entries of type ").append(TagType.getByTagClass(type).getTypeName()).append("\r\n{\r\n");
 		for (Tag t : value) {
 			bldr.append("   ").append(t.toString().replaceAll("\r\n", "\r\n   ")).append("\r\n");
 		}

@@ -33,25 +33,28 @@ import java.util.Map.Entry;
 /**
  * Represents a single NBT tag.
  */
-public abstract class Tag<T> implements Comparable<Tag> {
+public abstract class Tag<T> implements Comparable<Tag<?>> {
 	/**
 	 * The name of this tag.
 	 */
 	private final String name;
 
+	private final TagType type;
+
 	/**
 	 * Creates the tag with no name.
 	 */
-	public Tag() {
-		this("");
+	public Tag(TagType type) {
+		this(type, "");
 	}
 
 	/**
 	 * Creates the tag with the specified name.
 	 * @param name The name.
 	 */
-	public Tag(String name) {
+	public Tag(TagType type, String name) {
 		this.name = name;
+		this.type = type;
 	}
 
 	/**
@@ -60,6 +63,15 @@ public abstract class Tag<T> implements Comparable<Tag> {
 	 */
 	public final String getName() {
 		return name;
+	}
+
+	/**
+	 * Returns the type of this tag
+	 *
+	 * @return The type of this tag.
+	 */
+	public TagType getType() {
+		return type;
 	}
 
 	/**

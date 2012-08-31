@@ -51,7 +51,7 @@ public final class ByteTag extends Tag<Byte> {
 	 * @param value The value.
 	 */
 	public ByteTag(String name, byte value) {
-		super(name);
+		super(TagType.TAG_BYTE, name);
 		this.value = value;
 	}
 

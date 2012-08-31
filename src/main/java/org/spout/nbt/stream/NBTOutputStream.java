@@ -44,11 +44,11 @@ import org.spout.nbt.IntTag;
 import org.spout.nbt.ListTag;
 import org.spout.nbt.LongTag;
 import org.spout.nbt.NBTConstants;
-import org.spout.nbt.NBTUtils;
 import org.spout.nbt.ShortArrayTag;
 import org.spout.nbt.ShortTag;
 import org.spout.nbt.StringTag;
 import org.spout.nbt.Tag;
+import org.spout.nbt.TagType;
 
 /**
  * This class writes NBT, or Named Binary Tag, {@link Tag} objects to an
@@ -110,15 +110,14 @@ public final class NBTOutputStream implements Closeable {
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
 	public void writeTag(Tag<?> tag) throws IOException {
-		int type = NBTUtils.getTypeCode(tag.getClass());
 		String name = tag.getName();
 		byte[] nameBytes = name.getBytes(NBTConstants.CHARSET.name());
 
-		os.writeByte(type);
+		os.writeByte(tag.getType().getId());
 		os.writeShort(nameBytes.length);
 		os.write(nameBytes);
 
-		if (type == NBTConstants.TYPE_END) {
+		if (tag.getType() == TagType.TAG_END) {
 			throw new IOException("Named TAG_End not permitted.");
 		}
 
@@ -132,62 +131,61 @@ public final class NBTOutputStream implements Closeable {
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
 	private void writeTagPayload(Tag<?> tag) throws IOException {
-		int type = NBTUtils.getTypeCode(tag.getClass());
-		switch (type) {
-			case NBTConstants.TYPE_END:
+		switch (tag.getType()) {
+			case TAG_END:
 				writeEndTagPayload((EndTag) tag);
 				break;
 
-			case NBTConstants.TYPE_BYTE:
+			case TAG_BYTE:
 				writeByteTagPayload((ByteTag) tag);
 				break;
 
-			case NBTConstants.TYPE_SHORT:
+			case TAG_SHORT:
 				writeShortTagPayload((ShortTag) tag);
 				break;
 
-			case NBTConstants.TYPE_INT:
+			case TAG_INT:
 				writeIntTagPayload((IntTag) tag);
 				break;
 
-			case NBTConstants.TYPE_LONG:
+			case TAG_LONG:
 				writeLongTagPayload((LongTag) tag);
 				break;
 
-			case NBTConstants.TYPE_FLOAT:
+			case TAG_FLOAT:
 				writeFloatTagPayload((FloatTag) tag);
 				break;
 
-			case NBTConstants.TYPE_DOUBLE:
+			case TAG_DOUBLE:
 				writeDoubleTagPayload((DoubleTag) tag);
 				break;
 
-			case NBTConstants.TYPE_BYTE_ARRAY:
+			case TAG_BYTE_ARRAY:
 				writeByteArrayTagPayload((ByteArrayTag) tag);
 				break;
 
-			case NBTConstants.TYPE_STRING:
+			case TAG_STRING:
 				writeStringTagPayload((StringTag) tag);
 				break;
 
-			case NBTConstants.TYPE_LIST:
+			case TAG_LIST:
 				writeListTagPayload((ListTag<?>) tag);
 				break;
 
-			case NBTConstants.TYPE_COMPOUND:
+			case TAG_COMPOUND:
 				writeCompoundTagPayload((CompoundTag) tag);
 				break;
 
-			case NBTConstants.TYPE_INT_ARRAY:
+			case TAG_INT_ARRAY:
 				writeIntArrayTagPayload((IntArrayTag) tag);
 				break;
 
-			case NBTConstants.TYPE_SHORT_ARRAY:
+			case TAG_SHORT_ARRAY:
 				writeShortArrayTagPayload((ShortArrayTag) tag);
 				break;
 
 			default:
-				throw new IOException("Invalid tag type: " + type + ".");
+				throw new IOException("Invalid tag type: " + tag.getType() + ".");
 		}
 	}
 
@@ -223,7 +221,7 @@ public final class NBTOutputStream implements Closeable {
 		for (Tag<?> childTag : tag.getValue().values()) {
 			writeTag(childTag);
 		}
-		os.writeByte(NBTConstants.TYPE_END); // end tag - better way?
+		os.writeByte(TagType.TAG_END.getId()); // end tag - better way?
 	}
 
 	/**
@@ -234,11 +232,11 @@ public final class NBTOutputStream implements Closeable {
 	 */
 	@SuppressWarnings("unchecked")
 	private void writeListTagPayload(ListTag<?> tag) throws IOException {
-		Class<? extends Tag> clazz = tag.getType();
+		Class<? extends Tag<?>> clazz = tag.getElementType();
 		List<Tag<?>> tags = (List<Tag<?>>) tag.getValue();
 		int size = tags.size();
 
-		os.writeByte(NBTUtils.getTypeCode(clazz));
+		os.writeByte(TagType.getByTagClass(clazz).getId());
 		os.writeInt(size);
 		for (Tag<?> tag1 : tags) {
 			writeTagPayload(tag1);
@@ -339,7 +337,6 @@ public final class NBTOutputStream implements Closeable {
 	 * Writes a {@code TAG_Empty} tag.
 	 *
 	 * @param tag The tag.
-	 * @throws java.io.IOException if an I/O error occurs.
 	 */
 	private void writeEndTagPayload(EndTag tag) {
 		/* empty */

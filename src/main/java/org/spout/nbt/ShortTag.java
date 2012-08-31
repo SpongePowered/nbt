@@ -41,7 +41,7 @@ public final class ShortTag extends Tag<Short> {
 	 * @param value The value.
 	 */
 	public ShortTag(String name, short value) {
-		super(name);
+		super(TagType.TAG_SHORT, name);
 		this.value = value;
 	}
 

@@ -41,7 +41,7 @@ public final class IntTag extends Tag<Integer> {
 	 * @param value The value.
 	 */
 	public IntTag(String name, int value) {
-		super(name);
+		super(TagType.TAG_INT, name);
 		this.value = value;
 	}
 

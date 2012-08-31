@@ -43,7 +43,7 @@ public final class ByteArrayTag extends Tag<byte[]> {
 	 * @param value The value.
 	 */
 	public ByteArrayTag(String name, byte[] value) {
-		super(name);
+		super(TagType.TAG_BYTE_ARRAY, name);
 		this.value = value;
 	}
 

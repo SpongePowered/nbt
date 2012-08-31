@@ -41,7 +41,7 @@ public final class LongTag extends Tag<Long> {
 	 * @param value The value.
 	 */
 	public LongTag(String name, long value) {
-		super(name);
+		super(TagType.TAG_LONG, name);
 		this.value = value;
 	}
 

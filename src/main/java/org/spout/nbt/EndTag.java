@@ -34,7 +34,7 @@ public final class EndTag extends Tag<Object> {
 	 * Creates the tag.
 	 */
 	public EndTag() {
-		super();
+		super(TagType.TAG_END);
 	}
 
 	@Override

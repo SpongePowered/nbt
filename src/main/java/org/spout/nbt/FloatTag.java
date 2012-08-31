@@ -41,7 +41,7 @@ public final class FloatTag extends Tag<Float> {
 	 * @param value The value.
 	 */
 	public FloatTag(String name, float value) {
-		super(name);
+		super(TagType.TAG_FLOAT, name);
 		this.value = value;
 	}
 

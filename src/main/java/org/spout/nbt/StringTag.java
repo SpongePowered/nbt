@@ -41,7 +41,7 @@ public final class StringTag extends Tag<String> {
 	 * @param value The value.
 	 */
 	public StringTag(String name, String value) {
-		super(name);
+		super(TagType.TAG_STRING, name);
 		this.value = value;
 	}
 

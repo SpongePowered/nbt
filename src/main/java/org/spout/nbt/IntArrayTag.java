@@ -40,7 +40,7 @@ public class IntArrayTag extends Tag<int[]> {
 	 * @param value The value.
 	 */
 	public IntArrayTag(String name, int[] value) {
-		super(name);
+		super(TagType.TAG_INT_ARRAY, name);
 		this.value = value;
 	}
 

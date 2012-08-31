@@ -41,7 +41,7 @@ public final class CompoundTag extends Tag<CompoundMap> {
 	 * @param value The value.
 	 */
 	public CompoundTag(String name, CompoundMap value) {
-		super(name);
+		super(TagType.TAG_COMPOUND, name);
 //		this.value = (CompoundMap) Collections.unmodifiableMap(value); This doesn't work anymore, needs a new solution
 		this.value = value;
 	}
