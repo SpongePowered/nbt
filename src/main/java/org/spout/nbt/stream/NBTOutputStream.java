@@ -27,9 +27,9 @@
 package org.spout.nbt.stream;
 
 import java.io.Closeable;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.ByteOrder;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
@@ -62,12 +62,7 @@ public final class NBTOutputStream implements Closeable {
 	/**
 	 * The output stream.
 	 */
-	private final DataOutputStream os;
-
-	/**
-	 * Controls whether this NBTInputStream writes numbers in little-endian format.
-	 */
-	private final boolean littleEndian;
+	private final EndianSwitchableOutputStream os;
 
 	/**
 	 * Creates a new {@link NBTOutputStream}, which will write data to the
@@ -78,7 +73,7 @@ public final class NBTOutputStream implements Closeable {
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
 	public NBTOutputStream(OutputStream os) throws IOException {
-		this(os, true, false);
+		this(os, true, ByteOrder.BIG_ENDIAN);
 	}
 
 	/**
@@ -87,11 +82,11 @@ public final class NBTOutputStream implements Closeable {
 	 * be compressed with GZIP or not.
 	 *
 	 * @param os The output stream.
-	 * @param boolean A flag that indicates if the output should be compressed.
+	 * @param compressed A flag that indicates if the output should be compressed.
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
 	public NBTOutputStream(OutputStream os, boolean compressed) throws IOException {
-		this(os, compressed, false);
+		this(os, compressed, ByteOrder.BIG_ENDIAN);
 	}
 
 	/**
@@ -100,13 +95,12 @@ public final class NBTOutputStream implements Closeable {
 	 * be compressed with GZIP or not.
 	 *
 	 * @param os The output stream.
-	 * @param boolean A flag that indicates if the output should be compressed.
-	 * @param littleEndian A flag that indicates if numbers in the output should be output in little-endian format.
+	 * @param compressed A flag that indicates if the output should be compressed.
+	 * @param endianness A flag that indicates if numbers in the output should be output in little-endian format.
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
-	public NBTOutputStream(OutputStream os, boolean compressed, boolean littleEndian) throws IOException {
-		this.littleEndian = littleEndian;
-		this.os = new DataOutputStream(compressed ? new GZIPOutputStream(os) : os);
+	public NBTOutputStream(OutputStream os, boolean compressed, ByteOrder endianness) throws IOException {
+		this.os = new EndianSwitchableOutputStream(compressed ? new GZIPOutputStream(os) : os, endianness);
 	}
 
 	/**
@@ -115,13 +109,13 @@ public final class NBTOutputStream implements Closeable {
 	 * @param tag The tag to write.
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
-	public void writeTag(Tag tag) throws IOException {
+	public void writeTag(Tag<?> tag) throws IOException {
 		int type = NBTUtils.getTypeCode(tag.getClass());
 		String name = tag.getName();
 		byte[] nameBytes = name.getBytes(NBTConstants.CHARSET.name());
 
 		os.writeByte(type);
-		os.writeShort(littleEndian? Short.reverseBytes((short) nameBytes.length) : nameBytes.length);
+		os.writeShort(nameBytes.length);
 		os.write(nameBytes);
 
 		if (type == NBTConstants.TYPE_END) {
@@ -137,7 +131,7 @@ public final class NBTOutputStream implements Closeable {
 	 * @param tag The tag.
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
-	private void writeTagPayload(Tag tag) throws IOException {
+	private void writeTagPayload(Tag<?> tag) throws IOException {
 		int type = NBTUtils.getTypeCode(tag.getClass());
 		switch (type) {
 			case NBTConstants.TYPE_END:
@@ -215,7 +209,7 @@ public final class NBTOutputStream implements Closeable {
 	 */
 	private void writeByteArrayTagPayload(ByteArrayTag tag) throws IOException {
 		byte[] bytes = tag.getValue();
-		os.writeInt(littleEndian? Integer.reverseBytes(bytes.length) : bytes.length);
+		os.writeInt(bytes.length);
 		os.write(bytes);
 	}
 
@@ -226,10 +220,10 @@ public final class NBTOutputStream implements Closeable {
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
 	private void writeCompoundTagPayload(CompoundTag tag) throws IOException {
-		for (Tag childTag : tag.getValue().values()) {
+		for (Tag<?> childTag : tag.getValue().values()) {
 			writeTag(childTag);
 		}
-		os.writeByte((byte) 0); // end tag - better way?
+		os.writeByte(NBTConstants.TYPE_END); // end tag - better way?
 	}
 
 	/**
@@ -241,12 +235,12 @@ public final class NBTOutputStream implements Closeable {
 	@SuppressWarnings("unchecked")
 	private void writeListTagPayload(ListTag<?> tag) throws IOException {
 		Class<? extends Tag> clazz = tag.getType();
-		List<Tag> tags = (List<Tag>) tag.getValue();
+		List<Tag<?>> tags = (List<Tag<?>>) tag.getValue();
 		int size = tags.size();
 
 		os.writeByte(NBTUtils.getTypeCode(clazz));
-		os.writeInt(littleEndian? Integer.reverseBytes(size) : size);
-		for (Tag tag1 : tags) {
+		os.writeInt(size);
+		for (Tag<?> tag1 : tags) {
 			writeTagPayload(tag1);
 		}
 	}
@@ -259,7 +253,7 @@ public final class NBTOutputStream implements Closeable {
 	 */
 	private void writeStringTagPayload(StringTag tag) throws IOException {
 		byte[] bytes = tag.getValue().getBytes(NBTConstants.CHARSET.name());
-		os.writeShort(littleEndian? Short.reverseBytes((short) bytes.length) : bytes.length);
+		os.writeShort(bytes.length);
 		os.write(bytes);
 	}
 
@@ -270,11 +264,7 @@ public final class NBTOutputStream implements Closeable {
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
 	private void writeDoubleTagPayload(DoubleTag tag) throws IOException {
-		if (littleEndian) {
-			os.writeLong(Long.reverseBytes(Double.doubleToLongBits(tag.getValue())));
-		} else {
-			os.writeDouble(tag.getValue());
-		}
+		os.writeDouble(tag.getValue());
 	}
 
 	/**
@@ -284,11 +274,7 @@ public final class NBTOutputStream implements Closeable {
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
 	private void writeFloatTagPayload(FloatTag tag) throws IOException {
-		if (littleEndian) {
-			os.writeInt(Integer.reverseBytes(Float.floatToIntBits(tag.getValue())));
-		} else {
-			os.writeFloat(tag.getValue());
-		}
+		os.writeFloat(tag.getValue());
 	}
 
 	/**
@@ -298,7 +284,7 @@ public final class NBTOutputStream implements Closeable {
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
 	private void writeLongTagPayload(LongTag tag) throws IOException {
-		os.writeLong(littleEndian? Long.reverseBytes(tag.getValue()) : tag.getValue());
+		os.writeLong(tag.getValue());
 	}
 
 	/**
@@ -308,7 +294,7 @@ public final class NBTOutputStream implements Closeable {
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
 	private void writeIntTagPayload(IntTag tag) throws IOException {
-		os.writeInt(littleEndian? Integer.reverseBytes(tag.getValue()) : tag.getValue());
+		os.writeInt(tag.getValue());
 	}
 
 	/**
@@ -318,7 +304,7 @@ public final class NBTOutputStream implements Closeable {
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
 	private void writeShortTagPayload(ShortTag tag) throws IOException {
-		os.writeShort(littleEndian? Short.reverseBytes(tag.getValue()) : tag.getValue());
+		os.writeShort(tag.getValue());
 	}
 
 	/**
@@ -329,9 +315,9 @@ public final class NBTOutputStream implements Closeable {
 	 */
 	private void writeIntArrayTagPayload(IntArrayTag tag) throws IOException {
 		int[] ints = tag.getValue();
-		os.writeInt(littleEndian? Integer.reverseBytes(ints.length) : ints.length);
+		os.writeInt(ints.length);
 		for (int i = 0; i < ints.length; i++) {
-			os.writeInt(littleEndian? Integer.reverseBytes(ints[i]) : ints[i]);
+			os.writeInt(ints[i]);
 		}
 	}
 
@@ -343,9 +329,9 @@ public final class NBTOutputStream implements Closeable {
 	 */
 	private void writeShortArrayTagPayload(ShortArrayTag tag) throws IOException {
 		short[] shorts = tag.getValue();
-		os.writeInt(littleEndian? Integer.reverseBytes(shorts.length) : shorts.length);
+		os.writeInt(shorts.length);
 		for (int i = 0; i < shorts.length; i++) {
-			os.writeShort(littleEndian? Short.reverseBytes(shorts[i]) : shorts[i]);
+			os.writeShort(shorts[i]);
 		}
 	}
 
@@ -366,7 +352,7 @@ public final class NBTOutputStream implements Closeable {
 	/**
 	 * @return whether this NBTInputStream writes numbers in little-endian format.
 	 */
-	public boolean isLittleEndian() {
-		return littleEndian;
+	public ByteOrder getEndianness() {
+		return os.getEndianness();
 	}
 }
