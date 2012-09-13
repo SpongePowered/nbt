@@ -54,10 +54,7 @@ public class BasicTagField<T> implements Field<T> {
 	}
 
 	public T getValue(Tag<?> tag) throws IllegalArgumentException {
-		if (!valueType.isAssignableFrom(tag.getClass())) {
-			throw new IllegalArgumentException("Tag is not of type " + valueType);
-		}
-		Tag<T> value = valueType.cast(tag);
+		Tag<T> value = FieldUtils.checkTagCast(tag, valueType);
 		return value.getValue();
 	}
 

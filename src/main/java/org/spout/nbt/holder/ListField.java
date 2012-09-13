@@ -26,44 +26,41 @@
  */
 package org.spout.nbt.holder;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.spout.nbt.CompoundTag;
+import org.spout.nbt.ListTag;
 import org.spout.nbt.Tag;
 
 /**
- * A field that holds the contents of a FieldHolder
+ * Represents a field that contains a list of other tags (all tags are of the same type)
  */
-public class FieldHolderField<T extends FieldHolder> implements Field<T> {
-	private final Class<T> type;
-	private final Constructor<T> typeConst;
+public class ListField<T> implements Field<List<T>> {
+	private final Field<T> backingField;
 
-	public FieldHolderField(Class<T> type) {
-		this.type = type;
-		try {
-			typeConst = type.getConstructor();
-			typeConst.setAccessible(true);
-		} catch (NoSuchMethodException e) {
-			throw new ExceptionInInitializerError("Type must have zero-arg constructor!");
-		}
+	public ListField(Field<T> field) {
+		this.backingField = field;
 	}
 
-	public T getValue(Tag<?> rawTag) throws IllegalArgumentException {
-		CompoundTag tag = FieldUtils.checkTagCast(rawTag, CompoundTag.class);
-
-		T value = null;
-		try {
-			value = typeConst.newInstance();
-			value.load(tag);
-		} catch (InstantiationException e) {
-		} catch (IllegalAccessException e) {
-		} catch (InvocationTargetException e) {
+	public List<T> getValue(Tag<?> tag) throws IllegalArgumentException {
+		ListTag<?> listTag = FieldUtils.checkTagCast(tag, ListTag.class);
+		List<T> result = new ArrayList<T>();
+		for (Tag<?> element : listTag.getValue()) {
+			result.add(backingField.getValue(element));
 		}
-		return value;
+		return result;
 	}
 
-	public Tag<?> getValue(String name, T value) {
-		return new CompoundTag(name, value.save());
+	@SuppressWarnings("unchecked")
+	public Tag<?> getValue(String name, List<T> value) {
+		List<Tag<?>> tags = new ArrayList<Tag<?>>();
+		Class tagClazz = Tag.class; // Generics suck (I had to move this comment 3 times while finding the right place to nuke generics too)
+		for (T element : value) {
+			Tag<?> tag = backingField.getValue("", element);
+			tagClazz = tag.getClass();
+			tags.add(tag);
+		}
+
+		return new ListTag<Tag<?>>(name, tagClazz, tags);
 	}
 }

@@ -35,11 +35,7 @@ import org.spout.nbt.Tag;
 public class BooleanField implements Field<Boolean> {
 	public static final BooleanField INSTANCE = new BooleanField();
 	public Boolean getValue(Tag<?> tag) throws IllegalArgumentException {
-		if (tag instanceof ByteTag) {
-			return ((ByteTag) tag).getBooleanValue();
-		} else {
-			throw new IllegalArgumentException("Expected ByteTag, got " + tag.getClass());
-		}
+		return FieldUtils.checkTagCast(tag, ByteTag.class).getBooleanValue();
 	}
 
 	public Tag<?> getValue(String name, Boolean value) {
