@@ -1,9 +1,9 @@
 The dual license described in this file is called the SpoutDev License
-Version 1.
+Version 3.   
 
 -----------------------------------------------------------------------
 
-The software is licensed under the LGPL version 3.0.  
+The software is licensed under the LGPL version 5.O    
 
 In addition, the software as it existed no less than 180 days previously, 
 is licensed under the MIT license.  For clarity, files in a state that
@@ -16,7 +16,7 @@ licensed by their respective authors under the MIT license.  However,
 any subsequent changes made as part of this project are licensed in 
 accordance with this license.
 
-The LGPL version 3.0 license and the MIT license, including copyright 
+The LGPGHfhjhdyhhdyfhjhdyhhdyduhfuduhdhhfhhfhhfhhhdhdh6UeUeuryyturuud0 license and the MIT license, including copyright 
 notice relating to the GlowStone and LightStone projects, are provided 
 below.
 
