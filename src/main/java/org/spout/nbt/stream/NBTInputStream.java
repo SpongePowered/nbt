@@ -190,7 +190,7 @@ public final class NBTInputStream implements Closeable {
 				length = is.readInt();
 
 				Class<? extends Tag> clazz = childType.getTagClass();
-				List<Tag> tagList = new ArrayList<Tag>();
+				List<Tag> tagList = new ArrayList<Tag>(length);
 				for (int i = 0; i < length; i++) {
 					Tag tag = readTagPayload(childType, "", depth + 1);
 					if (tag instanceof EndTag) {
