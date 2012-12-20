@@ -352,4 +352,11 @@ public final class NBTOutputStream implements Closeable {
 	public ByteOrder getEndianness() {
 		return os.getEndianness();
 	}
+	
+	/**
+	 * Flushes the stream
+	 */
+	public void flush() throws IOException {
+		os.flush();
+	}
 }
