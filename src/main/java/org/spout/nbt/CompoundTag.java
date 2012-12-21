@@ -29,7 +29,7 @@ package org.spout.nbt;
 /**
  * The {@code TAG_Compound} tag.
  */
-public final class CompoundTag extends Tag<CompoundMap> {
+public class CompoundTag extends Tag<CompoundMap> {
 	/**
 	 * The value.
 	 */
