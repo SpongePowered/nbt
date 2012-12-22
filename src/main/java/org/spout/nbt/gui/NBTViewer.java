@@ -46,6 +46,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
@@ -102,6 +104,13 @@ public class NBTViewer extends JFrame implements ActionListener {
 	public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+            	try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				} catch (ClassNotFoundException e) {
+				} catch (InstantiationException e) {
+				} catch (IllegalAccessException e) {
+				} catch (UnsupportedLookAndFeelException e) {
+				}
             	NBTViewer viewer = new NBTViewer();
                 viewer.setVisible(true);
             }
