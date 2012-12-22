@@ -36,7 +36,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -51,8 +50,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeNode;
 
 import org.spout.nbt.ByteArrayTag;
 import org.spout.nbt.CompoundMap;
@@ -138,6 +135,9 @@ public class NBTViewer extends JFrame implements ActionListener {
 	private void openFile() {
 		FileDialog d = new FileDialog(this, "Open File", FileDialog.LOAD);
 		d.setVisible(true);
+		if (d.getDirectory() == null || d.getFile() == null) {
+			return;
+		}
 		File dir = new File(d.getDirectory());
 		File f = new File(dir, d.getFile());
 		List<Tag<?>> tags = readFile(f);
