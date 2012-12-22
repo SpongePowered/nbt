@@ -65,9 +65,11 @@ import org.spout.nbt.stream.NBTInputStream;
 public class NBTViewer extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+	private static final int MAX_WIDTH = 32;
 	private String format = "";
 	private JTree tree;
 	private DefaultMutableTreeNode top;
+	
 
 	public NBTViewer() {
 		
@@ -281,17 +283,22 @@ public class NBTViewer extends JFrame implements ActionListener {
 	
 	private static DefaultMutableTreeNode getNode(ByteArrayTag tag) {
 		byte[] values = tag.getValue();
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode(tag.getName() + " [byte[]]");
-		StringBuilder sb = new StringBuilder();
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode(tag.getName() + " [byte[" + values.length + "]");
+		StringBuilder sb = new StringBuilder("{");
 		boolean first = true;
-		for (byte b : values) {
+		for (byte v : values) {
 			if (!first) {
 				sb.append(", ");
 			} else {
-				sb.append("{");
 				first = false;
 			}
-			sb.append(b);
+			String s = Byte.toString(v);
+			if (sb.length() + s.length() > MAX_WIDTH) {
+				DefaultMutableTreeNode child = new DefaultMutableTreeNode(sb.toString());
+				root.add(child);
+				sb.setLength(0);
+			}
+			sb.append(Integer.toHexString(v & 0xFF));
 		}
 		sb.append("}");
 		DefaultMutableTreeNode child = new DefaultMutableTreeNode(sb.toString());
@@ -301,17 +308,22 @@ public class NBTViewer extends JFrame implements ActionListener {
 	
 	private static DefaultMutableTreeNode getNode(ShortArrayTag tag) {
 		short[] values = tag.getValue();
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode(tag.getName() + " [short[]]");
-		StringBuilder sb = new StringBuilder();
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode(tag.getName() + " [short[" + values.length + "]]");
+		StringBuilder sb = new StringBuilder("{");
 		boolean first = true;
-		for (int i : values) {
+		for (short v : values) {
 			if (!first) {
 				sb.append(", ");
 			} else {
-				sb.append("{");
 				first = false;
 			}
-			sb.append(i);
+			String s = Short.toString(v);
+			if (sb.length() + s.length() > MAX_WIDTH) {
+				DefaultMutableTreeNode child = new DefaultMutableTreeNode(sb.toString());
+				root.add(child);
+				sb.setLength(0);
+			}
+			sb.append(v);
 		}
 		sb.append("}");
 		DefaultMutableTreeNode child = new DefaultMutableTreeNode(sb.toString());
@@ -321,17 +333,23 @@ public class NBTViewer extends JFrame implements ActionListener {
 
 	private static DefaultMutableTreeNode getNode(IntArrayTag tag) {
 		int[] values = tag.getValue();
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode(tag.getName() + " [int[]]");
-		StringBuilder sb = new StringBuilder();
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode(tag.getName() + " [int[" + values.length + "]]");
+		StringBuilder sb = new StringBuilder("{");
 		boolean first = true;
-		for (int i : values) {
+		for (int v : values) {
 			if (!first) {
 				sb.append(", ");
 			} else {
-				sb.append("{");
 				first = false;
 			}
-			sb.append(i);
+			String s = Integer.toString(v);
+			if (sb.length() + s.length() > MAX_WIDTH) {
+				sb.append("<br>");
+				DefaultMutableTreeNode child = new DefaultMutableTreeNode(sb.toString());
+				root.add(child);
+				sb.setLength(0);
+			}
+			sb.append(v);
 		}
 		sb.append("}");
 		DefaultMutableTreeNode child = new DefaultMutableTreeNode(sb.toString());
