@@ -36,6 +36,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -51,6 +52,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeNode;
 
 import org.spout.nbt.ByteArrayTag;
 import org.spout.nbt.CompoundMap;
@@ -59,6 +61,8 @@ import org.spout.nbt.IntArrayTag;
 import org.spout.nbt.ListTag;
 import org.spout.nbt.ShortArrayTag;
 import org.spout.nbt.Tag;
+import org.spout.nbt.itemmap.StringMapReader;
+import org.spout.nbt.regionfile.SimpleRegionFileReader;
 import org.spout.nbt.stream.NBTInputStream;
 
 public class NBTViewer extends JFrame implements ActionListener {
@@ -153,6 +157,16 @@ public class NBTViewer extends JFrame implements ActionListener {
 			format = "Uncompressed NBT";
 			return tags;
 		}
+		tags = SimpleRegionFileReader.readFile(f);
+		if (tags != null) {
+			format = "SimpleRegionFile";
+			return tags;
+		}
+		tags = StringMapReader.readFile(f);
+		if (tags != null) {
+			format = "StringMap";
+			return tags;
+		}
 		
 		format = "Unknown";
 		return null;
@@ -190,11 +204,10 @@ public class NBTViewer extends JFrame implements ActionListener {
 	private void updateTree(List<Tag<?>> tags) {
 
 		DefaultTreeModel model = (DefaultTreeModel) tree.getModel();  
+
+		top.removeAllChildren();
 		
-		int children = top.getChildCount();
-		for (int i = 0; i < children; i++) {
-			model.removeNodeFromParent((MutableTreeNode) top.getChildAt(i));
-		}
+		model.nodeStructureChanged(top);
 		
 		if (tags == null) {
 			return;
@@ -202,16 +215,21 @@ public class NBTViewer extends JFrame implements ActionListener {
 
 		if (tags.size() == 1) {
 			model.insertNodeInto(getNode(tags.get(0)), top, 0);
-			tree.expandRow(0);
 		} else {
 			int i = 0;
 			for (Tag<?> t : tags) {
-				DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root Tag " + i);
-				model.insertNodeInto(root, top, i);
-				model.insertNodeInto(getNode(t), root, 0);
-				tree.expandRow(i);
+				model.insertNodeInto(getNode(t), top, i);
 				i++;
 			}
+		}
+		
+		for (int i = 0; i < tree.getRowCount(); i++) {
+			tree.collapseRow(i);
+		}
+		
+		tree.expandRow(0);
+		if (tags.size() == 1) {
+			tree.expandRow(1);
 		}
 	}
 	
@@ -221,7 +239,9 @@ public class NBTViewer extends JFrame implements ActionListener {
 	
 	@SuppressWarnings("unchecked")
 	private static DefaultMutableTreeNode getNode(Tag<?> tag, boolean includeName) {
-		if (tag instanceof CompoundTag) {
+		if (tag == null) {
+			return new DefaultMutableTreeNode("Empty");
+		} else if (tag instanceof CompoundTag) {
 			return getNode((CompoundTag) tag);
 		} else if (tag instanceof ListTag<?>) {
 			try {
@@ -268,10 +288,12 @@ public class NBTViewer extends JFrame implements ActionListener {
 			if (!first) {
 				sb.append(", ");
 			} else {
+				sb.append("{");
 				first = false;
 			}
 			sb.append(b);
 		}
+		sb.append("}");
 		DefaultMutableTreeNode child = new DefaultMutableTreeNode(sb.toString());
 		root.add(child);
 		return root;
@@ -286,10 +308,12 @@ public class NBTViewer extends JFrame implements ActionListener {
 			if (!first) {
 				sb.append(", ");
 			} else {
+				sb.append("{");
 				first = false;
 			}
 			sb.append(i);
 		}
+		sb.append("}");
 		DefaultMutableTreeNode child = new DefaultMutableTreeNode(sb.toString());
 		root.add(child);
 		return root;
@@ -304,10 +328,12 @@ public class NBTViewer extends JFrame implements ActionListener {
 			if (!first) {
 				sb.append(", ");
 			} else {
+				sb.append("{");
 				first = false;
 			}
 			sb.append(i);
 		}
+		sb.append("}");
 		DefaultMutableTreeNode child = new DefaultMutableTreeNode(sb.toString());
 		root.add(child);
 		return root;
