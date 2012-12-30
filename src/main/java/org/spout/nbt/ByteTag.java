@@ -77,4 +77,16 @@ public final class ByteTag extends Tag<Byte> {
 	public ByteTag clone() {
 		return new ByteTag(getName(), value);
 	}
+	
+	public static Boolean getBooleanValue(Tag<?> t) {
+		if (t == null) {
+			return null;
+		}
+		try {
+			ByteTag byteTag = (ByteTag) t;
+			return byteTag.getBooleanValue();
+		} catch (ClassCastException e) {
+			return null;
+		}
+	}
 }
