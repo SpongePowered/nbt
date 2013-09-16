@@ -1,28 +1,28 @@
 /*
  * This file is part of SimpleNBT.
  *
- * Copyright (c) 2011, SpoutDev <http://www.spout.org/>
- * SimpleNBT is licensed under the SpoutDev License Version 1.
+ * Copyright (c) 2011 Spout LLC <http://www.spout.org/>
+ * SimpleNBT is licensed under the Spout License Version 1.
  *
- * SimpleNBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * SimpleNBT is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
  *
  * In addition, 180 days after any changes are published, you can use the
  * software, incorporating those changes, under the terms of the MIT license,
- * as described in the SpoutDev License Version 1.
+ * as described in the Spout License Version 1.
  *
- * SimpleNBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * SimpleNBT is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for
+ * more details.
  *
  * You should have received a copy of the GNU Lesser General Public License,
- * the MIT license and the SpoutDev License Version 1 along with this program.
+ * the MIT license and the Spout License Version 1 along with this program.
  * If not, see <http://www.gnu.org/licenses/> for the GNU Lesser General Public
- * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
- * including the MIT license.
+ * License and see <http://spout.in/licensev1> for the full license, including
+ * the MIT license.
  */
 package org.spout.nbt.gui;
 
@@ -37,7 +37,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -63,67 +62,65 @@ import org.spout.nbt.regionfile.SimpleRegionFileReader;
 import org.spout.nbt.stream.NBTInputStream;
 
 public class NBTViewer extends JFrame implements ActionListener {
-
 	private static final long serialVersionUID = 1L;
 	private static final int MAX_WIDTH = 32;
 	private String format = "";
 	private JTree tree;
 	private DefaultMutableTreeNode top;
-	
 
 	public NBTViewer() {
-		
+
 		JMenuBar menu = new JMenuBar();
-        setJMenuBar(menu);
+		setJMenuBar(menu);
 
-        JMenu file = new JMenu("File");
-        
-        JMenuItem open = new JMenuItem("Open");
-        open.addActionListener(this);
+		JMenu file = new JMenu("File");
 
-        JMenuItem exit = new JMenuItem("Exit");
-        exit.addActionListener(this);
+		JMenuItem open = new JMenuItem("Open");
+		open.addActionListener(this);
 
-        file.add(open);
-        file.addSeparator();
-        file.add(exit);
+		JMenuItem exit = new JMenuItem("Exit");
+		exit.addActionListener(this);
 
-        menu.add(file);
-        
-        top = new DefaultMutableTreeNode("NBT Contents");
-        
-        tree = new JTree(top);
-        
-        JScrollPane treeView = new JScrollPane(tree);
-        
-        add(treeView);
-		
+		file.add(open);
+		file.addSeparator();
+		file.add(exit);
+
+		menu.add(file);
+
+		top = new DefaultMutableTreeNode("NBT Contents");
+
+		tree = new JTree(top);
+
+		JScrollPane treeView = new JScrollPane(tree);
+
+		add(treeView);
+
 		setTitle("SimpleNBT Viewer");
 		setSize(300, 600);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
-	
+
 	public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-            	try {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				try {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 				} catch (ClassNotFoundException e) {
 				} catch (InstantiationException e) {
 				} catch (IllegalAccessException e) {
 				} catch (UnsupportedLookAndFeelException e) {
 				}
-            	NBTViewer viewer = new NBTViewer();
-                viewer.setVisible(true);
-            }
-        });
-    }
+				NBTViewer viewer = new NBTViewer();
+				viewer.setVisible(true);
+			}
+		});
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
-		
+
 		if (command == null) {
 			return;
 		} else if (command.equals("Open")) {
@@ -131,9 +128,8 @@ public class NBTViewer extends JFrame implements ActionListener {
 		} else if (command.equals("Exit")) {
 			System.exit(0);
 		}
-
 	}
-	
+
 	private void openFile() {
 		FileDialog d = new FileDialog(this, "Open File", FileDialog.LOAD);
 		d.setVisible(true);
@@ -147,7 +143,7 @@ public class NBTViewer extends JFrame implements ActionListener {
 		top.setUserObject("NBT Contents [" + format + "]");
 		((DefaultTreeModel) tree.getModel()).nodeChanged(top);
 	}
-	
+
 	private List<Tag<?>> readFile(File f) {
 		List<Tag<?>> tags = readRawNBT(f, true);
 		if (tags != null) {
@@ -169,11 +165,11 @@ public class NBTViewer extends JFrame implements ActionListener {
 			format = "StringMap";
 			return tags;
 		}
-		
+
 		format = "Unknown";
 		return null;
 	}
-	
+
 	private List<Tag<?>> readRawNBT(File f, boolean compressed) {
 		List<Tag<?>> tags = new ArrayList<Tag<?>>();
 		try {
@@ -202,15 +198,15 @@ public class NBTViewer extends JFrame implements ActionListener {
 		}
 		return tags;
 	}
-	
+
 	private void updateTree(List<Tag<?>> tags) {
 
-		DefaultTreeModel model = (DefaultTreeModel) tree.getModel();  
+		DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
 
 		top.removeAllChildren();
-		
+
 		model.nodeStructureChanged(top);
-		
+
 		if (tags == null) {
 			return;
 		}
@@ -224,22 +220,22 @@ public class NBTViewer extends JFrame implements ActionListener {
 				i++;
 			}
 		}
-		
+
 		for (int i = 0; i < tree.getRowCount(); i++) {
 			tree.collapseRow(i);
 		}
-		
+
 		tree.expandRow(0);
 		if (tags.size() == 1) {
 			tree.expandRow(1);
 		}
 	}
-	
+
 	private static DefaultMutableTreeNode getNode(Tag<?> tag) {
 		return getNode(tag, true);
 	}
-	
-	@SuppressWarnings("unchecked")
+
+	@SuppressWarnings ("unchecked")
 	private static DefaultMutableTreeNode getNode(Tag<?> tag, boolean includeName) {
 		if (tag == null) {
 			return new DefaultMutableTreeNode("Empty");
@@ -260,7 +256,7 @@ public class NBTViewer extends JFrame implements ActionListener {
 		String message = includeName ? (tag.getName() + ":" + tag.getValue()) : tag.getValue().toString();
 		return new DefaultMutableTreeNode(message);
 	}
-	
+
 	private static DefaultMutableTreeNode getNode(CompoundTag tag) {
 		CompoundMap map = tag.getValue();
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode(tag.getName() + " [Map]");
@@ -270,7 +266,7 @@ public class NBTViewer extends JFrame implements ActionListener {
 		}
 		return root;
 	}
-	
+
 	private static DefaultMutableTreeNode getNode(ListTag<Tag<?>> tag) {
 		List<Tag<?>> values = tag.getValue();
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode(tag.getName() + " [List]");
@@ -280,7 +276,7 @@ public class NBTViewer extends JFrame implements ActionListener {
 		}
 		return root;
 	}
-	
+
 	private static DefaultMutableTreeNode getNode(ByteArrayTag tag) {
 		byte[] values = tag.getValue();
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode(tag.getName() + " [byte[" + values.length + "]");
@@ -305,7 +301,7 @@ public class NBTViewer extends JFrame implements ActionListener {
 		root.add(child);
 		return root;
 	}
-	
+
 	private static DefaultMutableTreeNode getNode(ShortArrayTag tag) {
 		short[] values = tag.getValue();
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode(tag.getName() + " [short[" + values.length + "]]");
@@ -356,5 +352,4 @@ public class NBTViewer extends JFrame implements ActionListener {
 		root.add(child);
 		return root;
 	}
-	
 }

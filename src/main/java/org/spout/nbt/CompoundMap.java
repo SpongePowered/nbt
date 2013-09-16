@@ -1,28 +1,28 @@
 /*
  * This file is part of SimpleNBT.
  *
- * Copyright (c) 2011, SpoutDev <http://www.spout.org/>
- * SimpleNBT is licensed under the SpoutDev License Version 1.
+ * Copyright (c) 2011 Spout LLC <http://www.spout.org/>
+ * SimpleNBT is licensed under the Spout License Version 1.
  *
- * SimpleNBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * SimpleNBT is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
  *
  * In addition, 180 days after any changes are published, you can use the
  * software, incorporating those changes, under the terms of the MIT license,
- * as described in the SpoutDev License Version 1.
+ * as described in the Spout License Version 1.
  *
- * SimpleNBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * SimpleNBT is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for
+ * more details.
  *
  * You should have received a copy of the GNU Lesser General Public License,
- * the MIT license and the SpoutDev License Version 1 along with this program.
+ * the MIT license and the Spout License Version 1 along with this program.
  * If not, see <http://www.gnu.org/licenses/> for the GNU Lesser General Public
- * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
- * including the MIT license.
+ * License and see <http://spout.in/licensev1> for the full license, including
+ * the MIT license.
  */
 package org.spout.nbt;
 
@@ -49,9 +49,7 @@ public class CompoundMap implements Map<String, Tag<?>>, Iterable<Tag<?>> {
 	}
 
 	/**
-	 * Creates a CompoundMap back by a LinkedHashMap, so insertion order is preserved.<br>
-	 * <br>
-	 * The map is initialised using the values given in the List.
+	 * Creates a CompoundMap back by a LinkedHashMap, so insertion order is preserved.<br> <br> The map is initialised using the values given in the List.
 	 *
 	 * @param initial the initial values for the CompoundMap
 	 */
@@ -60,9 +58,7 @@ public class CompoundMap implements Map<String, Tag<?>>, Iterable<Tag<?>> {
 	}
 
 	/**
-	 * Creates a CompoundMap back by a LinkedHashMap, so insertion order is preserved.<br>
-	 * <br>
-	 * The map is initialised using the values given in the Map.
+	 * Creates a CompoundMap back by a LinkedHashMap, so insertion order is preserved.<br> <br> The map is initialised using the values given in the Map.
 	 *
 	 * @param initial the initial values for the CompoundMap
 	 */
@@ -71,22 +67,18 @@ public class CompoundMap implements Map<String, Tag<?>>, Iterable<Tag<?>> {
 	}
 
 	/**
-	 * Creates a CompoundMap back by a LinkedHashMap, so insertion order is preserved.<br>
-	 * <br>
-	 * The map is initialised using the values given in the HashMap.  The constructor is included for
-	 * backward compatibility, it is recommended to use the one that takes Map<String, Tag> instead.
+	 * Creates a CompoundMap back by a LinkedHashMap, so insertion order is preserved.<br> <br> The map is initialised using the values given in the HashMap.  The constructor is included for backward
+	 * compatibility, it is recommended to use the one that takes Map<String, Tag> instead.
 	 *
 	 * @param initial the initial values for the CompoundMap
 	 */
 	@Deprecated
 	public CompoundMap(HashMap<String, Tag<?>> initial) {
-		this((Map<String, Tag<?>>)initial);
+		this((Map<String, Tag<?>>) initial);
 	}
 
 	/**
-	 * Creates a CompoundMap using the same element ordering rules as in the given CompoundMap.<br>
-	 * <br>
-	 * The map is initialised using the values given in the CompoundMap.
+	 * Creates a CompoundMap using the same element ordering rules as in the given CompoundMap.<br> <br> The map is initialised using the values given in the CompoundMap.
 	 *
 	 * @param initial the initial values for the CompoundMap
 	 */
@@ -95,8 +87,7 @@ public class CompoundMap implements Map<String, Tag<?>>, Iterable<Tag<?>> {
 	}
 
 	/**
-	 * Creates an empty CompoundMap.<br>
-	 * <br>
+	 * Creates an empty CompoundMap.<br> <br>
 	 *
 	 * @param sort elements are ordered in alphabetical ordering
 	 * @param reverse elements are ordered in reverse alphabetical ordering, when sort is true
@@ -106,8 +97,7 @@ public class CompoundMap implements Map<String, Tag<?>>, Iterable<Tag<?>> {
 	}
 
 	/**
-	 * Creates an empty CompoundMap which is initialised using the given values<br>
-	 * <br>
+	 * Creates an empty CompoundMap which is initialised using the given values<br> <br>
 	 *
 	 * @param initial the initial values
 	 * @param sort elements are ordered in alphabetical ordering
@@ -214,7 +204,7 @@ public class CompoundMap implements Map<String, Tag<?>>, Iterable<Tag<?>> {
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof CompoundMap) {
-			CompoundMap other = (CompoundMap)o;
+			CompoundMap other = (CompoundMap) o;
 			Iterator<Tag<?>> iThis = iterator();
 			Iterator<Tag<?>> iOther = other.iterator();
 			while (iThis.hasNext() && iOther.hasNext()) {

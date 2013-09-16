@@ -1,34 +1,32 @@
 /*
  * This file is part of SimpleNBT.
  *
- * Copyright (c) 2011, SpoutDev <http://www.spout.org/>
- * SimpleNBT is licensed under the SpoutDev License Version 1.
+ * Copyright (c) 2011 Spout LLC <http://www.spout.org/>
+ * SimpleNBT is licensed under the Spout License Version 1.
  *
- * SimpleNBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * SimpleNBT is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
  *
  * In addition, 180 days after any changes are published, you can use the
  * software, incorporating those changes, under the terms of the MIT license,
- * as described in the SpoutDev License Version 1.
+ * as described in the Spout License Version 1.
  *
- * SimpleNBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * SimpleNBT is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for
+ * more details.
  *
  * You should have received a copy of the GNU Lesser General Public License,
- * the MIT license and the SpoutDev License Version 1 along with this program.
+ * the MIT license and the Spout License Version 1 along with this program.
  * If not, see <http://www.gnu.org/licenses/> for the GNU Lesser General Public
- * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
- * including the MIT license.
+ * License and see <http://spout.in/licensev1> for the full license, including
+ * the MIT license.
  */
 package org.spout.nbt.stream;
 
 import java.io.Closeable;
-import java.io.DataInput;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteOrder;
@@ -48,7 +46,6 @@ import org.spout.nbt.IntTag;
 import org.spout.nbt.ListTag;
 import org.spout.nbt.LongTag;
 import org.spout.nbt.NBTConstants;
-import org.spout.nbt.NBTUtils;
 import org.spout.nbt.ShortArrayTag;
 import org.spout.nbt.ShortTag;
 import org.spout.nbt.StringTag;
@@ -56,12 +53,8 @@ import org.spout.nbt.Tag;
 import org.spout.nbt.TagType;
 
 /**
- * This class reads NBT, or Named Binary Tag streams, and produces an object
- * graph of subclasses of the {@link Tag} object.
- * <p />
- * The NBT format was created by Markus Persson, and the specification may
- * be found at <a href="http://www.minecraft.net/docs/NBT.txt">
- * http://www.minecraft.net/docs/NBT.txt</a>.
+ * This class reads NBT, or Named Binary Tag streams, and produces an object graph of subclasses of the {@link Tag} object. <p /> The NBT format was created by Markus Persson, and the specification
+ * may be found at <a href="http://www.minecraft.net/docs/NBT.txt"> http://www.minecraft.net/docs/NBT.txt</a>.
  */
 public final class NBTInputStream implements Closeable {
 	/**
@@ -70,8 +63,8 @@ public final class NBTInputStream implements Closeable {
 	private final EndianSwitchableInputStream is;
 
 	/**
-	 * Creates a new {@link NBTInputStream}, which will source its data
-	 * from the specified input stream. This assumes the stream is compressed.
+	 * Creates a new {@link NBTInputStream}, which will source its data from the specified input stream. This assumes the stream is compressed.
+	 *
 	 * @param is The input stream.
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
@@ -80,10 +73,9 @@ public final class NBTInputStream implements Closeable {
 	}
 
 	/**
-	 * Creates a new {@link NBTInputStream}, which sources its data from the
-	 * specified input stream. A flag must be passed which indicates if the
-	 * stream is compressed with GZIP or not. This assumes the stream
-	 * uses big endian encoding.
+	 * Creates a new {@link NBTInputStream}, which sources its data from the specified input stream. A flag must be passed which indicates if the stream is compressed with GZIP or not. This assumes the
+	 * stream uses big endian encoding.
+	 *
 	 * @param is The input stream.
 	 * @param compressed A flag indicating if the stream is compressed.
 	 * @throws java.io.IOException if an I/O error occurs.
@@ -93,9 +85,8 @@ public final class NBTInputStream implements Closeable {
 	}
 
 	/**
-	 * Creates a new {@link NBTInputStream}, which sources its data from the
-	 * specified input stream. A flag must be passed which indicates if the
-	 * stream is compressed with GZIP or not.
+	 * Creates a new {@link NBTInputStream}, which sources its data from the specified input stream. A flag must be passed which indicates if the stream is compressed with GZIP or not.
+	 *
 	 * @param is The input stream.
 	 * @param compressed A flag indicating if the stream is compressed.
 	 * @param endianness Whether to read numbers from the InputStream with little endian encoding.
@@ -107,6 +98,7 @@ public final class NBTInputStream implements Closeable {
 
 	/**
 	 * Reads an NBT {@link Tag} from the stream.
+	 *
 	 * @return The tag that was read.
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
@@ -116,6 +108,7 @@ public final class NBTInputStream implements Closeable {
 
 	/**
 	 * Reads an NBT {@link Tag} from the stream.
+	 *
 	 * @param depth The depth of this tag.
 	 * @return The tag that was read.
 	 * @throws java.io.IOException if an I/O error occurs.
@@ -139,13 +132,14 @@ public final class NBTInputStream implements Closeable {
 
 	/**
 	 * Reads the payload of a {@link Tag}, given the name and type.
+	 *
 	 * @param type The type.
 	 * @param name The name.
 	 * @param depth The depth.
 	 * @return The tag.
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings ({"unchecked", "rawtypes"})
 	private Tag readTagPayload(TagType type, String name, int depth) throws IOException {
 		switch (type) {
 			case TAG_END:
@@ -234,7 +228,7 @@ public final class NBTInputStream implements Closeable {
 
 			default:
 				throw new IOException("Invalid tag type: " + type + ".");
-			}
+		}
 	}
 
 	public void close() throws IOException {

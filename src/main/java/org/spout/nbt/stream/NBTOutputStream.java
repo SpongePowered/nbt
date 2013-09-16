@@ -1,28 +1,28 @@
 /*
  * This file is part of SimpleNBT.
  *
- * Copyright (c) 2011, SpoutDev <http://www.spout.org/>
- * SimpleNBT is licensed under the SpoutDev License Version 1.
+ * Copyright (c) 2011 Spout LLC <http://www.spout.org/>
+ * SimpleNBT is licensed under the Spout License Version 1.
  *
- * SimpleNBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * SimpleNBT is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
  *
  * In addition, 180 days after any changes are published, you can use the
  * software, incorporating those changes, under the terms of the MIT license,
- * as described in the SpoutDev License Version 1.
+ * as described in the Spout License Version 1.
  *
- * SimpleNBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * SimpleNBT is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for
+ * more details.
  *
  * You should have received a copy of the GNU Lesser General Public License,
- * the MIT license and the SpoutDev License Version 1 along with this program.
+ * the MIT license and the Spout License Version 1 along with this program.
  * If not, see <http://www.gnu.org/licenses/> for the GNU Lesser General Public
- * License and see <http://www.spout.org/SpoutDevLicenseV1.txt> for the full license,
- * including the MIT license.
+ * License and see <http://spout.in/licensev1> for the full license, including
+ * the MIT license.
  */
 package org.spout.nbt.stream;
 
@@ -51,12 +51,8 @@ import org.spout.nbt.Tag;
 import org.spout.nbt.TagType;
 
 /**
- * This class writes NBT, or Named Binary Tag, {@link Tag} objects to an
- * underlying {@link java.io.OutputStream}.
- * <p />
- * The NBT format was created by Markus Persson, and the specification may be
- * found at <a href="http://www.minecraft.net/docs/NBT.txt">
- * http://www.minecraft.net/docs/NBT.txt</a>.
+ * This class writes NBT, or Named Binary Tag, {@link Tag} objects to an underlying {@link java.io.OutputStream}. <p /> The NBT format was created by Markus Persson, and the specification may be found
+ * at <a href="http://www.minecraft.net/docs/NBT.txt"> http://www.minecraft.net/docs/NBT.txt</a>.
  */
 public final class NBTOutputStream implements Closeable {
 	/**
@@ -65,9 +61,7 @@ public final class NBTOutputStream implements Closeable {
 	private final EndianSwitchableOutputStream os;
 
 	/**
-	 * Creates a new {@link NBTOutputStream}, which will write data to the
-	 * specified underlying output stream. This assumes the output stream should
-	 * be compressed with GZIP.
+	 * Creates a new {@link NBTOutputStream}, which will write data to the specified underlying output stream. This assumes the output stream should be compressed with GZIP.
 	 *
 	 * @param os The output stream.
 	 * @throws java.io.IOException if an I/O error occurs.
@@ -77,9 +71,7 @@ public final class NBTOutputStream implements Closeable {
 	}
 
 	/**
-	 * Creates a new {@link NBTOutputStream}, which will write data to the
-	 * specified underlying output stream. A flag indicates if the output should
-	 * be compressed with GZIP or not.
+	 * Creates a new {@link NBTOutputStream}, which will write data to the specified underlying output stream. A flag indicates if the output should be compressed with GZIP or not.
 	 *
 	 * @param os The output stream.
 	 * @param compressed A flag that indicates if the output should be compressed.
@@ -90,9 +82,7 @@ public final class NBTOutputStream implements Closeable {
 	}
 
 	/**
-	 * Creates a new {@link NBTOutputStream}, which will write data to the
-	 * specified underlying output stream. A flag indicates if the output should
-	 * be compressed with GZIP or not.
+	 * Creates a new {@link NBTOutputStream}, which will write data to the specified underlying output stream. A flag indicates if the output should be compressed with GZIP or not.
 	 *
 	 * @param os The output stream.
 	 * @param compressed A flag that indicates if the output should be compressed.
@@ -230,7 +220,7 @@ public final class NBTOutputStream implements Closeable {
 	 * @param tag The tag.
 	 * @throws java.io.IOException if an I/O error occurs.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings ("unchecked")
 	private void writeListTagPayload(ListTag<?> tag) throws IOException {
 		Class<? extends Tag<?>> clazz = tag.getElementType();
 		List<Tag<?>> tags = (List<Tag<?>>) tag.getValue();
@@ -352,7 +342,7 @@ public final class NBTOutputStream implements Closeable {
 	public ByteOrder getEndianness() {
 		return os.getEndianness();
 	}
-	
+
 	/**
 	 * Flushes the stream
 	 */
