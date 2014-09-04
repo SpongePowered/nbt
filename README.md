@@ -1,81 +1,103 @@
-[![SimpleNBT][Project Logo]][Website]
+# Flow NBT [![License](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)][License] [![Flattr this](http://img.shields.io/badge/flattr-donate-lightgrey.svg?style=flat)][Donate] [![Build Status](http://img.shields.io/travis/flow/flow-nbt/master.svg?style=flat)](https://travis-ci.org/flow/flow-nbt) [![Coverage Status](http://img.shields.io/coveralls/flow/flow-nbt/master.svg?style=flat)](https://coveralls.io/r/flow/flow-nbt)
 
-What is SimpleNBT?
-------------------
-Modified NBT for the Spout project. Based on Graham Edgecombe's JNBT library. NBT (Named Binary Tag) is a tag based binary format designed to carry large amounts of binary data with smaller amounts of additional data.
+Flow NBT is a NBT library based on Graham Edgecombe's JNBT library. NBT (Named Binary Tag) is a tag based binary format designed to carry large amounts of binary data with smaller amounts of additional data.
 
-Copyright (c) 2011-2012, SpoutDev <<http://www.spout.org/>>
+## Getting Started
+* [Examples and code snippets](https://github.com/flow/examples/tree/master/nbt)
+* [Official documentation](#documentation)
+* [IRC support chat](http://kiwiirc.com/client/irc.esper.net/flow)
+* [Issues tracker](https://github.com/flow/flow-nbt/issues)
 
-Who is SpoutDev?
-----------------
-SpoutDev is the team behind the Spout and Spoutcraft projects, I See You, and Pipe.  
-[![Afforess](https://secure.gravatar.com/avatar/ea0be49e1e4deac42ed9204ffd95b56c?d=mm&r=pg&s=48)](http://forums.spout.org/members/afforess/) [![alta189](https://secure.gravatar.com/avatar/7a087430b2bf9456b8879c5469aadb95?d=mm&r=pg&s=48)](http://forums.spout.org/members/alta189/) [![Wulfspider](https://secure.gravatar.com/avatar/6f2a0dcb60cd1ebee57875f9326bc98c?d=mm&r=pg&s=48)](http://forums.spout.org/members/wulfspider/) [![raphfrk](https://secure.gravatar.com/avatar/68186a30d5a714f6012a9c48d2b10630?d=mm&r=pg&s=48)](http://forums.spout.org/members/raphfrk/) [![narrowtux](https://secure.gravatar.com/avatar/f110a5b8feacea25275521f4efd0d7f2?d=mm&r=pg&s=48)](http://forums.spout.org/members/narrowtux/) [![Top_Cat](https://secure.gravatar.com/avatar/defeffc70d775f6df95b68f0ece46c9e?d=mm&r=pg&s=48)](http://forums.spout.org/members/top_cat/) [![Olloth](https://secure.gravatar.com/avatar/fa8429add105b86cf3b61dbe15638812?d=mm&r=pg&s=48)](http://forums.spout.org/members/olloth/) [![Rycochet](https://secure.gravatar.com/avatar/b06c12e72953e0edd3054a8645d76791?d=mm&r=pg&s=48)](http://forums.spout.org/members/rycochet/) [![RoyAwesome](https://secure.gravatar.com/avatar/6d258213c33a16465021daa8df299a0d?d=mm&r=pg&s=48)](http://forums.spout.org/members/royawesome/) [![zml2008](https://secure.gravatar.com/avatar/2320ab48d0715a4e9c73b7ec13fd6f3a?d=mm&r=pg&s=48)](http://forums.spout.org/members/zml2008/)  [![Zidane](https://secure.gravatar.com/avatar/99532c7f117c8dac751422376116fb38?d=mm&r=pg&s=48)](http://forums.spout.org/members/zidane/) [![Contex](https://secure.gravatar.com/avatar/ab34f58825a956a975f1a3dcdf97a173?d=mm&r=pg&s=48)](http://forums.spout.org/members/contex/) 
+## Source Code
+The latest and greatest source can be found here on [GitHub](https://github.com/flow/flow-nbt). If you are using Git, use this command to clone the project:
 
-Visit our [website][Website] or get support on our [forums][Forums].  
-Track and submit issues and bugs on our [issue tracker][Issues].
+    git clone git://github.com/flow/flow-nbt.git
 
-[![Follow us on Twitter][Twitter Logo]][Twitter][![Like us on Facebook][Facebook Logo]][Facebook][![Donate to the Spout project][Donate Logo]][Donate]
+Or download the [latest zip archive](https://github.com/flow/flow-nbt/archive/master.zip).
 
-Source
-------
-The latest and greatest source can be found on [GitHub].  
-Download the latest builds from [Jenkins].    [![Build Status](http://build.spout.org/job/SimpleNBT/badge/icon)][Jenkins]  
-View the latest [Javadoc].
+## Dependencies
+We love open-source libraries! This project uses are few of them to make things easier. If you aren't using Maven or Gradle, you'll need these!
+* [commons-io:commons-io](https://oss.sonatype.org/#nexus-search;gav~commons-io~commons-io~~~)
+* [org.apache.commons:commons-lang3](https://oss.sonatype.org/#nexus-search;gav~org.apache~commons-lang3~~~)
+* [org.yaml:snakeyaml](https://oss.sonatype.org/#nexus-search;gav~org.yaml~snakeyaml~~~)
 
-License
--------
-SimpleNBT is licensed under the [GNU Lesser General Public License Version 3][License], but with a provision that files are released under the MIT license 180 days after they are published. Please see the `LICENSE.txt` file for details.
+## Test Dependencies
+The following dependencies are only needed if you compiling the tests included with this project. Gotta test 'em all!
+* [junit:junit](https://oss.sonatype.org/#nexus-search;gav~junit~junit~~~)
+* [org.hamcrest:hamcrest-library](https://oss.sonatype.org/#nexus-search;gav~org.hamcrest~hamcrest-library~~~)
+* [org.powermock:powermock-api-mockito](https://oss.sonatype.org/#nexus-search;gav~org.powermock~powermock-api-mockito~~~)
+* [org.powermock:powermock-module-junit4](https://oss.sonatype.org/#nexus-search;gav~org.powermock~powermock-module-junit4~~~)
 
-Compiling
----------
-SimpleNBT uses Maven to handle its dependencies.
+## Building from Source
+This project can be built with the _latest_ [Java Development Kit](http://oracle.com/technetwork/java/javase/downloads) and [Maven](http://maven.apache.org/) or [Gradle](http://www.gradle.org/). Maven and Gradle are used to simplify dependency management, but using either of them is optional.
 
-* Install [Maven 2 or 3](http://maven.apache.org/download.html)  
-* Checkout this repo and run: `mvn clean install`
+For Maven, the command `mvn clean package` will build the project and will put the compiled JAR in `target`, and `mvn clean install` will copy it to your local Maven repository.
 
-Using with Your Project
------------------------
-For those using [Maven](http://maven.apache.org/download.html) to manage project dependencies, simply include the following in your pom.xml:
+For Gradle, the command `gradlew` will build the project and will put the compiled JAR in `~/build/distributions`, and `gradlew install` will copy it to your local Maven repository.
+
+## Contributing
+Are you a talented programmer looking to contribute some code? We'd love the help!
+
+* Open a pull request with your changes, following our [guidelines and coding standards](CONTRIBUTING.md).
+* Please follow the above guidelines for your pull request(s) accepted.
+* For help setting up the project, keep reading!
+
+Love the project? Feel free to [donate] to help continue development! Flow projects are open-source and powered by community members, like yourself. Without you, we wouldn't be here today!
+
+Please don't forget to follow and star our repo! Join our growing community to keep up to date with the latest Flow development.
+
+## Usage
+If you're using [Maven](http://maven.apache.org/download.html) to manage project dependencies, simply include the following in your `pom.xml` file:
 
     <dependency>
-        <groupId>org.spout</groupId>
-        <artifactId>simplenbt</artifactId>
-        <version>1.0.4-SNAPSHOT</version>
+        <groupId>com.flowpowered</groupId>
+        <artifactId>flow-nbt</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </dependency>
 
-If you do not already have repo.spout.org in your repository list, you will need to add this also:
+If you do not already have the required repo in your repository list, you will need to add this as well:
 
     <repository>
-        <id>spout-repo</id>
-        <url>https://repo.spout.org</url>
+        <id>sonatype-nexus</id>
+        <url>https://oss.sonatype.org/content/groups/public</url>
     </repository>
 
-Coding and Pull Request Formatting
-----------------------------------
-* Generally follow the Oracle coding standards.
-* Use tabs, no spaces.
-* No trailing whitespaces.
-* 200 column limit for readability.
-* Pull requests must compile, work, and be formatted properly.
-* Sign-off on ALL your commits - this indicates you agree to the terms of our license.
-* No merges should be included in pull requests unless the pull request's purpose is a merge.
-* Number of commits in a pull request should be kept to *one commit* and all additional commits must be *squashed*.
-* You may have more than one commit in a pull request if the commits are separate changes, otherwise squash them.
-* For clarification, see the full pull request guidelines [here](http://spout.in/prguide).
+If you're using [Gradle](http://www.gradle.org/) to manage project dependencies, simply include the following in your `build.gradle` file:
 
-**Please follow the above conventions if you want your pull request(s) accepted.**
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            name = 'sonatype-nexus'
+            url = 'https://oss.sonatype.org/content/groups/public/'
+        }
+    }
+    dependencies {
+        compile 'com.flowpowered:flow-nbt:1.0.0-SNAPSHOT'
+    }
 
-[Project Logo]: http://cdn.spout.org/img/logo/spout_327x150.png
-[License]: http://www.spout.org/SpoutDevLicenseV1.txt
-[Website]: http://www.spout.org
-[Forums]: http://forums.spout.org
-[GitHub]: https://github.com/SpoutDev/SimpleNBT
-[Javadoc]: http://jd.spout.org/nbt/
-[Jenkins]: http:/build.spout.org/job/SimpleNBT
-[Issues]: http://issues.spout.org/browse/SimpleNBT
-[Twitter]: http://spout.in/twitter
-[Twitter Logo]: http://cdn.spout.org/img/button/twitter_follow_us.png
-[Facebook]: http://spout.in/facebook
-[Facebook Logo]: http://cdn.spout.org/img/button/facebook_like_us.png
-[Donate]: https://www.paypal.com/cgi-bin/webscr?hosted_button_id=QNJH72R72TZ64&item_name=SimpleNBT+donation+%28from+github.com%29&cmd=_s-xclick
-[Donate Logo]: http://cdn.spout.org/img/button/donate_paypal_96x96.png
+If you'd prefer to manually import the latest .jar file, you can get it [here](https://github.com/flow/flow-nbt/releases).
+
+## Documentation
+Want to get friendly with the project and put it to good use? Check out the latest [Javadocs](http://nbt.flowpowered.com/).
+
+To generate the the Javadocs with Maven, use the `mvn javadoc:javadoc` command. To view the javadocs simply go to `target/site/apidocs/` and open `index.html` in a web browser.
+
+To generate Javadocs with Gradle, use the `gradlew javadoc` command. To view the javadocs simply go to `build/docs/javadoc/` and open `index.html` in a web browser.
+
+## Version Control
+We've adopted the [git flow branching model](http://nvie.com/posts/a-successful-git-branching-model/) in our projects. The creators of git flow released a [short intro video](http://vimeo.com/16018419) to explain the model.
+
+The `master` branch is production-ready, but is not yet vetted for release. Only small patches and `hotfix/x` branches are pushed to `master`, and will always have a release version. The `develop` and `stage` branches are pre-production, and are where we push `feature/x` branches for testing.
+
+Our release branches are named by version number, e.g. `1.0` and `1.1`. We begin release branches with a beta (b1) designation and progress them through release candidate to stable. All open source releases (included pre-releases) are tagged.
+
+## Legal Stuff
+Flow NBT is licensed under the [MIT License][License]. Basically, you can do whatever you want as long as you include the original copyright. Please see the `LICENSE.txt` file for details.
+
+## Credits
+* [Spout](https://spout.org/) and contributors - *where we all began, and for much of the re-licensed code.*
+* All the people behind [Java](http://www.oracle.com/technetwork/java/index.html), [Maven](http://maven.apache.org/), and [Gradle](http://www.gradle.org/).
+
+[Donate]: https://flattr.com/submit/auto?user_id=spout&url=https://github.com/flow/flow-nbt&title=Flow+NBT&language=Java&tags=github&category=software
+[License]: https://tldrlegal.com/license/mit-license

@@ -1,28 +1,25 @@
 /*
- * This file is part of SimpleNBT.
+ * This file is part of Flow NBT, licensed under the MIT License (MIT).
  *
- * Copyright (c) 2011 Spout LLC <http://www.spout.org/>
- * SimpleNBT is licensed under the Spout License Version 1.
+ * Copyright (c) 2011 Spout LLC <https://spout.org/>
  *
- * SimpleNBT is free software: you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation, either version 3 of the License, or (at your option)
- * any later version.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * In addition, 180 days after any changes are published, you can use the
- * software, incorporating those changes, under the terms of the MIT license,
- * as described in the Spout License Version 1.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
- * SimpleNBT is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for
- * more details.
- *
- * You should have received a copy of the GNU Lesser General Public License,
- * the MIT license and the Spout License Version 1 along with this program.
- * If not, see <http://www.gnu.org/licenses/> for the GNU Lesser General Public
- * License and see <http://spout.in/licensev1> for the full license, including
- * the MIT license.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package org.spout.nbt;
 
@@ -39,96 +36,96 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class CompoundMapTest {
-	List<Tag<?>> sorted;
-	List<Tag<?>> random;
-	List<Tag<?>> reverse;
+    List<Tag<?>> sorted;
+    List<Tag<?>> random;
+    List<Tag<?>> reverse;
 
-	@Before
-	public void setupLists() {
-		random = new ArrayList<Tag<?>>();
+    @Before
+    public void setupLists() {
+        random = new ArrayList<Tag<?>>();
 
-		Random r = new Random();
+        Random r = new Random();
 
-		for (int i = 0; i < 20; i++) {
-			random.add(new LongTag(Integer.toHexString(r.nextInt()), r.nextLong()));
-		}
+        for (int i = 0; i < 20; i++) {
+            random.add(new LongTag(Integer.toHexString(r.nextInt()), r.nextLong()));
+        }
 
-		sorted = new ArrayList<Tag<?>>(random);
-		Collections.sort(sorted);
+        sorted = new ArrayList<Tag<?>>(random);
+        Collections.sort(sorted);
 
-		reverse = new ArrayList<Tag<?>>(random);
-		Collections.sort(reverse, Collections.reverseOrder());
-	}
+        reverse = new ArrayList<Tag<?>>(random);
+        Collections.sort(reverse, Collections.reverseOrder());
+    }
 
-	@Test
-	public void printLists() {
-		printList("Random", random);
-		printList("Sorted", sorted);
-		printList("Reverse", reverse);
-	}
+    @Test
+    public void printLists() {
+        printList("Random", random);
+        printList("Sorted", sorted);
+        printList("Reverse", reverse);
+    }
 
-	private void printList(String type, List<Tag<?>> list) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("List: " + type + "\n");
-		for (Tag t : list) {
-			sb.append(t.getName() + "\n");
-		}
-		System.out.println(sb.toString());
-	}
+    private void printList(String type, List<Tag<?>> list) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("List: " + type + "\n");
+        for (Tag t : list) {
+            sb.append(t.getName() + "\n");
+        }
+        System.out.println(sb.toString());
+    }
 
-	@Test
-	public void preserveOrder() {
-		CompoundMap tag = new CompoundMap(random, false, false);
+    @Test
+    public void preserveOrder() {
+        CompoundMap tag = new CompoundMap(random, false, false);
 
-		assertEquals("Tag setup", tag, random);
+        assertEquals("Tag setup", tag, random);
 
-		tag = new CompoundMap(false, false);
+        tag = new CompoundMap(false, false);
 
-		for (Tag t : random) {
-			tag.put(t);
-		}
+        for (Tag t : random) {
+            tag.put(t);
+        }
 
-		assertEquals("Tag setup", tag, random);
-	}
+        assertEquals("Tag setup", tag, random);
+    }
 
-	@Test
-	public void sorted() {
-		CompoundMap tag = new CompoundMap(random, true, false);
+    @Test
+    public void sorted() {
+        CompoundMap tag = new CompoundMap(random, true, false);
 
-		assertEquals("Tag setup", tag, sorted);
+        assertEquals("Tag setup", tag, sorted);
 
-		tag = new CompoundMap(true, false);
+        tag = new CompoundMap(true, false);
 
-		for (Tag t : random) {
-			tag.put(t);
-		}
+        for (Tag t : random) {
+            tag.put(t);
+        }
 
-		assertEquals("Tag setup", tag, sorted);
-	}
+        assertEquals("Tag setup", tag, sorted);
+    }
 
-	@Test
-	public void reverseSorted() {
-		CompoundMap tag = new CompoundMap(random, true, true);
+    @Test
+    public void reverseSorted() {
+        CompoundMap tag = new CompoundMap(random, true, true);
 
-		assertEquals("Tag setup", tag, reverse);
+        assertEquals("Tag setup", tag, reverse);
 
-		tag = new CompoundMap(true, true);
+        tag = new CompoundMap(true, true);
 
-		for (Tag t : random) {
-			tag.put(t);
-		}
+        for (Tag t : random) {
+            tag.put(t);
+        }
 
-		assertEquals("Tag setup", tag, reverse);
-	}
+        assertEquals("Tag setup", tag, reverse);
+    }
 
-	private void assertEquals(String message, Iterable<Tag<?>> a, Iterable<Tag<?>> b) {
-		Iterator<Tag<?>> iterA = a.iterator();
-		Iterator<Tag<?>> iterB = b.iterator();
-		while (iterA.hasNext() && iterB.hasNext()) {
-			Tag currentA = iterA.next();
-			Tag currentB = iterB.next();
-			assertTrue(message, currentA.equals(currentB));
-		}
-		assertFalse("Maps had different lengths", iterA.hasNext() || iterB.hasNext());
-	}
+    private void assertEquals(String message, Iterable<Tag<?>> a, Iterable<Tag<?>> b) {
+        Iterator<Tag<?>> iterA = a.iterator();
+        Iterator<Tag<?>> iterB = b.iterator();
+        while (iterA.hasNext() && iterB.hasNext()) {
+            Tag currentA = iterA.next();
+            Tag currentB = iterB.next();
+            assertTrue(message, currentA.equals(currentB));
+        }
+        assertFalse("Maps had different lengths", iterA.hasNext() || iterB.hasNext());
+    }
 }
