@@ -63,7 +63,7 @@ public class IntArrayTag extends Tag<int[]> {
         if (name != null && !name.equals("")) {
             append = "(\"" + this.getName() + "\")";
         }
-        return "TAG_Short_Array" + append + ": " + hex.toString();
+        return "TAG_Int_Array" + append + ": " + hex.toString();
     }
 
     public IntArrayTag clone() {
