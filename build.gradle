@@ -16,7 +16,7 @@ version = '1.0.0-SNAPSHOT'
 ext.packaging = 'jar'
 ext.inceptionYear = '2011'
 ext.url = 'http://flowpowered.com'
-ext.description = 'NBT library for the Flow collection. Based on Graham Edgecombe's JNBT library. NBT (Named Binary Tag) is a tag based binary format designed to carry large amounts of binary data with smaller amounts of additional data.'
+ext.description = 'NBT library for the Flow collection. Based on Graham Edgecombe\'s JNBT library. NBT (Named Binary Tag) is a tag based binary format designed to carry large amounts of binary data with smaller amounts of additional data.'
 
 // Organization information
 ext.organization = 'Spout LLC'
