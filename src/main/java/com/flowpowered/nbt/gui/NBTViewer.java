@@ -91,7 +91,7 @@ public class NBTViewer extends JFrame implements ActionListener {
 
         add(treeView);
 
-        setTitle("SimpleNBT Viewer");
+        setTitle("Flow NBT Viewer");
         setSize(300, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
