@@ -62,7 +62,7 @@ If you plan on using snapshots and do not already have the snapshot repo in your
 If you'd prefer to manually import the latest .jar file, you can get it [here](https://github.com/flow/nbt/releases).
 
 ## Documentation
-Want to get friendly with the project and put it to good use? Check out the latest [Javadocs](https://nbt.flowpowered.com/).
+Want to get friendly with the project and put it to good use? Check out the latest [Javadocs](https://flowpowered.com/nbt).
 
 To generate Javadocs with Maven, use the `mvn javadoc:javadoc` command. To view the javadocs simply go to `target/site/apidocs/` and open `index.html` in a web browser.
 
