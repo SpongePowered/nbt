@@ -1,0 +1,8 @@
+com.flowpowered.nbt
+com.flowpowered.nbt.exception
+com.flowpowered.nbt.gui
+com.flowpowered.nbt.holder
+com.flowpowered.nbt.itemmap
+com.flowpowered.nbt.regionfile
+com.flowpowered.nbt.stream
+com.flowpowered.nbt.util
