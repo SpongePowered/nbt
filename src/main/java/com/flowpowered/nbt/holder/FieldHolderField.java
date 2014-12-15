@@ -1,7 +1,7 @@
 /*
  * This file is part of Flow NBT, licensed under the MIT License (MIT).
  *
- * Copyright (c) 2011 Spout LLC <https://spout.org/>
+ * Copyright (c) 2011 Flow Powered <https://flowpowered.com/>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spout.nbt.holder;
+package com.flowpowered.nbt.holder;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import org.spout.nbt.CompoundTag;
-import org.spout.nbt.Tag;
+import com.flowpowered.nbt.CompoundTag;
+import com.flowpowered.nbt.Tag;
 
 /**
  * A field that holds the contents of a FieldHolder

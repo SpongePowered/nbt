@@ -1,7 +1,7 @@
 /*
  * This file is part of Flow NBT, licensed under the MIT License (MIT).
  *
- * Copyright (c) 2011 Spout LLC <https://spout.org/>
+ * Copyright (c) 2011 Flow Powered <https://flowpowered.com/>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spout.nbt.stream;
+package com.flowpowered.nbt.stream;
 
 import java.io.DataOutput;
 import java.io.DataOutputStream;
@@ -30,9 +30,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteOrder;
 
-/**
- * @author zml2008
- */
 public class EndianSwitchableOutputStream extends FilterOutputStream implements DataOutput {
     private final ByteOrder endianness;
 

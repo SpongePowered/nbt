@@ -1,7 +1,7 @@
 /*
  * This file is part of Flow NBT, licensed under the MIT License (MIT).
  *
- * Copyright (c) 2011 Spout LLC <https://spout.org/>
+ * Copyright (c) 2011 Flow Powered <https://flowpowered.com/>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spout.nbt.gui;
+package com.flowpowered.nbt.gui;
 
 import java.awt.FileDialog;
 import java.awt.event.ActionEvent;
@@ -47,16 +47,16 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-import org.spout.nbt.ByteArrayTag;
-import org.spout.nbt.CompoundMap;
-import org.spout.nbt.CompoundTag;
-import org.spout.nbt.IntArrayTag;
-import org.spout.nbt.ListTag;
-import org.spout.nbt.ShortArrayTag;
-import org.spout.nbt.Tag;
-import org.spout.nbt.itemmap.StringMapReader;
-import org.spout.nbt.regionfile.SimpleRegionFileReader;
-import org.spout.nbt.stream.NBTInputStream;
+import com.flowpowered.nbt.ByteArrayTag;
+import com.flowpowered.nbt.CompoundMap;
+import com.flowpowered.nbt.CompoundTag;
+import com.flowpowered.nbt.IntArrayTag;
+import com.flowpowered.nbt.ListTag;
+import com.flowpowered.nbt.ShortArrayTag;
+import com.flowpowered.nbt.Tag;
+import com.flowpowered.nbt.itemmap.StringMapReader;
+import com.flowpowered.nbt.regionfile.SimpleRegionFileReader;
+import com.flowpowered.nbt.stream.NBTInputStream;
 
 public class NBTViewer extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
@@ -66,7 +66,6 @@ public class NBTViewer extends JFrame implements ActionListener {
     private DefaultMutableTreeNode top;
 
     public NBTViewer() {
-
         JMenuBar menu = new JMenuBar();
         setJMenuBar(menu);
 

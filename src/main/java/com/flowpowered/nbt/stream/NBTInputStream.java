@@ -1,7 +1,7 @@
 /*
  * This file is part of Flow NBT, licensed under the MIT License (MIT).
  *
- * Copyright (c) 2011 Spout LLC <https://spout.org/>
+ * Copyright (c) 2011 Flow Powered <https://flowpowered.com/>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spout.nbt.stream;
+package com.flowpowered.nbt.stream;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -31,27 +31,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
-import org.spout.nbt.ByteArrayTag;
-import org.spout.nbt.ByteTag;
-import org.spout.nbt.CompoundMap;
-import org.spout.nbt.CompoundTag;
-import org.spout.nbt.DoubleTag;
-import org.spout.nbt.EndTag;
-import org.spout.nbt.FloatTag;
-import org.spout.nbt.IntArrayTag;
-import org.spout.nbt.IntTag;
-import org.spout.nbt.ListTag;
-import org.spout.nbt.LongTag;
-import org.spout.nbt.NBTConstants;
-import org.spout.nbt.ShortArrayTag;
-import org.spout.nbt.ShortTag;
-import org.spout.nbt.StringTag;
-import org.spout.nbt.Tag;
-import org.spout.nbt.TagType;
+import com.flowpowered.nbt.ByteArrayTag;
+import com.flowpowered.nbt.ByteTag;
+import com.flowpowered.nbt.CompoundMap;
+import com.flowpowered.nbt.CompoundTag;
+import com.flowpowered.nbt.DoubleTag;
+import com.flowpowered.nbt.EndTag;
+import com.flowpowered.nbt.FloatTag;
+import com.flowpowered.nbt.IntArrayTag;
+import com.flowpowered.nbt.IntTag;
+import com.flowpowered.nbt.ListTag;
+import com.flowpowered.nbt.LongTag;
+import com.flowpowered.nbt.NBTConstants;
+import com.flowpowered.nbt.ShortArrayTag;
+import com.flowpowered.nbt.ShortTag;
+import com.flowpowered.nbt.StringTag;
+import com.flowpowered.nbt.Tag;
+import com.flowpowered.nbt.TagType;
 
 /**
  * This class reads NBT, or Named Binary Tag streams, and produces an object graph of subclasses of the {@link Tag} object. <p /> The NBT format was created by Markus Persson, and the specification
- * may be found at <a href="http://www.minecraft.net/docs/NBT.txt"> http://www.minecraft.net/docs/NBT.txt</a>.
+ * may be found at <a href="https://flowpowered.com/nbt/spec.txt"> https://flowpowered.com/nbt/spec.txt</a>.
  */
 public final class NBTInputStream implements Closeable {
     /**

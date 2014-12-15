@@ -1,7 +1,7 @@
 /*
  * This file is part of Flow NBT, licensed under the MIT License (MIT).
  *
- * Copyright (c) 2011 Spout LLC <https://spout.org/>
+ * Copyright (c) 2011 Flow Powered <https://flowpowered.com/>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spout.nbt.regionfile;
+package com.flowpowered.nbt.regionfile;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -32,14 +32,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.InflaterInputStream;
 
-import org.spout.nbt.Tag;
-import org.spout.nbt.stream.NBTInputStream;
+import com.flowpowered.nbt.Tag;
+import com.flowpowered.nbt.stream.NBTInputStream;
 
 public class SimpleRegionFileReader {
     private static int EXPECTED_VERSION = 1;
 
     public static List<Tag<?>> readFile(File f) {
-
         RandomAccessFile raf;
         try {
             raf = new RandomAccessFile(f, "r");
