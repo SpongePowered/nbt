@@ -5,6 +5,9 @@ jdk: oraclejdk8
 # Pre-install Maven dependencies
 install: mvn dependency:go-offline
 
+# Compile and test source
+script: mvn clean -DbuildNumber=$TRAVIS_BUILD_NUMBER -DciSystem=travis -Dcommit=${TRAVIS_COMMIT:0:7}
+
 # Fetch resources, run deployment goal/task, and generate Javadocs and reports
 after_success:
   # Get files for use with build, namely the custom Maven settings.xml and scripts
