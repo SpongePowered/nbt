@@ -1,17 +1,29 @@
 # Source language and JDK version to use
 language: java
-jdk: oraclejdk7
+jdk: oraclejdk8
 
-# Compile and package JAR and set build properties
+# Pre-install Maven dependencies
 install: mvn dependency:go-offline
-script: mvn package -DbuildNumber=$TRAVIS_BUILD_NUMBER -DciSystem=travis -Dcommit=${TRAVIS_COMMIT:0:7}
 
-# Perform steps after compilation/test success
-after_success:
-  # Get files for use with build, namely the custom Maven settings.xml
-  - "git clone https://github.com/flow/travis-ci-resources.git target/travis"
-  # Check if commit is not a pull request, if repo is official, and branch is master, generate and deploy artifacts and reports
-  - "[[ $TRAVIS_PULL_REQUEST == false ]] && [[ $TRAVIS_REPO_SLUG == flow/flow-nbt ]] && [[ $TRAVIS_BRANCH == master ]] && mvn javadoc:jar source:jar cobertura:cobertura coveralls:cobertura -DserviceJobId=$TRAVIS_JOB_ID deploy --settings target/travis/settings.xml"
+# Fetch resources, compile and package JAR, generate Javadocs and reports, and deploy
+script:
+  # Get files for use with build, namely the custom Maven settings.xml and scripts
+  - "git clone https://github.com/flow/travis-ci-resources.git $HOME/build/flow/travis"
+  # Check if branch is not master or develop; then generate artifacts and reports
+  - "[[ $TRAVIS_BRANCH != master ]] && [[ $TRAVIS_BRANCH != develop ]] && mvn clean -DbuildNumber=$TRAVIS_BUILD_NUMBER -DciSystem=travis -Dcommit=${TRAVIS_COMMIT:0:7} javadoc:javadoc cobertura:cobertura coveralls:report -DserviceJobId=$TRAVIS_JOB_ID"
+  # DEVELOP: Check if commit is not a pull request, if repo is official, if branch is not master; then generate and deploy artifacts and reports
+  - "[[ $TRAVIS_PULL_REQUEST == false ]] && [[ $TRAVIS_REPO_SLUG == flow/nbt ]] && [[ $TRAVIS_BRANCH == develop ]] && mvn package -DbuildNumber=$TRAVIS_BUILD_NUMBER -DciSystem=travis -Dcommit=${TRAVIS_COMMIT:0:7} javadoc:jar source:jar cobertura:cobertura coveralls:report -DserviceJobId=$TRAVIS_JOB_ID deploy --settings $HOME/build/flow/travis/settings.xml"
+  # RELEASE: Check if commit is not a pull request, if repo is official, if branch is master; then run deployment script
+  - "[[ $TRAVIS_PULL_REQUEST == false ]] && [[ $TRAVIS_REPO_SLUG == flow/nbt ]] && [[ $TRAVIS_BRANCH == master ]] && $HOME/build/flow/travis/deploy.sh && $HOME/build/flow/travis/gh-pages.sh"
+
+# RELEASE: Deploy main JAR to GitHub Releases
+deploy:
+  provider: releases
+  api-key: $GITHUB_TOKEN
+  file: "target/flow-nbt-`cat version.txt`.jar"
+  skip_cleanup: true
+  on:
+    branch: master
 
 # Notification services
 notifications:
@@ -27,5 +39,7 @@ env:
     # Make the log output cleaner
     - TERM=dumb
     # Super secure, encrypted variables! Ssssh!
-    - secure: "YcjdRARWdj84NRL5W7yf3LY3UivSr//iCCHD6+vCoOk4HD36wADKs6ebTDr3RKg56vl6LrhyBgJNproJ+OLqtZbzd4OggN41yQBQ5jgLssxhDNLHZ/GyhhDYYGTuoNPirEn/YXsTmWHjRbEC85akrFtWK8QujCFr1eh2vR5gjQU="
-    - secure: "pFf0WDUNcVDyW6nQE+kZZITNibBiOpXhGCH0EQDEdQSE+p2UkXwbvUGq1ypQA0ly//OicJxAnyjfIUhyWZDM1Is8RpDU0xDBudTMaT1Blu2ArUGuOXCSESbQE0rwr/i+7YDmxB22KW8Sf5AjF1if2TeSy3aaB9ATv6eyeFQg788="
+    - secure: "SMBuKdVcYSq9OSa0K7id14tAqAT6qU6DIrDOC+qgZ4+a3dLMkOuKIh7/m8SgkRSkvoO/9tviWry59YTvRw25zPWyLx0/RjPz20IE+m3o5TWe6Gz/IdtPBvUI4QLJRTYGhCFeyVWrZXKmxdKgW80hSCWb76cUxUItx8dboUEJVl0="
+    - secure: "sOb5EqUSVGKwMSGr2en0wdbQYlGww9psKd/kQiI04MwWbwv8blrLwYwr1WtrPEVvBPbjR9mWFj8LybQyGU4UIobSwJ4q+8ip6Spj0+ElXsUpAF1u4ONq3echSYijuaK3DUVYdrP3zHRc9tLILaaf4/u6VESLYHfJlMvobdR2wFY="
+    - secure: "cjfdRmwy6AISryuBtIXCNWMznKQRihKfCE7cZVYpY/IsslSzvAniIolOvYgCOtFv7BfdHc/6RQABCIbq4qjY2/rXZp1Tt5Be/pMAy9Tt2ZsKPa/e20PwL71sTSqUYHFuoyGE9elKb693CSagkMEFIWFFIntAJ9JdGp5zYJVU9Cs="
+    - secure: "igD4ifrKm/U66/L/+DhDoEhdR6KqiP8ULe22gxoUXz1BAZndoV0OXIXNfaBuoaDHTJKOCKviUuWUvNpoDTeBiLp8+Ix6of8yBgLDXUPo3LiDrJJ9iLsqcG9FaV9VBrTA4lq6O4Y3NQ1f/S1upYr+OKpo5EdcX/BexvYj3bHYn54="
