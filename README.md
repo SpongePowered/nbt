@@ -1,4 +1,4 @@
-# Flow NBT [![License](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)][License] [![Flattr this](http://img.shields.io/badge/flattr-donate-lightgrey.svg?style=flat)][Donate] [![Build Status](http://img.shields.io/travis/flow/nbt/master.svg?style=flat)](https://travis-ci.org/flow/nbt) [![Coverage Status](http://img.shields.io/coveralls/flow/nbt/master.svg?style=flat)](https://coveralls.io/r/flow/nbt)
+# Flow NBT [![License](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)][License] [![Flattr this](http://img.shields.io/badge/flattr-donate-lightgrey.svg?style=flat)][Donate] [![Build Status](http://img.shields.io/travis/flow/nbt/develop.svg?style=flat)](https://travis-ci.org/flow/nbt) [![Coverage Status](http://img.shields.io/coveralls/flow/nbt/develop.svg?style=flat)](https://coveralls.io/r/flow/nbt)
 
 Named Binary Tag (NBT) library for Java based on Graham Edgecombe's JNBT library. NBT is a tag based binary format designed to carry large amounts of binary data with smaller amounts of additional data.
 
@@ -13,7 +13,7 @@ The latest and greatest source can be found here on [GitHub](https://github.com/
 
     git clone git://github.com/flow/nbt.git
 
-Or download the [latest zip archive](https://github.com/flow/nbt/archive/master.zip).
+Or download the latest [development archive](https://github.com/flow/nbt/archive/develop.zip) or the latest [stable archive](https://github.com/flow/nbt/archive/master.zip).
 
 ## Test Dependencies
 The following dependencies are only needed if you compiling the tests included with this project. Gotta test 'em all!
