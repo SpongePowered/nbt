@@ -16,7 +16,7 @@ archivesBaseName = 'flow-nbt'
 version = '1.0.1-SNAPSHOT'
 ext.packaging = 'jar'
 ext.inceptionYear = '2011'
-ext.url = 'https://flowpowered.com'
+ext.url = 'https://flowpowered.com/nbt'
 ext.description = 'Named Binary Tag (NBT) library for Java based on Graham Edgecombe's JNBT library.'
 
 // Organization information
