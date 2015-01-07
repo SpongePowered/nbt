@@ -9,7 +9,7 @@
     <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <inceptionYear>2011</inceptionYear>
-    <url>https://flowpowered.com</url>
+    <url>https://flowpowered.com/nbt</url>
     <description>Named Binary Tag (NBT) library for Java based on Graham Edgecombe's JNBT library.</description>
 
     <!-- Parent information -->
