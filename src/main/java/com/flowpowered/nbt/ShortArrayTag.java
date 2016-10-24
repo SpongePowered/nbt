@@ -52,8 +52,19 @@ public class ShortArrayTag extends Tag<short[]> {
         StringBuilder hex = new StringBuilder();
         for (short s : value) {
             String hexDigits = Integer.toHexString(s).toUpperCase();
-            if (hexDigits.length() == 1) {
-                hex.append("0");
+            switch (hexDigits.length()) {
+                case 8:
+                case 7:
+                case 6:
+                case 5:
+                    hexDigits = hexDigits.substring(hexDigits.length() - 4);
+                    break;
+                case 1:
+                    hex.append("0");
+                case 2:
+                    hex.append("0");
+                case 3:
+                    hex.append("0");
             }
             hex.append(hexDigits).append(" ");
         }
@@ -89,7 +100,7 @@ public class ShortArrayTag extends Tag<short[]> {
             int length = shortArray.length;
             short[] newArray = new short[length];
             System.arraycopy(shortArray, 0, newArray, 0, length);
-            return shortArray;
+            return newArray;
         }
     }
 }
