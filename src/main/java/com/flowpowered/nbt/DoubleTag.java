@@ -30,7 +30,7 @@ public final class DoubleTag extends Tag<Double> {
     /**
      * The value.
      */
-    private final double value;
+    private double value;
 
     /**
      * Creates the tag.
@@ -46,6 +46,11 @@ public final class DoubleTag extends Tag<Double> {
     @Override
     public Double getValue() {
         return value;
+    }
+
+    @Override
+    public void setValue(Double value) {
+        this.value = value;
     }
 
     @Override

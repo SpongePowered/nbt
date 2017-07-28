@@ -29,7 +29,7 @@ public class ShortArrayTag extends Tag<short[]> {
     /**
      * The value.
      */
-    private final short[] value;
+    private short[] value;
 
     /**
      * Creates the tag.
@@ -45,6 +45,11 @@ public class ShortArrayTag extends Tag<short[]> {
     @Override
     public short[] getValue() {
         return value;
+    }
+
+    @Override
+    public void setValue(short[] value) {
+        this.value = value;
     }
 
     @Override

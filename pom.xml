@@ -6,7 +6,7 @@
     <name>Flow NBT</name>
     <groupId>com.flowpowered</groupId>
     <artifactId>flow-nbt</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <inceptionYear>2011</inceptionYear>
     <url>https://flowpowered.com/nbt</url>

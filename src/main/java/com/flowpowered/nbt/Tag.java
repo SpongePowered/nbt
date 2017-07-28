@@ -80,6 +80,13 @@ public abstract class Tag<T> implements Comparable<Tag<?>> {
     public abstract T getValue();
 
     /**
+     * Sets the value of this tag
+     * 
+     * @param value The value of this tag.
+     */
+    public abstract void setValue(T value);
+
+    /**
      * Clones a Map<String, Tag>
      *
      * @param map the map

@@ -30,7 +30,7 @@ public class CompoundTag extends Tag<CompoundMap> {
     /**
      * The value.
      */
-    private final CompoundMap value;
+    private CompoundMap value;
 
     /**
      * Creates the tag.
@@ -47,6 +47,11 @@ public class CompoundTag extends Tag<CompoundMap> {
     @Override
     public CompoundMap getValue() {
         return value;
+    }
+
+    @Override
+    public void setValue(CompoundMap value) {
+        this.value = value;
     }
 
     @Override
