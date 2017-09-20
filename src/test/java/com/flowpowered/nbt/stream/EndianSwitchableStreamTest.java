@@ -44,6 +44,7 @@ public class EndianSwitchableStreamTest {
         EndianSwitchableOutputStream output = new EndianSwitchableOutputStream(rawOutput, ByteOrder.LITTLE_ENDIAN);
         output.writeShort(unsigned);
         output.writeChar(testChar);
+        output.flush();
 
         EndianSwitchableInputStream input = new EndianSwitchableInputStream(new ByteArrayInputStream(rawOutput.toByteArray()), ByteOrder.LITTLE_ENDIAN);
         assertEquals(unsigned, input.readUnsignedShort());
