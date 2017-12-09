@@ -64,7 +64,7 @@ dependencies {
 processResources {
     // Include in final JAR
     from(rootProject.rootDir) {
-        include 'LICENSE.txt'
+        include 'flownbt-LICENSE.txt'
     }
 }
 

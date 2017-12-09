@@ -55,7 +55,9 @@ public final class ByteArrayTag extends Tag<byte[]> {
         StringBuilder hex = new StringBuilder();
         for (byte b : value) {
             String hexDigits = Integer.toHexString(b).toUpperCase();
-            if (hexDigits.length() == 1) {
+            if (hexDigits.length() > 2)
+                hexDigits = hexDigits.substring(hexDigits.length() - 2);
+            else if (hexDigits.length() == 1) {
                 hex.append("0");
             }
             hex.append(hexDigits).append(" ");
