@@ -49,6 +49,7 @@ public final class NBTConstants {
             TYPE_LIST = TagType.TAG_LIST.getId(),
             TYPE_COMPOUND = TagType.TAG_COMPOUND.getId(),
             TYPE_INT_ARRAY = TagType.TAG_INT_ARRAY.getId(),
+            TYPE_LONG_ARRAY = TagType.TAG_LONG_ARRAY.getId(),
             TYPE_SHORT_ARRAY = TagType.TAG_SHORT_ARRAY.getId();
 
     /**

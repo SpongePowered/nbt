@@ -39,6 +39,7 @@ import com.flowpowered.nbt.FloatTag;
 import com.flowpowered.nbt.IntArrayTag;
 import com.flowpowered.nbt.IntTag;
 import com.flowpowered.nbt.ListTag;
+import com.flowpowered.nbt.LongArrayTag;
 import com.flowpowered.nbt.LongTag;
 import com.flowpowered.nbt.NBTConstants;
 import com.flowpowered.nbt.ShortArrayTag;
@@ -165,6 +166,10 @@ public final class NBTOutputStream implements Closeable {
 
             case TAG_INT_ARRAY:
                 writeIntArrayTagPayload((IntArrayTag) tag);
+                break;
+
+            case TAG_LONG_ARRAY:
+                writeLongArrayTagPayload((LongArrayTag) tag);
                 break;
 
             case TAG_SHORT_ARRAY:
@@ -303,6 +308,20 @@ public final class NBTOutputStream implements Closeable {
         os.writeInt(ints.length);
         for (int i = 0; i < ints.length; i++) {
             os.writeInt(ints[i]);
+        }
+    }
+
+    /**
+     * Writes a {@code TAG_Long_Array} tag.
+     *
+     * @param tag The tag.
+     * @throws java.io.IOException if an I/O error occurs.
+     */
+    private void writeLongArrayTagPayload(LongArrayTag tag) throws IOException {
+        long[] longs = tag.getValue();
+        os.writeInt(longs.length);
+        for (int i = 0; i < longs.length; i++) {
+            os.writeLong(longs[i]);
         }
     }
 
