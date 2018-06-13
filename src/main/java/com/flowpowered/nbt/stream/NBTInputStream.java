@@ -30,6 +30,7 @@ import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
+import java.util.zip.InflaterInputStream;
 
 import com.flowpowered.nbt.ByteArrayTag;
 import com.flowpowered.nbt.ByteTag;
@@ -54,6 +55,22 @@ import com.flowpowered.nbt.TagType;
  * may be found at <a href="https://flowpowered.com/nbt/spec.txt"> https://flowpowered.com/nbt/spec.txt</a>.
  */
 public final class NBTInputStream implements Closeable {
+
+	/**
+	 * Flag indicating that the given data stream is not compressed.
+	 */
+	public static final int NO_COMPRESSION = 0;
+	/**
+	 * Flag indicating that the given data will be compressed with the GZIP compression algorithm. This is the default compression method used to compress nbt files.
+	 * Chunks in Minecraft Region/Anvil files with compression method {@code 1} (see the respective format documentation) will use this compression method too, although this is not actively used anymore.
+	 */
+	public static final int GZIP_COMPRESSION = 1;
+	/**
+	 * Flag indicating that the given data will be compressed with the ZLIB compression algorithm. This is the default compression method used to compress the nbt
+	 * data of the chunks in Minecraft Region/Anvil files, but only if its compression method is {@code 2} (see the respective format documentation), which is default for all newer versions.
+	 */
+	public static final int ZLIB_COMPRESSION = 2;
+
     /**
      * The data input stream.
      */
@@ -66,7 +83,7 @@ public final class NBTInputStream implements Closeable {
      * @throws java.io.IOException if an I/O error occurs.
      */
     public NBTInputStream(InputStream is) throws IOException {
-        this(is, true, ByteOrder.BIG_ENDIAN);
+        this(is, GZIP_COMPRESSION, ByteOrder.BIG_ENDIAN);
     }
 
     /**
@@ -76,9 +93,23 @@ public final class NBTInputStream implements Closeable {
      * @param is The input stream.
      * @param compressed A flag indicating if the stream is compressed.
      * @throws java.io.IOException if an I/O error occurs.
+     * @deprecated Use {@link #NBTInputStream(InputStream, int)} instead
      */
+    @Deprecated
     public NBTInputStream(InputStream is, boolean compressed) throws IOException {
         this(is, compressed, ByteOrder.BIG_ENDIAN);
+    }
+
+    /**
+     * Creates a new {@link NBTInputStream}, which will source its data from the specified input stream. The stream may be wrapped into a decompressing input stream depending on the chosen compression method.
+     * This assumes the stream uses big endian encoding.
+     *
+     * @param is The input stream.
+     * @param compression The compression algorithm used for the input stream. Must be {@link #NO_COMPRESSION}, {@link #GZIP_COMPRESSION} or {@link #ZLIB_COMPRESSION}.
+     * @throws java.io.IOException if an I/O error occurs.
+     */
+    public NBTInputStream(InputStream is, int compression) throws IOException {
+        this(is, compression, ByteOrder.BIG_ENDIAN);
     }
 
     /**
@@ -88,9 +119,35 @@ public final class NBTInputStream implements Closeable {
      * @param compressed A flag indicating if the stream is compressed.
      * @param endianness Whether to read numbers from the InputStream with little endian encoding.
      * @throws java.io.IOException if an I/O error occurs.
+     * @deprecated Use {@link #NBTInputStream(InputStream, int, ByteOrder)} instead
      */
+    @Deprecated
     public NBTInputStream(InputStream is, boolean compressed, ByteOrder endianness) throws IOException {
-        this.is = new EndianSwitchableInputStream(compressed ? new GZIPInputStream(is) : is, endianness);
+    	this(is, compressed ? GZIP_COMPRESSION : NO_COMPRESSION, endianness);
+    }
+
+    /**
+     * Creates a new {@link NBTInputStream}, which sources its data from the specified input stream. The stream may be wrapped into a decompressing input stream depending on the chosen compression method.
+     *
+     * @param is The input stream.
+     * @param compression The compression algorithm used for the input stream. Must be {@link #NO_COMPRESSION}, {@link #GZIP_COMPRESSION} or {@link #ZLIB_COMPRESSION}.
+     * @param endianness Whether to read numbers from the InputStream with little endian encoding.
+     * @throws java.io.IOException if an I/O error occurs.
+     */
+    public NBTInputStream(InputStream is, int compression, ByteOrder endianness) throws IOException {
+    	switch (compression) {
+    	case NO_COMPRESSION:
+    		this.is = new EndianSwitchableInputStream(is, endianness);
+    		break;
+    	case GZIP_COMPRESSION:
+    		this.is = new EndianSwitchableInputStream(new GZIPInputStream(is), endianness);
+    		break;
+    	case ZLIB_COMPRESSION:
+    		this.is = new EndianSwitchableInputStream(new InflaterInputStream(is), endianness);
+    		break;
+    	default:
+    		throw new IllegalArgumentException("Unsupported compression type, must be between 0 and 2 (inclusive)");
+    	}
     }
 
     /**
@@ -228,7 +285,8 @@ public final class NBTInputStream implements Closeable {
         }
     }
 
-    public void close() throws IOException {
+    @Override
+	public void close() throws IOException {
         is.close();
     }
 
