@@ -60,7 +60,7 @@ public class NBTTester {
         }
 
         try {
-            Tag tag = input.readTag();
+            Tag<?> tag = input.readTag();
             System.out.println("NBT data from file: " + argFile.getCanonicalPath());
             System.out.println(tag);
         } catch (IOException e) {

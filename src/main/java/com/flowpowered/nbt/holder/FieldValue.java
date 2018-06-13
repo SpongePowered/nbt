@@ -53,7 +53,7 @@ public class FieldValue<T> {
      * @return The value
      */
     public T load(CompoundTag tag) {
-        Tag subTag = tag.getValue().get(key);
+        Tag<?> subTag = tag.getValue().get(key);
         if (subTag == null) {
             return (value = defaultValue);
         }
@@ -67,7 +67,7 @@ public class FieldValue<T> {
                 return;
             }
         }
-        Tag t = field.getValue(key, value);
+        Tag<?> t = field.getValue(key, value);
         tag.put(t);
     }
 

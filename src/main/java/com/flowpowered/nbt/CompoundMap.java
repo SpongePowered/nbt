@@ -117,7 +117,7 @@ public class CompoundMap implements Map<String, Tag<?>>, Iterable<Tag<?>> {
             }
         }
         if (initial != null) {
-            for (Tag t : initial) {
+            for (Tag<?> t : initial) {
                 put(t);
             }
         }
@@ -205,8 +205,8 @@ public class CompoundMap implements Map<String, Tag<?>>, Iterable<Tag<?>> {
             Iterator<Tag<?>> iThis = iterator();
             Iterator<Tag<?>> iOther = other.iterator();
             while (iThis.hasNext() && iOther.hasNext()) {
-                Tag tThis = iThis.next();
-                Tag tOther = iOther.next();
+                Tag<?> tThis = iThis.next();
+                Tag<?> tOther = iOther.next();
                 if (!tThis.equals(tOther)) {
                     return false;
                 }

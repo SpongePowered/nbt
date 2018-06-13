@@ -77,7 +77,7 @@ public class SimpleRegionFileReader {
                 raf.readFully(data);
                 ByteArrayInputStream in = new ByteArrayInputStream(data);
                 InflaterInputStream iis = new InflaterInputStream(in);
-                NBTInputStream ns = new NBTInputStream(iis, false);
+                NBTInputStream ns = new NBTInputStream(iis, NBTInputStream.NO_COMPRESSION);
                 try {
                     Tag<?> t = ns.readTag();
                     list.add(t);
