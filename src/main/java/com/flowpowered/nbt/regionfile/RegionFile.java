@@ -8,9 +8,8 @@ import java.nio.IntBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.flowpowered.nbt.CompoundTag;
 import com.flowpowered.nbt.stream.NBTInputStream;
@@ -18,8 +17,8 @@ import com.flowpowered.nbt.stream.NBTInputStream;
 /**
  * This helper class provides functionality to read the data of single chunks in a region/anvil file. It uses modern {@code java.nio}
  * classes like {@link Path} and {@link FileChannel} to access its data from the file. Each instance of the class represents a single file,
- * whose header will be loaded and parsed in the constructor. It will provide access to its chunks and their content, though they will have to
- * be loaded manually by calling the respective {@code load} methods. Once {@link #close()} is called, all loaded data will be freed and
+ * whose header will be loaded and parsed in the constructor. It will provide access to its chunks and their content, though they will have
+ * to be loaded manually by calling the respective {@code load} methods. Once {@link #close()} is called, all loaded data will be freed and
  * the {@link FileChannel} used to load the data will be closed. All further usage is undefined.
  *
  * @author piegames
@@ -102,7 +101,13 @@ public class RegionFile implements Closeable {
 
 	/** List all chunks that actually exist in that region file. */
 	public List<RegionChunk> listExistingChunks() {
-		return Arrays.stream(chunks).filter(s -> s != null).collect(Collectors.toList());
+		// TODO add back in when using Java 1.8
+		// return Arrays.stream(chunks).filter(s -> s != null).collect(Collectors.toList());
+		List<RegionChunk> ret = new ArrayList<>(1024);
+		for (RegionChunk chunk : chunks)
+			if (chunk != null)
+				ret.add(chunk);
+		return ret;
 	}
 
 	public class RegionChunk {
