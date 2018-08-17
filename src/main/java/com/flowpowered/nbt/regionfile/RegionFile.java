@@ -149,7 +149,7 @@ public class RegionFile implements Closeable {
 			data.flip();
 
 			realLength = data.getInt(0) - 1;
-			compression = data.get(5);
+			compression = data.get(4);
 
 			isLoaded = true;
 		}
