@@ -1,0 +1,489 @@
+TAG_Compound: 1 entries
+{
+   TAG_Compound("Data"): 40 entries
+   {
+      TAG_Long("RandomSeed"): 4294967295
+      TAG_String("generatorName"): default
+      TAG_Double("BorderCenterZ"): 0.0
+      TAG_Byte("Difficulty"): 2
+      TAG_Long("BorderSizeLerpTime"): 0
+      TAG_Byte("raining"): 0
+      TAG_Compound("DimensionData"): 1 entries
+      {
+         TAG_Compound("1"): 1 entries
+         {
+            TAG_Compound("DragonFight"): 3 entries
+            {
+               TAG_List("Gateways"): 20 entries of type TAG_Int
+               {
+                  TAG_Int: 9
+                  TAG_Int: 13
+                  TAG_Int: 6
+                  TAG_Int: 12
+                  TAG_Int: 1
+                  TAG_Int: 8
+                  TAG_Int: 11
+                  TAG_Int: 3
+                  TAG_Int: 4
+                  TAG_Int: 18
+                  TAG_Int: 16
+                  TAG_Int: 19
+                  TAG_Int: 2
+                  TAG_Int: 17
+                  TAG_Int: 0
+                  TAG_Int: 14
+                  TAG_Int: 10
+                  TAG_Int: 7
+                  TAG_Int: 15
+                  TAG_Int: 5
+               }
+               TAG_Byte("DragonKilled"): 1
+               TAG_Byte("PreviouslyKilled"): 1
+            }
+         }
+      }
+      TAG_Long("Time"): 714595
+      TAG_Int("GameType"): 0
+      TAG_Byte("MapFeatures"): 1
+      TAG_Double("BorderCenterX"): 0.0
+      TAG_Double("BorderDamagePerBlock"): 0.2
+      TAG_Double("BorderWarningBlocks"): 5.0
+      TAG_Double("BorderSizeLerpTarget"): 6.0E7
+      TAG_Compound("Version"): 3 entries
+      {
+         TAG_Byte("Snapshot"): 0
+         TAG_Int("Id"): 1519
+         TAG_String("Name"): 1.13
+      }
+      TAG_Long("DayTime"): 922064
+      TAG_Byte("initialized"): 1
+      TAG_Byte("allowCommands"): 1
+      TAG_Long("SizeOnDisk"): 0
+      TAG_Compound("CustomBossEvents"): 0 entries
+      {
+      }
+      TAG_Compound("GameRules"): 23 entries
+      {
+         TAG_String("doTileDrops"): false
+         TAG_String("doFireTick"): true
+         TAG_String("maxCommandChainLength"): 65536
+         TAG_String("reducedDebugInfo"): false
+         TAG_String("naturalRegeneration"): true
+         TAG_String("disableElytraMovementCheck"): false
+         TAG_String("doMobLoot"): true
+         TAG_String("announceAdvancements"): true
+         TAG_String("keepInventory"): false
+         TAG_String("doEntityDrops"): true
+         TAG_String("doLimitedCrafting"): false
+         TAG_String("mobGriefing"): true
+         TAG_String("randomTickSpeed"): 3
+         TAG_String("commandBlockOutput"): true
+         TAG_String("spawnRadius"): 10
+         TAG_String("doMobSpawning"): true
+         TAG_String("maxEntityCramming"): 24
+         TAG_String("logAdminCommands"): true
+         TAG_String("spectatorsGenerateChunks"): false
+         TAG_String("doWeatherCycle"): true
+         TAG_String("sendCommandFeedback"): true
+         TAG_String("doDaylightCycle"): false
+         TAG_String("showDeathMessages"): true
+      }
+      TAG_Compound("Player"): 43 entries
+      {
+         TAG_Int("HurtByTimestamp"): 128850
+         TAG_Short("SleepTimer"): 0
+         TAG_Byte("SpawnForced"): 0
+         TAG_List("Attributes"): 8 entries of type TAG_Compound
+         {
+            TAG_Compound: 2 entries
+            {
+               TAG_Double("Base"): 20.0
+               TAG_String("Name"): generic.maxHealth
+            }
+            TAG_Compound: 2 entries
+            {
+               TAG_Double("Base"): 0.0
+               TAG_String("Name"): generic.knockbackResistance
+            }
+            TAG_Compound: 2 entries
+            {
+               TAG_Double("Base"): 0.10000000149011612
+               TAG_String("Name"): generic.movementSpeed
+            }
+            TAG_Compound: 2 entries
+            {
+               TAG_Double("Base"): 0.0
+               TAG_String("Name"): generic.armor
+            }
+            TAG_Compound: 2 entries
+            {
+               TAG_Double("Base"): 0.0
+               TAG_String("Name"): generic.armorToughness
+            }
+            TAG_Compound: 2 entries
+            {
+               TAG_Double("Base"): 1.0
+               TAG_String("Name"): generic.attackDamage
+            }
+            TAG_Compound: 2 entries
+            {
+               TAG_Double("Base"): 4.0
+               TAG_String("Name"): generic.attackSpeed
+            }
+            TAG_Compound: 2 entries
+            {
+               TAG_Double("Base"): 0.0
+               TAG_String("Name"): generic.luck
+            }
+         }
+         TAG_Byte("Invulnerable"): 0
+         TAG_Byte("FallFlying"): 0
+         TAG_Int("PortalCooldown"): 0
+         TAG_Float("AbsorptionAmount"): 0.0
+         TAG_Compound("abilities"): 7 entries
+         {
+            TAG_Byte("invulnerable"): 1
+            TAG_Byte("mayfly"): 1
+            TAG_Byte("instabuild"): 1
+            TAG_Float("walkSpeed"): 0.1
+            TAG_Byte("mayBuild"): 1
+            TAG_Byte("flying"): 1
+            TAG_Float("flySpeed"): 0.05
+         }
+         TAG_Float("FallDistance"): 0.0
+         TAG_Compound("recipeBook"): 6 entries
+         {
+            TAG_List("recipes"): 42 entries of type TAG_String
+            {
+               TAG_String: minecraft:activator_rail
+               TAG_String: minecraft:cobblestone_stairs
+               TAG_String: minecraft:stone_shovel
+               TAG_String: minecraft:chest
+               TAG_String: minecraft:crafting_table
+               TAG_String: minecraft:spruce_stairs
+               TAG_String: minecraft:stone
+               TAG_String: minecraft:powered_rail
+               TAG_String: minecraft:cobblestone_wall
+               TAG_String: minecraft:charcoal
+               TAG_String: minecraft:oak_planks
+               TAG_String: minecraft:stone_hoe
+               TAG_String: minecraft:oak_button
+               TAG_String: minecraft:oak_fence
+               TAG_String: minecraft:lever
+               TAG_String: minecraft:oak_stairs
+               TAG_String: minecraft:stone_pressure_plate
+               TAG_String: minecraft:oak_pressure_plate
+               TAG_String: minecraft:stone_sword
+               TAG_String: minecraft:stone_button
+               TAG_String: minecraft:stone_pickaxe
+               TAG_String: minecraft:spruce_trapdoor
+               TAG_String: minecraft:spruce_fence_gate
+               TAG_String: minecraft:spruce_fence
+               TAG_String: minecraft:stick
+               TAG_String: minecraft:cobblestone_slab
+               TAG_String: minecraft:spruce_door
+               TAG_String: minecraft:detector_rail
+               TAG_String: minecraft:oak_fence_gate
+               TAG_String: minecraft:oak_slab
+               TAG_String: minecraft:furnace
+               TAG_String: minecraft:stone_bricks
+               TAG_String: minecraft:stone_slab
+               TAG_String: minecraft:spruce_slab
+               TAG_String: minecraft:spruce_button
+               TAG_String: minecraft:oak_trapdoor
+               TAG_String: minecraft:oak_door
+               TAG_String: minecraft:sign
+               TAG_String: minecraft:stone_axe
+               TAG_String: minecraft:spruce_pressure_plate
+               TAG_String: minecraft:trapped_chest
+               TAG_String: minecraft:oak_wood
+            }
+            TAG_Byte("isFilteringCraftable"): 0
+            TAG_List("toBeDisplayed"): 42 entries of type TAG_String
+            {
+               TAG_String: minecraft:activator_rail
+               TAG_String: minecraft:cobblestone_stairs
+               TAG_String: minecraft:stone_shovel
+               TAG_String: minecraft:chest
+               TAG_String: minecraft:crafting_table
+               TAG_String: minecraft:spruce_stairs
+               TAG_String: minecraft:stone
+               TAG_String: minecraft:powered_rail
+               TAG_String: minecraft:cobblestone_wall
+               TAG_String: minecraft:charcoal
+               TAG_String: minecraft:oak_planks
+               TAG_String: minecraft:stone_hoe
+               TAG_String: minecraft:oak_button
+               TAG_String: minecraft:oak_fence
+               TAG_String: minecraft:lever
+               TAG_String: minecraft:oak_stairs
+               TAG_String: minecraft:stone_pressure_plate
+               TAG_String: minecraft:oak_pressure_plate
+               TAG_String: minecraft:stone_sword
+               TAG_String: minecraft:stone_button
+               TAG_String: minecraft:stone_pickaxe
+               TAG_String: minecraft:spruce_trapdoor
+               TAG_String: minecraft:spruce_fence_gate
+               TAG_String: minecraft:spruce_fence
+               TAG_String: minecraft:stick
+               TAG_String: minecraft:cobblestone_slab
+               TAG_String: minecraft:spruce_door
+               TAG_String: minecraft:detector_rail
+               TAG_String: minecraft:oak_fence_gate
+               TAG_String: minecraft:oak_slab
+               TAG_String: minecraft:furnace
+               TAG_String: minecraft:stone_bricks
+               TAG_String: minecraft:stone_slab
+               TAG_String: minecraft:spruce_slab
+               TAG_String: minecraft:spruce_button
+               TAG_String: minecraft:oak_trapdoor
+               TAG_String: minecraft:oak_door
+               TAG_String: minecraft:sign
+               TAG_String: minecraft:stone_axe
+               TAG_String: minecraft:spruce_pressure_plate
+               TAG_String: minecraft:trapped_chest
+               TAG_String: minecraft:oak_wood
+            }
+            TAG_Byte("isFurnaceGuiOpen"): 0
+            TAG_Byte("isGuiOpen"): 0
+            TAG_Byte("isFurnaceFilteringCraftable"): 0
+         }
+         TAG_Short("DeathTime"): 0
+         TAG_Int("XpSeed"): -962796252
+         TAG_Int("XpTotal"): 733
+         TAG_Int("playerGameType"): 1
+         TAG_Byte("seenCredits"): 0
+         TAG_List("Motion"): 3 entries of type TAG_Double
+         {
+            TAG_Double: 0.0
+            TAG_Double: 0.0
+            TAG_Double: 0.0
+         }
+         TAG_Int("SpawnY"): 82
+         TAG_Long("UUIDLeast"): -7307225268105228908
+         TAG_Float("Health"): 20.0
+         TAG_Int("SpawnZ"): 2236
+         TAG_Float("foodSaturationLevel"): 18.0
+         TAG_Int("SpawnX"): -4048
+         TAG_Short("Air"): 300
+         TAG_Byte("OnGround"): 0
+         TAG_Int("Dimension"): 0
+         TAG_List("Rotation"): 2 entries of type TAG_Float
+         {
+            TAG_Float: 16.425446
+            TAG_Float: 90.0
+         }
+         TAG_Int("XpLevel"): 22
+         TAG_Int("Score"): 733
+         TAG_Long("UUIDMost"): -6620843258805795274
+         TAG_Byte("Sleeping"): 0
+         TAG_List("Pos"): 3 entries of type TAG_Double
+         {
+            TAG_Double: 508.30314538488165
+            TAG_Double: 78.19136852275403
+            TAG_Double: 2035.9523347535592
+         }
+         TAG_Short("Fire"): -20
+         TAG_Float("XpP"): 0.74999964
+         TAG_List("EnderItems"): 0 entries of type TAG_End
+         {
+         }
+         TAG_Int("DataVersion"): 1519
+         TAG_Int("foodLevel"): 20
+         TAG_Float("foodExhaustionLevel"): 3.953829
+         TAG_Short("HurtTime"): 0
+         TAG_Int("SelectedItemSlot"): 5
+         TAG_List("ActiveEffects"): 1 entries of type TAG_Compound
+         {
+            TAG_Compound: 6 entries
+            {
+               TAG_Byte("Ambient"): 0
+               TAG_Byte("ShowIcon"): 1
+               TAG_Byte("ShowParticles"): 1
+               TAG_Int("Duration"): 1949261
+               TAG_Byte("Id"): 16
+               TAG_Byte("Amplifier"): 0
+            }
+         }
+         TAG_List("Inventory"): 24 entries of type TAG_Compound
+         {
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 0
+               TAG_String("id"): minecraft:dirt
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 1
+               TAG_String("id"): minecraft:cobblestone
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 2
+               TAG_String("id"): minecraft:stone
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 3
+               TAG_String("id"): minecraft:oak_log
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 4
+               TAG_String("id"): minecraft:oak_planks
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 5
+               TAG_String("id"): minecraft:hopper
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 6
+               TAG_String("id"): minecraft:chest
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 7
+               TAG_String("id"): minecraft:spruce_planks
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 8
+               TAG_String("id"): minecraft:polished_andesite
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 9
+               TAG_String("id"): minecraft:dirt
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 10
+               TAG_String("id"): minecraft:powered_rail
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 11
+               TAG_String("id"): minecraft:spruce_slab
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 12
+               TAG_String("id"): minecraft:tripwire_hook
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 13
+               TAG_String("id"): minecraft:bookshelf
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 14
+               TAG_String("id"): minecraft:stone_pressure_plate
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 4 entries
+            {
+               TAG_Byte("Slot"): 15
+               TAG_String("id"): minecraft:flint_and_steel
+               TAG_Byte("Count"): 1
+               TAG_Compound("tag"): 1 entries
+               {
+                  TAG_Int("Damage"): 0
+               }
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 19
+               TAG_String("id"): minecraft:cobblestone
+               TAG_Byte("Count"): 10
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 20
+               TAG_String("id"): minecraft:oak_log
+               TAG_Byte("Count"): 10
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 28
+               TAG_String("id"): minecraft:cobblestone_slab
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 31
+               TAG_String("id"): minecraft:torch
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 32
+               TAG_String("id"): minecraft:furnace
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 33
+               TAG_String("id"): minecraft:polished_andesite
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 34
+               TAG_String("id"): minecraft:rail
+               TAG_Byte("Count"): 1
+            }
+            TAG_Compound: 3 entries
+            {
+               TAG_Byte("Slot"): 35
+               TAG_String("id"): minecraft:tnt
+               TAG_Byte("Count"): 1
+            }
+         }
+         TAG_Int("foodTickTimer"): 0
+      }
+      TAG_Int("SpawnY"): 64
+      TAG_Int("rainTime"): 16093
+      TAG_Int("thunderTime"): 17595
+      TAG_Int("SpawnZ"): 256
+      TAG_Byte("hardcore"): 0
+      TAG_Byte("DifficultyLocked"): 0
+      TAG_Int("SpawnX"): 128
+      TAG_Int("clearWeatherTime"): 0
+      TAG_Byte("thundering"): 0
+      TAG_Int("generatorVersion"): 1
+      TAG_Int("version"): 19133
+      TAG_Double("BorderSafeZone"): 5.0
+      TAG_Long("LastPlayed"): 1534516348794
+      TAG_Double("BorderWarningTime"): 15.0
+      TAG_String("LevelName"): Multi 5
+      TAG_Double("BorderSize"): 6.0E7
+      TAG_Int("DataVersion"): 1519
+      TAG_Compound("DataPacks"): 2 entries
+      {
+         TAG_List("Enabled"): 1 entries of type TAG_String
+         {
+            TAG_String: vanilla
+         }
+         TAG_List("Disabled"): 0 entries of type TAG_End
+         {
+         }
+      }
+   }
+}
