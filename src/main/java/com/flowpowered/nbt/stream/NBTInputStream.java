@@ -41,6 +41,7 @@ import com.flowpowered.nbt.FloatTag;
 import com.flowpowered.nbt.IntArrayTag;
 import com.flowpowered.nbt.IntTag;
 import com.flowpowered.nbt.ListTag;
+import com.flowpowered.nbt.LongArrayTag;
 import com.flowpowered.nbt.LongTag;
 import com.flowpowered.nbt.NBTConstants;
 import com.flowpowered.nbt.ShortArrayTag;
@@ -214,6 +215,14 @@ public final class NBTInputStream implements Closeable {
                     ints[i] = is.readInt();
                 }
                 return new IntArrayTag(name, ints);
+
+            case TAG_LONG_ARRAY:
+                length = is.readInt();
+                long[] longs = new long[length];
+                for (int i = 0; i < length; i++) {
+                    longs[i] = is.readLong();
+                }
+                return new LongArrayTag(name, longs);
 
             case TAG_SHORT_ARRAY:
                 length = is.readInt();

@@ -40,6 +40,7 @@ public enum TagType {
     // Java generics, y u so suck
     TAG_COMPOUND(CompoundTag.class, "TAG_Compound", 10),
     TAG_INT_ARRAY(IntArrayTag.class, "TAG_Int_Array", 11),
+    TAG_LONG_ARRAY(LongArrayTag.class, "TAG_Long_Array", 12),
     TAG_SHORT_ARRAY(ShortArrayTag.class, "TAG_Short_Array", 100),;
     private static final Map<Class<? extends Tag<?>>, TagType> BY_CLASS = new HashMap<Class<? extends Tag<?>>, TagType>();
     private static final Map<String, TagType> BY_NAME = new HashMap<String, TagType>();
