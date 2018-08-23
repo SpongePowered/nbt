@@ -35,6 +35,7 @@ import java.util.zip.InflaterInputStream;
 import com.flowpowered.nbt.Tag;
 import com.flowpowered.nbt.stream.NBTInputStream;
 
+@Deprecated
 public class SimpleRegionFileReader {
     private static int EXPECTED_VERSION = 1;
 

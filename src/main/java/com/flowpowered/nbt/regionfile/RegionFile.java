@@ -156,7 +156,8 @@ public class RegionFile implements Closeable {
 
 		/** Unloads all chunk data if it has been loaded */
 		public void unload() {
-			data.clear();
+			if (isLoaded && data != null)
+				data.clear();
 			data = null;
 			isLoaded = false;
 		}
@@ -223,5 +224,47 @@ public class RegionFile implements Closeable {
 			}
 			return tag;
 		}
+	}
+
+	public static int bitsPerIndex(long[] blocks) {
+		/* There are {@code 16*16*16=4096} blocks in each chunk, and a long has 64 bits */
+		return blocks.length * 64 / 4096;
+	}
+
+	/**
+	 * Extract a palette index from the long array. This data is located at {@code /Level/Sections[i]/BlockStates}.
+	 *
+	 * @param blocks
+	 *            a long array containing all the block states as Minecraft encodes them to {@code /Level/Sections[i]/BlockStates} within each
+	 *            section of a chunk.
+	 * @param i
+	 *            The index of the block to be extracted. Since the data is mapped XZY, {@code i = x | (z<<4) | (y<<8)}.
+	 * @param bitsPerIndex
+	 *            The amount of bits each index has. This is to avoid redundant calculation on each call.
+	 *
+	 * @see #bitsPerIndex(long[])
+	 */
+	public static long extractFromLong(long[] blocks, int i, int bitsPerIndex) {
+		int startByte = (bitsPerIndex * i) >> 6; // >> 6 equals / 64
+		int endByte = (bitsPerIndex * (i + 1)) >> 6;
+		// The bit within the long where our value starts. Counting from the right LSB (!).
+		int startByteBit = ((bitsPerIndex * i)) & 63; // % 64 equals & 63
+		int endByteBit = ((bitsPerIndex * (i + 1))) & 63;
+
+		// Use bit shifting and & bit masking to extract bit sequences out of longs as numbers
+		// -1L is the value with every bit set
+		long blockIndex;
+		if (startByte == endByte) {
+			// Normal case: the bit string we need is within a single long
+			blockIndex = (blocks[startByte] << (64 - endByteBit)) >>> (64 + startByteBit - endByteBit);
+		} else if (endByteBit == 0) {
+			// The bit string is exactly at the beginning of a long
+			blockIndex = blocks[startByte] >>> startByteBit;
+		} else {
+			// The bit string is overlapping two longs
+			blockIndex = ((blocks[startByte] >>> startByteBit))
+					| ((blocks[endByte] << (64 - endByteBit)) >>> (startByteBit - endByteBit));
+		}
+		return blockIndex;
 	}
 }
