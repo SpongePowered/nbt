@@ -107,7 +107,7 @@ public abstract class Tag<T> implements Comparable<Tag<?>> {
     }
 
     @Override
-    public int compareTo(Tag other) {
+    public int compareTo(Tag<?> other) {
         if (equals(other)) {
             return 0;
         } else {
@@ -124,5 +124,6 @@ public abstract class Tag<T> implements Comparable<Tag<?>> {
      *
      * @return the clone
      */
-    public abstract Tag<T> clone();
+    @Override
+	public abstract Tag<T> clone();
 }

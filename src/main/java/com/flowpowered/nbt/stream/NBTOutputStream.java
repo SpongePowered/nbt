@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteOrder;
 import java.util.List;
+import java.util.zip.DeflaterOutputStream;
 import java.util.zip.GZIPOutputStream;
 
 import com.flowpowered.nbt.ByteArrayTag;
@@ -65,7 +66,7 @@ public final class NBTOutputStream implements Closeable {
      * @throws java.io.IOException if an I/O error occurs.
      */
     public NBTOutputStream(OutputStream os) throws IOException {
-        this(os, true, ByteOrder.BIG_ENDIAN);
+        this(os, NBTInputStream.GZIP_COMPRESSION, ByteOrder.BIG_ENDIAN);
     }
 
     /**
@@ -74,9 +75,23 @@ public final class NBTOutputStream implements Closeable {
      * @param os The output stream.
      * @param compressed A flag that indicates if the output should be compressed.
      * @throws java.io.IOException if an I/O error occurs.
+     * @deprecated Use {@link #NBTOutputStream(InputStream, int)} instead
      */
+    @Deprecated
     public NBTOutputStream(OutputStream os, boolean compressed) throws IOException {
         this(os, compressed, ByteOrder.BIG_ENDIAN);
+    }
+
+    /**
+     * Creates a new {@link NBTOutputStream}, which will write data to the specified underlying output stream. The stream may be wrapped into a compressing output stream
+     * depending on the chosen compression method. A flag indicates if the output should be compressed with GZIP or not.
+     *
+     * @param os The output stream.
+     * @param compression The compression algorithm used for the input stream. Must be {@link NBTInputStream#NO_COMPRESSION}, {@link NBTInputStream#GZIP_COMPRESSION} or {@link NBTInputStream#ZLIB_COMPRESSION}.
+     * @throws java.io.IOException if an I/O error occurs.
+     */
+    public NBTOutputStream(OutputStream os, int compression) throws IOException {
+        this(os, compression, ByteOrder.BIG_ENDIAN);
     }
 
     /**
@@ -86,9 +101,35 @@ public final class NBTOutputStream implements Closeable {
      * @param compressed A flag that indicates if the output should be compressed.
      * @param endianness A flag that indicates if numbers in the output should be output in little-endian format.
      * @throws java.io.IOException if an I/O error occurs.
+     * @deprecated Use {@link #NBTOutputStream(InputStream, int, ByteOrder)} instead
      */
+    @Deprecated
     public NBTOutputStream(OutputStream os, boolean compressed, ByteOrder endianness) throws IOException {
-        this.os = new EndianSwitchableOutputStream(compressed ? new GZIPOutputStream(os) : os, endianness);
+        this(os, compressed ? NBTInputStream.GZIP_COMPRESSION : NBTInputStream.NO_COMPRESSION, endianness);
+    }
+
+    /**
+     * Creates a new {@link NBTOutputStream}, which will write data to the specified underlying output stream. The stream may be wrapped into a compressing output stream depending on the chosen compression method.
+     *
+     * @param os The output stream.
+     * @param compression The compression algorithm used for the input stream. Must be {@link NBTInputStream#NO_COMPRESSION}, {@link NBTInputStream#GZIP_COMPRESSION} or {@link NBTInputStream#ZLIB_COMPRESSION}.
+     * @param endianness A flag that indicates if numbers in the output should be output in little-endian format.
+     * @throws java.io.IOException if an I/O error occurs.
+     */
+    public NBTOutputStream(OutputStream os, int compression, ByteOrder endianness) throws IOException {
+    	switch (compression) {
+    	case NBTInputStream.NO_COMPRESSION:
+    		this.os = new EndianSwitchableOutputStream(os, endianness);
+    		break;
+    	case NBTInputStream.GZIP_COMPRESSION:
+    		this.os = new EndianSwitchableOutputStream(new GZIPOutputStream(os), endianness);
+    		break;
+    	case NBTInputStream.ZLIB_COMPRESSION:
+    		this.os = new EndianSwitchableOutputStream(new DeflaterOutputStream(os), endianness);
+    		break;
+    	default:
+    		throw new IllegalArgumentException("Unsupported compression type, must be between 0 and 2 (inclusive)");
+    	}
     }
 
     /**
@@ -348,7 +389,8 @@ public final class NBTOutputStream implements Closeable {
         /* empty */
     }
 
-    public void close() throws IOException {
+    @Override
+	public void close() throws IOException {
         os.close();
     }
 

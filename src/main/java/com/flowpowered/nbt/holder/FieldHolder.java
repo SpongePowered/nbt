@@ -67,22 +67,44 @@ public abstract class FieldHolder {
         }
     }
 
+    @Deprecated
     public void save(File file, boolean compressed) throws IOException {
         save(new FileOutputStream(file), compressed);
     }
 
-    public void save(OutputStream stream, boolean compressed) throws IOException {
-        NBTOutputStream os = new NBTOutputStream(stream, compressed);
-        os.writeTag(new CompoundTag("", save()));
+    public void save(File file, int compression) throws IOException {
+        save(new FileOutputStream(file), compression);
     }
 
+    @Deprecated
+    public void save(OutputStream stream, boolean compressed) throws IOException {
+    	save(stream, compressed ? NBTInputStream.GZIP_COMPRESSION : NBTInputStream.NO_COMPRESSION);
+    }
+
+    public void save(OutputStream stream, int compression) throws IOException {
+        NBTOutputStream os = new NBTOutputStream(stream, compression);
+        os.writeTag(new CompoundTag("", save()));
+        os.close();
+    }
+
+    @Deprecated
     public void load(File file, boolean compressed) throws IOException {
         load(new FileInputStream(file), compressed);
     }
 
+    public void load(File file, int compression) throws IOException {
+        load(new FileInputStream(file), compression);
+    }
+
+    @Deprecated
     public void load(InputStream stream, boolean compressed) throws IOException {
-        NBTInputStream is = new NBTInputStream(stream, compressed);
+    	load(stream, compressed ? NBTInputStream.GZIP_COMPRESSION : NBTInputStream.NO_COMPRESSION);
+    }
+
+    public void load(InputStream stream, int compression) throws IOException {
+        NBTInputStream is = new NBTInputStream(stream, compression);
         Tag<?> tag = is.readTag();
+        is.close();
         if (!(tag instanceof CompoundTag)) {
             throw new IllegalArgumentException("Expected CompoundTag, got " + tag.getClass());
         }

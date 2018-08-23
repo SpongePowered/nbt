@@ -38,9 +38,8 @@ public class StringMapReader {
     public static List<Tag<?>> readFile(File f) {
         List<Tag<?>> list = new ArrayList<Tag<?>>();
 
-        try {
-            FileInputStream fis = new FileInputStream(f);
-            DataInputStream dis = new DataInputStream(fis);
+        try (FileInputStream fis = new FileInputStream(f);
+            DataInputStream dis = new DataInputStream(fis);){
             boolean eof = false;
             while (!eof) {
                 int value;

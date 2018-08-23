@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -99,7 +100,8 @@ public class NBTViewer extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 } catch (ClassNotFoundException e) {
@@ -141,12 +143,12 @@ public class NBTViewer extends JFrame implements ActionListener {
     }
 
     private List<Tag<?>> readFile(File f) {
-        List<Tag<?>> tags = readRawNBT(f, true);
+        List<Tag<?>> tags = readRawNBT(f, NBTInputStream.GZIP_COMPRESSION);
         if (tags != null) {
             format = "Compressed NBT";
             return tags;
         }
-        tags = readRawNBT(f, false);
+        tags = readRawNBT(f, NBTInputStream.NO_COMPRESSION);
         if (tags != null) {
             format = "Uncompressed NBT";
             return tags;
@@ -166,11 +168,11 @@ public class NBTViewer extends JFrame implements ActionListener {
         return null;
     }
 
-    private List<Tag<?>> readRawNBT(File f, boolean compressed) {
+    private List<Tag<?>> readRawNBT(File f, int compression) {
         List<Tag<?>> tags = new ArrayList<Tag<?>>();
         try {
             InputStream is = new FileInputStream(f);
-            NBTInputStream ns = new NBTInputStream(is, compressed);
+            NBTInputStream ns = new NBTInputStream(is, compression);
             try {
                 boolean eof = false;
                 while (!eof) {

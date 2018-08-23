@@ -35,6 +35,7 @@ import java.util.zip.InflaterInputStream;
 import com.flowpowered.nbt.Tag;
 import com.flowpowered.nbt.stream.NBTInputStream;
 
+@Deprecated
 public class SimpleRegionFileReader {
     private static int EXPECTED_VERSION = 1;
 
@@ -77,7 +78,7 @@ public class SimpleRegionFileReader {
                 raf.readFully(data);
                 ByteArrayInputStream in = new ByteArrayInputStream(data);
                 InflaterInputStream iis = new InflaterInputStream(in);
-                NBTInputStream ns = new NBTInputStream(iis, false);
+                NBTInputStream ns = new NBTInputStream(iis, NBTInputStream.NO_COMPRESSION);
                 try {
                     Tag<?> t = ns.readTag();
                     list.add(t);

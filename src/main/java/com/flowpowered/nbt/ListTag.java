@@ -77,14 +77,15 @@ public class ListTag<T extends Tag<?>> extends Tag<List<T>> {
 
         StringBuilder bldr = new StringBuilder();
         bldr.append("TAG_List").append(append).append(": ").append(value.size()).append(" entries of type ").append(TagType.getByTagClass(type).getTypeName()).append("\r\n{\r\n");
-        for (Tag t : value) {
+        for (Tag<?> t : value) {
             bldr.append("   ").append(t.toString().replaceAll("\r\n", "\r\n   ")).append("\r\n");
         }
         bldr.append("}");
         return bldr.toString();
     }
 
-    @SuppressWarnings ("unchecked")
+    @Override
+	@SuppressWarnings ("unchecked")
     public ListTag<T> clone() {
         List<T> newList = new ArrayList<T>();
 
