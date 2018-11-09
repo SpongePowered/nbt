@@ -35,9 +35,9 @@ public class NBTInputStreamTest {
 	@Test
 	public void testRegionFile() throws IOException, URISyntaxException {
 		try (RegionFile file = new RegionFile(Paths.get(getClass().getResource("/r.1.3.mca").toURI()))) {
-			file.loadAllChunks();
-			for (RegionChunk chunk : file.listExistingChunks()) {
-				chunk.readTag();
+			for (RegionChunk chunk : file) {
+				if (chunk.getData() != null)
+					chunk.getData().readTag();
 			}
 		}
 	}

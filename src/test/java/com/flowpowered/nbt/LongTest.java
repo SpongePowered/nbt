@@ -9,7 +9,7 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import com.flowpowered.nbt.regionfile.RegionFile;
+import com.flowpowered.nbt.regionfile.Chunk;
 
 public class LongTest {
 
@@ -38,7 +38,7 @@ public class LongTest {
 			for (int i = 0; i < BITS * 64; i++) {
 				// Compare conversion with control data
 				assertEquals(Long.parseLong(new StringBuilder(number.substring(i * BITS, i * BITS + BITS)).reverse().toString(), 2),
-						RegionFile.extractFromLong(longData, i, BITS));
+						Chunk.extractFromLong(longData, i, BITS));
 			}
 		}
 	}
