@@ -10,8 +10,6 @@ import java.nio.file.Paths;
 import org.junit.Test;
 
 import com.flowpowered.nbt.Tag;
-import com.flowpowered.nbt.regionfile.RegionFile;
-import com.flowpowered.nbt.regionfile.RegionFile.RegionChunk;
 
 public class NBTInputStreamTest {
 
@@ -23,22 +21,6 @@ public class NBTInputStreamTest {
 			assertArrayEquals(
 					Files.readAllLines(Paths.get(getClass().getResource("/level.txt").toURI())).toArray(new String[] {}),
 					tag.toString().split("\r\n"));
-		}
-	}
-
-	/**
-	 * Test reading the NBT data in a region file
-	 *
-	 * @throws URISyntaxException
-	 * @throws IOException
-	 */
-	@Test
-	public void testRegionFile() throws IOException, URISyntaxException {
-		try (RegionFile file = new RegionFile(Paths.get(getClass().getResource("/r.1.3.mca").toURI()))) {
-			for (RegionChunk chunk : file) {
-				if (chunk.getData() != null)
-					chunk.getData().readTag();
-			}
 		}
 	}
 }

@@ -6,12 +6,14 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import com.flowpowered.nbt.regionfile.RegionFile.RegionChunk;
 
@@ -42,19 +44,30 @@ public class RegionFile implements Closeable, Iterable<RegionChunk> {
 	protected ShortBuffer			sectorCounts;
 	protected List<Boolean>			sectorUsed;
 
-	/** Create a new RegionFile object representing the region file at the given path and load it into memory. */
+	/**
+	 * Create a new RegionFile object representing the region file at the given path and load it into memory. If the file does not exist, it
+	 * will be created.
+	 */
 	public RegionFile(Path file) throws IOException {
-		this.file = file;
+		this.file = Objects.requireNonNull(file);
 
-		raf = FileChannel.open(file, StandardOpenOption.READ);
+		boolean exists = Files.exists(file);
+		Files.createDirectories(file.getParent());
+		raf = FileChannel.open(file, StandardOpenOption.READ, StandardOpenOption.WRITE, StandardOpenOption.CREATE);
 
 		locations = ByteBuffer.allocate(4096);
-		raf.read(locations);
+		if (exists)
+			raf.read(locations);
+		else
+			locations.put(new byte[4096]);
 		locations.flip();
 		locations2 = locations.asIntBuffer();
 
 		timestamps = ByteBuffer.allocate(4096);
-		raf.read(timestamps);
+		if (exists)
+			raf.read(timestamps);
+		else
+			timestamps.put(new byte[4096]);
 		timestamps.flip();
 		timestamps2 = timestamps.asIntBuffer();
 
@@ -62,7 +75,7 @@ public class RegionFile implements Closeable, Iterable<RegionChunk> {
 		for (int i = 0; i < 1024; i++) {
 			int chunkPos = locations2.get(i) >>> 8;
 			int chunkLength = locations2.get(i) & 0xFF;
-			if (chunkPos > 0) {
+			if (exists && chunkPos > 0) {
 				// i & 31 retrieves the last 5 bit which store the x coordinate
 				chunks[i] = new RegionChunk(i & 31, i >> 5, new Chunk(timestamps2.get(i), raf, chunkPos, chunkLength));
 			} else
@@ -173,12 +186,12 @@ public class RegionFile implements Closeable, Iterable<RegionChunk> {
 	public final class RegionChunk {
 
 		/** The x coordinate of the chunk relative to its RegionFile's origin */
-		public final int	x;
+		public final int			x;
 		/** The z coordinate of the chunk relative to its RegionFile's origin */
-		public final int	z;
+		public final int			z;
 
-		private Chunk		data;
-		private volatile boolean		upToDate;
+		private Chunk				data;
+		private volatile boolean	upToDate;
 
 		private RegionChunk(int x, int z, Chunk data) {
 			if (x < 0 || z < 0 || x > 32 || z > 32)
@@ -227,8 +240,12 @@ public class RegionFile implements Closeable, Iterable<RegionChunk> {
 
 			@Override
 			public RegionChunk next() {
-				return chunks[i];
+				return chunks[i++];
 			}
 		};
+	}
+
+	public Path getPath() {
+		return file;
 	}
 }
