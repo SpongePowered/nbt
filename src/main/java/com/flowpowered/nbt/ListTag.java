@@ -38,7 +38,7 @@ public class ListTag<T extends Tag<?>> extends Tag<List<T>> {
     /**
      * The value.
      */
-    private final List<T> value;
+    private List<T> value;
 
     /**
      * Creates the tag.
@@ -50,7 +50,7 @@ public class ListTag<T extends Tag<?>> extends Tag<List<T>> {
     public ListTag(String name, Class<T> type, List<T> value) {
         super(TagType.TAG_LIST, name);
         this.type = type;
-        this.value = Collections.unmodifiableList(value);
+        this.value = value;
     }
 
     /**
@@ -65,6 +65,11 @@ public class ListTag<T extends Tag<?>> extends Tag<List<T>> {
     @Override
     public List<T> getValue() {
         return value;
+    }
+
+    @Override
+    public void setValue(List<T> value) {
+        this.value = value;
     }
 
     @Override

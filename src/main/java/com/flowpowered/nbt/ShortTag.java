@@ -30,7 +30,7 @@ public final class ShortTag extends Tag<Short> {
     /**
      * The value.
      */
-    private final short value;
+    private short value;
 
     /**
      * Creates the tag.
@@ -46,6 +46,11 @@ public final class ShortTag extends Tag<Short> {
     @Override
     public Short getValue() {
         return value;
+    }
+
+    @Override
+    public void setValue(Short value) {
+        this.value = value;
     }
 
     @Override

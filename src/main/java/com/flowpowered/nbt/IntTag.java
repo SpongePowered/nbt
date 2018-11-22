@@ -30,7 +30,7 @@ public final class IntTag extends Tag<Integer> {
     /**
      * The value.
      */
-    private final int value;
+    private int value;
 
     /**
      * Creates the tag.
@@ -46,6 +46,11 @@ public final class IntTag extends Tag<Integer> {
     @Override
     public Integer getValue() {
         return value;
+    }
+
+    @Override
+    public void setValue(Integer value) {
+        this.value = value;
     }
 
     @Override

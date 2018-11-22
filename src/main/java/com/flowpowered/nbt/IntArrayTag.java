@@ -29,7 +29,7 @@ public class IntArrayTag extends Tag<int[]> {
     /**
      * The value.
      */
-    private final int[] value;
+    private int[] value;
 
     /**
      * Creates the tag.
@@ -45,6 +45,11 @@ public class IntArrayTag extends Tag<int[]> {
     @Override
     public int[] getValue() {
         return value;
+    }
+
+    @Override
+    public void setValue(int[] value) {
+        this.value = value;
     }
 
     @Override

@@ -30,7 +30,7 @@ public final class FloatTag extends Tag<Float> {
     /**
      * The value.
      */
-    private final float value;
+    private float value;
 
     /**
      * Creates the tag.
@@ -46,6 +46,11 @@ public final class FloatTag extends Tag<Float> {
     @Override
     public Float getValue() {
         return value;
+    }
+
+    @Override
+    public void setValue(Float value) {
+        this.value = value;
     }
 
     @Override

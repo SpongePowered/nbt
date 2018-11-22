@@ -40,6 +40,11 @@ public final class EndTag extends Tag<Object> {
     }
 
     @Override
+    public void setValue(Object value) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public String toString() {
         return "TAG_End";
     }

@@ -30,7 +30,7 @@ public final class StringTag extends Tag<String> {
     /**
      * The value.
      */
-    private final String value;
+    private String value;
 
     /**
      * Creates the tag.
@@ -46,6 +46,11 @@ public final class StringTag extends Tag<String> {
     @Override
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override

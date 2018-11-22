@@ -30,7 +30,7 @@ public final class LongTag extends Tag<Long> {
     /**
      * The value.
      */
-    private final long value;
+    private long value;
 
     /**
      * Creates the tag.
@@ -46,6 +46,11 @@ public final class LongTag extends Tag<Long> {
     @Override
     public Long getValue() {
         return value;
+    }
+
+    @Override
+    public void setValue(Long value) {
+        this.value = value;
     }
 
     @Override
