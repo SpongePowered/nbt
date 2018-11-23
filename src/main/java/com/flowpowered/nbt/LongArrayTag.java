@@ -29,7 +29,7 @@ public class LongArrayTag extends Tag<long[]> {
     /**
      * The value.
      */
-    private final long[] value;
+	private long[] value;
 
     /**
      * Creates the tag.
@@ -46,6 +46,11 @@ public class LongArrayTag extends Tag<long[]> {
     public long[] getValue() {
         return value;
     }
+
+	@Override
+	public void setValue(long[] value) {
+		this.value = value;
+	}
 
     @Override
     public String toString() {
@@ -66,7 +71,8 @@ public class LongArrayTag extends Tag<long[]> {
         return "TAG_Long_Array" + append + ": " + hex.toString();
     }
 
-    public LongArrayTag clone() {
+    @Override
+	public LongArrayTag clone() {
         long[] clonedArray = cloneArray(value);
 
         return new LongArrayTag(getName(), clonedArray);
