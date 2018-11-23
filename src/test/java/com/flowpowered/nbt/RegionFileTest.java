@@ -1,16 +1,19 @@
 package com.flowpowered.nbt;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import com.flowpowered.nbt.regionfile.Chunk;
 import com.flowpowered.nbt.regionfile.RegionFile;
-import com.flowpowered.nbt.regionfile.RegionFile.RegionChunk;
 
 public class RegionFileTest {
 
@@ -25,11 +28,10 @@ public class RegionFileTest {
 	 */
 	@Test
 	public void testRead() throws IOException, URISyntaxException {
-		try (RegionFile file = new RegionFile(Paths.get(getClass().getResource("/r.1.3.mca").toURI()))) {
-			for (RegionChunk chunk : file) {
-				if (chunk.getData() != null)
-					chunk.getData().readTag();
-			}
+		RegionFile file = new RegionFile(Paths.get(getClass().getResource("/r.1.3.mca").toURI()));
+		for (Chunk chunk : file) {
+			if (chunk != null)
+				chunk.readTag();
 		}
 	}
 
@@ -37,7 +39,10 @@ public class RegionFileTest {
 	public void testCreateNew() throws IOException {
 		File file = folder.newFile();
 		file.delete();
-		new RegionFile(file.toPath()).close();
+		RegionFile.createNew(file.toPath());
 		file.delete();
+		RegionFile rf = RegionFile.open(folder.newFolder().toPath().resolve("test").resolve("test.mca"));
+		rf.writeChanges();
+		assertEquals(4096 * 2, Files.size(rf.getPath()));
 	}
 }
