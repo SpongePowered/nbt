@@ -106,19 +106,11 @@ public class EndianSwitchableInputStream extends FilterInputStream implements Da
     }
 
     public float readFloat() throws IOException {
-        int result = readInt();
-        if (endianness == ByteOrder.LITTLE_ENDIAN) {
-            result = Integer.reverseBytes(result);
-        }
-        return Float.intBitsToFloat(result);
+        return Float.intBitsToFloat(readInt());
     }
 
     public double readDouble() throws IOException {
-        long result = readLong();
-        if (endianness == ByteOrder.LITTLE_ENDIAN) {
-            result = Long.reverseBytes(result);
-        }
-        return Double.longBitsToDouble(result);
+        return Double.longBitsToDouble(readLong());
     }
 
     @SuppressWarnings ("deprecation") // This method is deprecated
