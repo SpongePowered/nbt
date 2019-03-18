@@ -87,7 +87,7 @@ public class Chunk {
 	 *             if the coordinates are out of bounds
 	 * @author piegames
 	 */
-	public Chunk(int x, int z, int timestamp, FileChannel raf, int start, int length) throws IOException {
+	Chunk(int x, int z, int timestamp, FileChannel raf, int start, int length) throws IOException {
 		if (x < 0 || z < 0 || x >= 32 || z >= 32)
 			throw new IllegalArgumentException("Coordinates must be in range [0..32), but were x=" + x + ", z=" + z + ")");
 		this.x = x;
