@@ -28,12 +28,11 @@ import static org.junit.Assert.assertEquals;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.ByteOrder;
 
 import org.junit.Test;
 
 /**
- * Test for both {@link EndianSwitchableInputStream EndianSwitchableInput} and {@link EndianSwitchableOutputStream Output} Streams
+ * Test for both {@link LittleEndianInputStream EndianSwitchableInput} and {@link LittleEndianOutputStream Output} Streams
  */
 public class EndianSwitchableStreamTest {
     @Test
@@ -41,12 +40,12 @@ public class EndianSwitchableStreamTest {
         int unsigned = Short.MAX_VALUE + 5;
         char testChar = 'b';
         ByteArrayOutputStream rawOutput = new ByteArrayOutputStream();
-        EndianSwitchableOutputStream output = new EndianSwitchableOutputStream(rawOutput, ByteOrder.LITTLE_ENDIAN);
+        LittleEndianOutputStream output = new LittleEndianOutputStream(rawOutput );
         output.writeShort(unsigned);
         output.writeChar(testChar);
         output.close();
 
-        EndianSwitchableInputStream input = new EndianSwitchableInputStream(new ByteArrayInputStream(rawOutput.toByteArray()), ByteOrder.LITTLE_ENDIAN);
+        LittleEndianInputStream input = new LittleEndianInputStream (new ByteArrayInputStream(rawOutput.toByteArray()) );
         assertEquals(unsigned, input.readUnsignedShort());
         assertEquals(testChar, input.readChar());
         input.close();
