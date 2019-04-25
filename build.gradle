@@ -39,7 +39,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.saliman:gradle-cobertura-plugin:2.2.8' // Coveralls dependency
+        classpath 'net.saliman:gradle-cobertura-plugin:2.6.0' // Coveralls dependency
         classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.10.0'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
     }
@@ -83,8 +83,8 @@ license {
 
 // Source compiler configuration
 configure([compileJava, compileTestJava]) {
-    sourceCompatibility = '1.7'
-    targetCompatibility = '1.7'
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
     options.encoding = 'UTF-8'
     options.compilerArgs << '-Xlint:all'
     options.compilerArgs << '-Xlint:-path'
