@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * This helper class provides functionality to read the data of single chunks in a region/anvil file. It uses modern {@code java.nio}
@@ -103,16 +104,22 @@ public class RegionFile implements Closeable {
 	}
 
 	/**
+	 * Same as {@link #listChunks()}, but as stream.
+	 */
+	public Stream<Integer> streamChunks() {
+		return IntStream.range(0, 32 * 32).filter(pos -> hasChunk(pos))
+				.boxed()
+				.sorted(Comparator.comparingInt(i -> locations2.get(i) >>> 8));
+	}
+
+	/**
 	 * List the positions of all chunks that exist in this file sorted by their their appearance order in the file. Use this to read all chunks
 	 * in their sequential order to speed up seek times.
 	 * 
 	 * @see #coordsToPosition(int, int)
 	 */
 	public List<Integer> listChunks() {
-		return IntStream.range(0, 32 * 32).filter(pos -> hasChunk(pos))
-				.boxed()
-				.sorted(Comparator.comparingInt(i -> locations2.get(i) >>> 8))
-				.collect(Collectors.toList());
+		return streamChunks().collect(Collectors.toList());
 	}
 
 	/**
