@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,10 +29,12 @@ public class RegionFileTest {
 	 */
 	@Test
 	public void testRead() throws IOException, URISyntaxException {
-		RegionFile file = new RegionFile(Paths.get(getClass().getResource("/r.1.3.mca").toURI()));
-		for (Chunk chunk : file) {
-			if (chunk != null)
-				chunk.readTag();
+		try (RegionFile file = new RegionFile(Paths.get(getClass().getResource("/r.1.3.mca").toURI()));) {
+			for (int i : file.listChunks()) {
+				Chunk chunk = file.loadChunk(i);
+				if (chunk != null)
+					chunk.readTag();
+			}
 		}
 	}
 
@@ -39,10 +42,11 @@ public class RegionFileTest {
 	public void testCreateNew() throws IOException {
 		File file = folder.newFile();
 		file.delete();
-		RegionFile.createNew(file.toPath());
+		RegionFile.createNew(file.toPath()).close();
 		file.delete();
 		RegionFile rf = RegionFile.open(folder.newFolder().toPath().resolve("test").resolve("test.mca"));
-		rf.writeChanges();
+		rf.writeChunks(new HashMap<>());
 		assertEquals(4096 * 2, Files.size(rf.getPath()));
+		rf.close();
 	}
 }
